@@ -1,12 +1,12 @@
-import axios from 'axios';
+import axios, { AxiosResponse, AxiosError } from 'axios';
 
 export const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL || '/api/v1',
 });
 
 axiosInstance.interceptors.response.use(
-  (response) => response,
-  async (error) => {
+  (response: AxiosResponse) => response,
+  async (error: any) => {
     const originalRequest = error.config;
     // Prevenir infinite loop si el error es de login/refresh
     if (error.response?.status === 401 && !originalRequest._retry && !originalRequest.url.includes('/auth/')) {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import { axiosInstance } from '../../../lib/axios';
 
 export const ElectorsList = () => {
-  const [electors, setElectors] = useState([]);
+  const [electors, setElectors] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);

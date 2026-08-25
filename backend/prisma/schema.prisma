@@ -1,0 +1,538 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ==========================================
+// 1. MULTI-TENANCY & SEGURIDAD (FASE 3)
+// ==========================================
+model Organization {
+  id              String           @id @default(uuid())
+  name            String
+  users           User[]
+  departments     Department[]
+  electors        Elector[]
+  team_members    TeamMember[]
+  team_positions  TeamPosition[]
+  plans           Plan[]
+  tasks           Task[]
+  notifications   Notification[]
+  election_days   ElectionDayOperation[]
+  elections       Election[]
+  audit_logs      AuditLog[]
+  export_jobs     ExportJob[]
+  saved_reports   SavedReport[]
+}
+
+model User {
+  id                    String       @id @default(uuid())
+  organization_id       String
+  organization          Organization @relation(fields: [organization_id], references: [id])
+  name                  String
+  email                 String       @unique
+  password_hash         String
+  status                String       @default("ACTIVE")
+  team_member           TeamMember?
+  notifications         Notification[]
+  audit_logs            AuditLog[]
+  table_results         PollingTableResult[]
+  acts                  ElectionAct[]
+  export_jobs           ExportJob[]
+  saved_reports         SavedReport[]
+  dashboard_preferences DashboardPreference?
+}
+
+// ==========================================
+// 2. GESTIÃ“N TERRITORIAL (FASE 4)
+// ==========================================
+model Department {
+  id              String         @id @default(uuid())
+  organization_id String
+  organization    Organization   @relation(fields: [organization_id], references: [id])
+  name            String
+  municipalities  Municipality[]
+  @@unique([organization_id, name])
+}
+
+model Municipality {
+  id              String       @id @default(uuid())
+  department_id   String
+  department      Department   @relation(fields: [department_id], references: [id])
+  name            String
+  zones           Zone[]
+  team_assignments TeamAssignment[]
+  plans           Plan[]
+  tasks           Task[]
+}
+
+model Zone {
+  id              String       @id @default(uuid())
+  municipality_id String
+  municipality    Municipality @relation(fields: [municipality_id], references: [id])
+  name            String
+  polling_stations PollingStation[]
+  team_assignments TeamAssignment[]
+  plans           Plan[]
+  tasks           Task[]
+}
+
+model PollingStation {
+  id              String       @id @default(uuid())
+  zone_id         String
+  zone            Zone         @relation(fields: [zone_id], references: [id])
+  name            String
+  polling_tables  PollingTable[]
+  team_assignments TeamAssignment[]
+  plans           Plan[]
+  tasks           Task[]
+  field_reports   FieldReport[]
+  incidents       OperationalIncident[]
+  checkins        CheckIn[]
+}
+
+model PollingTable {
+  id                 String         @id @default(uuid())
+  polling_station_id String
+  polling_station    PollingStation @relation(fields: [polling_station_id], references: [id])
+  table_number       String
+  team_assignments   TeamAssignment[]
+  tasks              Task[]
+  field_reports      FieldReport[]
+  incidents          OperationalIncident[]
+  results            PollingTableResult[]
+  acts               ElectionAct[]
+}
+
+// ==========================================
+// 3. GESTIÃ“N DE ELECTORES (FASE 5)
+// ==========================================
+model Elector {
+  id                 String       @id @default(uuid())
+  organization_id    String
+  organization       Organization @relation(fields: [organization_id], references: [id])
+  document_type      String
+  document_number    String
+  first_name         String
+  last_name          String
+  status             String       @default("ACTIVE")
+  created_at         DateTime     @default(now())
+  
+  @@unique([organization_id, document_type, document_number])
+}
+
+// ==========================================
+// 4. EQUIPO ELECTORAL (FASE 6)
+// ==========================================
+model TeamMember {
+  id              String           @id @default(uuid())
+  organization_id String
+  organization    Organization     @relation(fields: [organization_id], references: [id])
+  user_id         String?          @unique
+  user            User?            @relation(fields: [user_id], references: [id])
+  document_type   String
+  document_number String
+  first_name      String
+  last_name       String
+  phone           String?
+  status          String           @default("ACTIVE")
+  assignments     TeamAssignment[]
+  tasks           Task[]
+  field_reports   FieldReport[]
+  checkins        CheckIn[]
+  created_at      DateTime         @default(now())
+
+  @@unique([organization_id, document_type, document_number])
+}
+
+model TeamPosition {
+  id              String           @id @default(uuid())
+  organization_id String
+  organization    Organization     @relation(fields: [organization_id], references: [id])
+  name            String
+  assignments     TeamAssignment[]
+}
+
+model TeamAssignment {
+  id                 String         @id @default(uuid())
+  member_id          String
+  member             TeamMember     @relation(fields: [member_id], references: [id])
+  position_id        String
+  position           TeamPosition   @relation(fields: [position_id], references: [id])
+  
+  municipality_id    String?
+  municipality       Municipality?  @relation(fields: [municipality_id], references: [id])
+  zone_id            String?
+  zone               Zone?          @relation(fields: [zone_id], references: [id])
+  polling_station_id String?
+  polling_station    PollingStation? @relation(fields: [polling_station_id], references: [id])
+  polling_table_id   String?
+  polling_table      PollingTable?  @relation(fields: [polling_table_id], references: [id])
+  
+  start_date         DateTime
+  end_date           DateTime?
+  status             String         @default("ACTIVE")
+  created_at         DateTime       @default(now())
+}
+
+// ==========================================
+// 5. PLANIFICACIÃ“N Y GESTIÃ“N OPERATIVA (FASE 7)
+// ==========================================
+model Plan {
+  id                 String         @id @default(uuid())
+  organization_id    String
+  organization       Organization   @relation(fields: [organization_id], references: [id])
+  name               String
+  description        String?
+  start_date         DateTime
+  end_date           DateTime?
+  status             String         @default("DRAFT")
+  
+  municipality_id    String?
+  municipality       Municipality?  @relation(fields: [municipality_id], references: [id])
+  zone_id            String?
+  zone               Zone?          @relation(fields: [zone_id], references: [id])
+  polling_station_id String?
+  polling_station    PollingStation? @relation(fields: [polling_station_id], references: [id])
+  
+  tasks              Task[]
+  created_at         DateTime       @default(now())
+}
+
+model Task {
+  id                 String         @id @default(uuid())
+  organization_id    String
+  organization       Organization   @relation(fields: [organization_id], references: [id])
+  plan_id            String?
+  plan               Plan?          @relation(fields: [plan_id], references: [id])
+  title              String
+  description        String?
+  priority           String         @default("MEDIUM")
+  status             String         @default("PENDING")
+  due_date           DateTime?
+  
+  assignee_id        String?
+  assignee           TeamMember?    @relation(fields: [assignee_id], references: [id])
+  
+  municipality_id    String?
+  municipality       Municipality?  @relation(fields: [municipality_id], references: [id])
+  zone_id            String?
+  zone               Zone?          @relation(fields: [zone_id], references: [id])
+  polling_station_id String?
+  polling_station    PollingStation? @relation(fields: [polling_station_id], references: [id])
+  polling_table_id   String?
+  polling_table      PollingTable?  @relation(fields: [polling_table_id], references: [id])
+  
+  created_at         DateTime       @default(now())
+}
+
+model Notification {
+  id              String         @id @default(uuid())
+  organization_id String
+  organization    Organization   @relation(fields: [organization_id], references: [id])
+  user_id         String
+  user            User           @relation(fields: [user_id], references: [id])
+  message         String
+  type            String         @default("INFO")
+  is_read         Boolean        @default(false)
+  created_at      DateTime       @default(now())
+}
+
+// ==========================================
+// 6. DÃA ELECTORAL Y OPERACIÃ“N (FASE 8)
+// ==========================================
+model ElectionDayOperation {
+  id              String         @id @default(uuid())
+  organization_id String
+  organization    Organization   @relation(fields: [organization_id], references: [id])
+  name            String
+  start_datetime  DateTime
+  end_datetime    DateTime?
+  status          String         @default("PLANNED") 
+  
+  reports         FieldReport[]
+  incidents       OperationalIncident[]
+  checkins        CheckIn[]
+  
+  created_at      DateTime       @default(now())
+  updated_at      DateTime       @updatedAt
+}
+
+model FieldReport {
+  id                  String         @id @default(uuid())
+  organization_id     String
+  election_day_id     String
+  election_day        ElectionDayOperation @relation(fields: [election_day_id], references: [id])
+  
+  client_uuid         String         @unique 
+  report_type         String         
+  status              String         
+  description         String?
+  
+  reporter_id         String
+  reporter            TeamMember     @relation(fields: [reporter_id], references: [id])
+  
+  polling_station_id  String?
+  polling_station     PollingStation? @relation(fields: [polling_station_id], references: [id])
+  polling_table_id    String?
+  polling_table       PollingTable?  @relation(fields: [polling_table_id], references: [id])
+  
+  reported_at         DateTime       @default(now())
+  created_at          DateTime       @default(now())
+}
+
+model OperationalIncident {
+  id                  String         @id @default(uuid())
+  organization_id     String
+  election_day_id     String
+  election_day        ElectionDayOperation @relation(fields: [election_day_id], references: [id])
+  
+  client_uuid         String         @unique 
+  type                String
+  priority            String         @default("MEDIUM") 
+  status              String         @default("OPEN") 
+  description         String
+  
+  reporter_id         String
+  assignee_id         String?
+  
+  polling_station_id  String?
+  polling_station     PollingStation? @relation(fields: [polling_station_id], references: [id])
+  polling_table_id    String?
+  polling_table       PollingTable?  @relation(fields: [polling_table_id], references: [id])
+  
+  resolved_at         DateTime?
+  created_at          DateTime       @default(now())
+  updated_at          DateTime       @updatedAt
+}
+
+model CheckIn {
+  id                  String         @id @default(uuid())
+  organization_id     String
+  election_day_id     String
+  election_day        ElectionDayOperation @relation(fields: [election_day_id], references: [id])
+  
+  client_uuid         String         @unique
+  type                String         
+  member_id           String
+  member              TeamMember     @relation(fields: [member_id], references: [id])
+  
+  polling_station_id  String?
+  polling_station     PollingStation? @relation(fields: [polling_station_id], references: [id])
+  status              String         @default("REPORTED")
+  
+  reported_at         DateTime       @default(now())
+}
+
+// ==========================================
+// 7. RESULTADOS ELECTORALES Y ESCRUTINIO (FASE 9)
+// ==========================================
+model Election {
+  id              String         @id @default(uuid())
+  organization_id String
+  organization    Organization   @relation(fields: [organization_id], references: [id])
+  name            String
+  election_type   String         
+  election_date   DateTime
+  status          String         @default("DRAFT") 
+  
+  candidates      Candidate[]
+  acts            ElectionAct[]
+  table_results   PollingTableResult[]
+  
+  created_at      DateTime       @default(now())
+  updated_at      DateTime       @updatedAt
+}
+
+model Candidate {
+  id              String         @id @default(uuid())
+  election_id     String
+  election        Election       @relation(fields: [election_id], references: [id])
+  name            String
+  ballot_number   String?
+  party_or_group  String?
+  position        String?
+  status          String         @default("ACTIVE")
+  
+  results         CandidateResult[]
+}
+
+model ElectionAct {
+  id                 String         @id @default(uuid())
+  election_id        String
+  election           Election       @relation(fields: [election_id], references: [id])
+  polling_table_id   String
+  polling_table      PollingTable   @relation(fields: [polling_table_id], references: [id])
+  
+  document_reference String         
+  checksum           String         @unique 
+  version            Int            @default(1)
+  status             String         @default("UPLOADED") 
+  
+  uploaded_by        String
+  uploader           User           @relation(fields: [uploaded_by], references: [id])
+  
+  results            PollingTableResult[]
+  
+  uploaded_at        DateTime       @default(now())
+}
+
+model PollingTableResult {
+  id                 String         @id @default(uuid())
+  election_id        String
+  election           Election       @relation(fields: [election_id], references: [id])
+  polling_table_id   String
+  polling_table      PollingTable   @relation(fields: [polling_table_id], references: [id])
+  act_id             String?
+  act                ElectionAct?   @relation(fields: [act_id], references: [id])
+  
+  version            Int            @default(1)
+  status             String         @default("REPORTED") 
+  
+  total_votes        Int            @default(0) 
+  correction_reason  String?        
+  
+  reported_by        String
+  reporter           User           @relation(fields: [reported_by], references: [id])
+  
+  candidate_results  CandidateResult[]
+  category_results   CategoryResult[] 
+  
+  reported_at        DateTime       @default(now())
+  updated_at         DateTime       @updatedAt
+}
+
+model CandidateResult {
+  id                 String         @id @default(uuid())
+  result_id          String
+  result             PollingTableResult @relation(fields: [result_id], references: [id])
+  candidate_id       String
+  candidate          Candidate      @relation(fields: [candidate_id], references: [id])
+  votes              Int            @default(0) 
+}
+
+model CategoryResult {
+  id                 String         @id @default(uuid())
+  result_id          String
+  result             PollingTableResult @relation(fields: [result_id], references: [id])
+  category           String         
+  votes              Int            @default(0)
+}
+
+// ==========================================
+// 8. CENTRO DE CONTROL, ANALÃTICA Y EXPORTACIONES (FASE 10)
+// ==========================================
+model ExportJob {
+  id              String         @id @default(uuid())
+  organization_id String
+  organization    Organization   @relation(fields: [organization_id], references: [id])
+  user_id         String
+  user            User           @relation(fields: [user_id], references: [id])
+  
+  type            String         // EJ: TERRITORIAL_REPORT, AUDIT_LOG, ELECTION_RESULTS
+  filters         Json?          // Filtros aplicados
+  status          String         @default("PENDING") // PENDING, PROCESSING, COMPLETED, FAILED, EXPIRED
+  file_url        String?        // URL temporal y segura
+  error_message   String?
+  
+  expires_at      DateTime?
+  created_at      DateTime       @default(now())
+  completed_at    DateTime?
+}
+
+model SavedReport {
+  id              String         @id @default(uuid())
+  organization_id String
+  organization    Organization   @relation(fields: [organization_id], references: [id])
+  user_id         String
+  user            User           @relation(fields: [user_id], references: [id])
+  
+  name            String
+  type            String
+  config_json     Json           // Columnas, filtros y ordenamientos favoritos
+  
+  created_at      DateTime       @default(now())
+  updated_at      DateTime       @updatedAt
+}
+
+model DashboardPreference {
+  id              String         @id @default(uuid())
+  user_id         String         @unique
+  user            User           @relation(fields: [user_id], references: [id])
+  
+  widgets_json    Json           // PosiciÃ³n y visibilidad de los widgets (Regla 37, 39)
+  
+  updated_at      DateTime       @updatedAt
+}
+
+// Tabla de AuditorÃ­a unificada transversal (Regla 18, 19, 21)
+model AuditLog {
+  id              String       @id @default(uuid())
+  organization_id String
+  organization    Organization @relation(fields: [organization_id], references: [id])
+  user_id         String
+  user            User         @relation(fields: [user_id], references: [id])
+  action          String
+  entity_name     String
+  entity_id       String
+  new_values      Json?
+  created_at      DateTime     @default(now())
+  
+  @@index([organization_id, created_at]) // Rendimiento para analÃ­tica de auditorÃ­a
+}
+
+// ==========================================
+// 9. INTELIGENCIA ELECTORAL Y ANALÍTICA AVANZADA (FASE 16)
+// ==========================================
+model AnomalyAlert {
+  id              String         @id @default(uuid())
+  organization_id String
+  organization    Organization   @relation(fields: [organization_id], references: [id])
+  
+  type            String         // EJ: "VOTE_SPIKE", "LATENCY_DROP"
+  severity        String         // EJ: "LOW", "MEDIUM", "HIGH", "CRITICAL"
+  score           Float          // 0 a 100
+  
+  description     String
+  context_json    Json?          // Motivo de la IA
+  
+  status          String         @default("DETECTED") // DETECTED, IN_REVIEW, CONFIRMED, DISMISSED
+  reviewed_by     String?
+  reviewer        User?          @relation("AnomalyReviewer", fields: [reviewed_by], references: [id])
+  resolution_note String?
+  
+  detected_at     DateTime       @default(now())
+  updated_at      DateTime       @updatedAt
+  
+  @@index([organization_id, status])
+}
+
+model IntelligenceModel {
+  id              String         @id @default(uuid())
+  name            String
+  version         String
+  type            String         // "ANOMALY", "FORECAST", "SIMULATION"
+  algorithm       String
+  metrics_json    Json?
+  
+  status          String         @default("ACTIVE") // ACTIVE, RETIRED
+  
+  created_at      DateTime       @default(now())
+}
+
+model SimulationScenario {
+  id              String         @id @default(uuid())
+  organization_id String
+  organization    Organization   @relation(fields: [organization_id], references: [id])
+  user_id         String
+  user            User           @relation(fields: [user_id], references: [id])
+  
+  name            String
+  parameters_json Json           // Variables X e Y de predicción
+  result_json     Json           // Resultados simulados
+  
+  created_at      DateTime       @default(now())
+}

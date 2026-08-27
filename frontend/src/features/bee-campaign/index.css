@@ -642,15 +642,6 @@ html.reduce-motion ::after {
 .theme-light-modules [class*="bg-\[\#0c1325\]"],
 .theme-light-modules [class*="bg-\[\#0b0f19\]"],
 .theme-light-modules [class*="bg-\[\#070e17\]"],
-.theme-light-modules [class*="bg-slate-955"],
-.theme-light-modules [class*="bg-slate-950"],
-.theme-light-modules [class*="bg-slate-900"],
-.theme-light-modules [class*="bg-slate-800"],
-.theme-light-modules [class*="bg-slate-750"],
-.theme-light-modules [class*="bg-slate-700"],
-.theme-light-modules [class*="bg-slate-650"],
-.theme-light-modules [class*="bg-slate-600"],
-.theme-light-modules [class*="bg-slate-500"],
 .theme-light-modules [class*="bg-gradient-"],
 .theme-light-modules [class*="from-"],
 .theme-light-modules [class*="via-"],
@@ -661,6 +652,27 @@ html.reduce-motion ::after {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02) !important;
 }
 
+/* Highlight wells, sub-containers, and rows (Soft Light Gray) */
+.theme-light-modules [class*="/40"],
+.theme-light-modules [class*="/50"],
+.theme-light-modules [class*="/60"],
+.theme-light-modules [class*="/80"],
+.theme-light-modules [class*="/90"],
+.theme-light-modules [class*="bg-\[\#111c30\]"],
+.theme-light-modules [class*="bg-\[\#111C30\]"],
+.theme-light-modules [class*="bg-\[\#081d38\]"],
+.theme-light-modules [class*="bg-\[\#030d1a\]"],
+.theme-light-modules [class*="bg-\[\#031121\]"],
+.theme-light-modules .bg-slate-950\/80,
+.theme-light-modules .bg-slate-900\/80,
+.theme-light-modules .bg-slate-800\/50,
+.theme-light-modules .bg-slate-950\/40,
+.theme-light-modules .bg-slate-900\/40 {
+  background-color: #f1f5f9 !important; /* Soft highlighted headers, wells and rows */
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.01) !important;
+}
+
 /* Divider lines */
 .theme-light-modules .border-slate-800,
 .theme-light-modules .border-slate-700,
@@ -669,17 +681,17 @@ html.reduce-motion ::after {
   border-color: rgba(0, 0, 0, 0.08) !important;
 }
 
-/* Muted or secondary text color overrides */
+/* Muted or secondary text color overrides - Darker for readability on light backgrounds */
 .theme-light-modules .text-slate-300,
 .theme-light-modules .text-slate-400,
 .theme-light-modules .text-gray-400 {
-  color: #475569 !important; /* Slate 600 */
+  color: #334155 !important; /* Slate 700 - Highly readable */
 }
 
 .theme-light-modules .text-slate-500,
 .theme-light-modules .text-slate-600,
 .theme-light-modules .text-gray-500 {
-  color: #64748b !important; /* Slate 500 */
+  color: #475569 !important; /* Slate 600 */
 }
 
 .theme-light-modules .text-cyan-300,

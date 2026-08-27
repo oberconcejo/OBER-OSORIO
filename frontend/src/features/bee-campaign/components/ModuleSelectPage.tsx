@@ -88,17 +88,13 @@ const modules = [
 
 export function ModuleSelectPage({ onBack, onSelectModule, onOpenLogin }: ModuleSelectPageProps) {
   const [hovered, setHovered] = useState<string | null>(null);
-  const [mousePosMap, setMousePosMap] = useState<Record<string, { x: number; y: number }>>({});
 
-  const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>, cardId: string) => {
+  const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    setMousePosMap(prev => ({
-      ...prev,
-      [cardId]: {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top
-      }
-    }));
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+    e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
   };
 
   return (
@@ -172,14 +168,13 @@ export function ModuleSelectPage({ onBack, onSelectModule, onOpenLogin }: Module
           {modules.map((mod) => {
             const Icon = mod.icon;
             const isHovered = hovered === mod.id;
-            const pos = mousePosMap[mod.id] || { x: 150, y: 150 };
 
             return (
               <div
                 key={mod.id}
                 onMouseEnter={() => setHovered(mod.id)}
                 onMouseLeave={() => setHovered(null)}
-                onMouseMove={(e) => handleCardMouseMove(e, mod.id)}
+                onMouseMove={handleCardMouseMove}
                 onClick={() => onSelectModule(mod.targetView)}
                 className={`relative group cursor-pointer rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 overflow-hidden min-h-[390px] ${
                   isHovered
@@ -194,8 +189,8 @@ export function ModuleSelectPage({ onBack, onSelectModule, onOpenLogin }: Module
                   <div
                     className="pointer-events-none absolute rounded-full blur-3xl opacity-90 transition-opacity duration-150"
                     style={{
-                      left: `${pos.x}px`,
-                      top: `${pos.y}px`,
+                      left: 'var(--mouse-x, 150px)',
+                      top: 'var(--mouse-y, 150px)',
                       width: '340px',
                       height: '340px',
                       transform: 'translate(-50%, -50%)',

@@ -194,9 +194,7 @@ button,
 }
 
 /* Rounded inputs matching clean Antigravity search box */
-input[type="text"],
-input[type="email"],
-input[type="password"],
+input,
 select {
   border-radius: 999px !important;
   padding-left: 1.25rem;

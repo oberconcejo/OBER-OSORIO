@@ -33,7 +33,7 @@ const modules = [
       'Control de Presupuesto e ingresos/egresos para reporte CNE',
       'Auditoría inalterable de Audit Logs y Cuentas Claras'
     ],
-    buttonText: 'Acceso Protegido - Gestión Administrat...',
+    buttonText: 'Entrar - Gestión Administrativa',
     iconBg: 'bg-cyan-950/80 border border-cyan-500/30',
     iconColor: 'text-cyan-400',
     bulletColor: 'text-cyan-400',
@@ -55,7 +55,7 @@ const modules = [
       'Programa de Gobierno interactivo y perfil del candidato',
       'Agenda, calendario electoral y análisis de debates'
     ],
-    buttonText: 'Acceso Protegido - Gestión Estratégica',
+    buttonText: 'Entrar - Gestión Estratégica',
     iconBg: 'bg-teal-950/80 border border-teal-500/30',
     iconColor: 'text-teal-400',
     bulletColor: 'text-teal-400',
@@ -77,7 +77,7 @@ const modules = [
       'Gestión de testigos electorales y jurados en mesa',
       'Muestreo de encuestas y escrutinio del Día E'
     ],
-    buttonText: 'Acceso Protegido - Gestión Territorial',
+    buttonText: 'Entrar - Gestión Territorial',
     iconBg: 'bg-purple-950/80 border border-purple-500/30',
     iconColor: 'text-purple-400',
     bulletColor: 'text-purple-400',

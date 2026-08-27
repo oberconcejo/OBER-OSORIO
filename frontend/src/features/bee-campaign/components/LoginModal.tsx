@@ -206,7 +206,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 16 }}
           transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-          className="relative w-full max-w-md bg-[#050c18] border border-cyan-500/25 rounded-3xl shadow-2xl shadow-[#020617]/90 p-6 sm:p-8 z-10 text-slate-100 flex flex-col overflow-hidden max-h-[92vh]"
+          className="relative w-full max-w-md bg-[#050c18] border border-cyan-500/25 rounded-3xl shadow-2xl shadow-[#020617]/90 p-6 sm:p-8 z-10 text-slate-100 flex flex-col overflow-y-auto max-h-[92vh]"
         >
 
           {/* Close button */}

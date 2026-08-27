@@ -1,91 +1,105 @@
-import { Injectable, BadRequestException, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../database/prisma.service';
+import { Injectable, ConflictException } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
+import { CreatePositionDto, CreateMemberDto } from './dto/create-team.dto';
 
 @Injectable()
 export class TeamService {
   constructor(private prisma: PrismaService) {}
 
-  // ==========================================
-  // CREACIÓN Y VALIDACIÓN (REGLA 9)
-  // ==========================================
-  async createMember(orgId: string, data: any, authorId: string) {
+  async getPositions(organizationId: string) {
+    return this.prisma.teamPosition.findMany({
+      where: { organization_id: organizationId },
+      orderBy: { name: 'asc' }
+    });
+  }
+
+  async createPosition(organizationId: string, dto: CreatePositionDto) {
+    return this.prisma.teamPosition.create({
+      data: {
+        organization_id: organizationId,
+        name: dto.name
+      }
+    });
+  }
+
+  async getMembers(organizationId: string) {
+    return this.prisma.teamMember.findMany({
+      where: { organization_id: organizationId },
+      orderBy: { first_name: 'asc' },
+      include: {
+        assignments: {
+          include: {
+            position: true,
+            polling_station: true,
+            polling_table: true
+          }
+        }
+      }
+    });
+  }
+
+  async createMember(organizationId: string, dto: CreateMemberDto) {
+    // Check if member already exists by document
     const existing = await this.prisma.teamMember.findFirst({
-      where: { organization_id: orgId, document_type: data.document_type, document_number: data.document_number }
+      where: {
+        organization_id: organizationId,
+        document_type: dto.document_type,
+        document_number: dto.document_number,
+      }
     });
 
     if (existing) {
-      throw new BadRequestException('El miembro del equipo ya existe en esta organización.');
+      throw new ConflictException('El colaborador ya se encuentra registrado con ese documento en esta organizacin.');
     }
 
-    const member = await this.prisma.teamMember.create({
-      data: { ...data, organization_id: orgId }
-    });
-
-    await this.logAudit(orgId, authorId, 'TEAM_MEMBER_CREATED', 'TeamMember', member.id, data);
-    return member;
-  }
-
-  // ==========================================
-  // ASIGNACIÓN MÚLTIPLE Y CONFLICTOS (REGLAS 14, 25, 40)
-  // ==========================================
-  async assignTerritory(orgId: string, memberId: string, data: any, authorId: string) {
-    // 1. Verificamos que el miembro existe y pertenece al tenant
-    const member = await this.prisma.teamMember.findFirst({ where: { id: memberId, organization_id: orgId }});
-    if (!member) throw new NotFoundException('Miembro no encontrado o no autorizado.');
-
-    // 2. Regla de Negocio: Evitar múltiples responsables en la misma mesa (Ejemplo)
-    if (data.polling_table_id) {
-      const activeTableManager = await this.prisma.teamAssignment.findFirst({
-        where: { polling_table_id: data.polling_table_id, status: 'ACTIVE' }
-      });
-      if (activeTableManager) {
-        throw new BadRequestException('CONFLICTO DE ASIGNACIÓN: Esta mesa ya tiene un responsable activo.');
-      }
-    }
-
-    // 3. Finalizar asignaciones previas si se solicitó (Regla 28: Historial)
-    if (data.finalize_previous) {
-      await this.prisma.teamAssignment.updateMany({
-        where: { member_id: memberId, status: 'ACTIVE' },
-        data: { status: 'FINALIZED', end_date: new Date() }
-      });
-    }
-
-    // 4. Crear nueva asignación
-    const assignment = await this.prisma.teamAssignment.create({
+    return this.prisma.teamMember.create({
       data: {
-        member_id: memberId,
-        position_id: data.position_id,
-        municipality_id: data.municipality_id,
-        zone_id: data.zone_id,
-        polling_station_id: data.polling_station_id,
-        polling_table_id: data.polling_table_id,
-        start_date: new Date(data.start_date),
-        end_date: data.end_date ? new Date(data.end_date) : null,
+        organization_id: organizationId,
+        document_type: dto.document_type,
+        document_number: dto.document_number,
+        first_name: dto.first_name,
+        last_name: dto.last_name,
+        phone: dto.phone,
       }
     });
-
-    await this.logAudit(orgId, authorId, 'TEAM_MEMBER_ASSIGNED', 'TeamAssignment', assignment.id, data);
-    return assignment;
   }
 
-  // ==========================================
-  // ENLACE A USUARIO (REGLA 10 y 11)
-  // ==========================================
-  async linkUser(orgId: string, memberId: string, userId: string, authorId: string) {
-    const member = await this.prisma.teamMember.update({
-      where: { id: memberId },
-      data: { user_id: userId } // Relación 1:1 controlada
+  async getAssignments(organizationId: string) {
+    return this.prisma.teamAssignment.findMany({
+      where: {
+        member: {
+          organization_id: organizationId
+        }
+      },
+      include: {
+        member: true,
+        position: true,
+        municipality: true,
+        zone: true,
+        polling_station: true,
+        polling_table: true
+      },
+      orderBy: { created_at: 'desc' }
     });
-    
-    // Aquí iría el disparador de email / invitación
-    await this.logAudit(orgId, authorId, 'TEAM_MEMBER_USER_LINKED', 'TeamMember', memberId, { userId });
-    return member;
   }
 
-  private async logAudit(orgId: string, userId: string, action: string, entity: string, entityId: string, values: any) {
-    await this.prisma.auditLog.create({
-      data: { organization_id: orgId, user_id: userId, action, entity_name: entity, entity_id: entityId, new_values: values }
+  async assignTerritory(organizationId: string, dto: import('./dto/assign-team.dto').AssignTeamDto) {
+    const member = await this.prisma.teamMember.findFirst({
+      where: { id: dto.member_id, organization_id: organizationId }
+    });
+
+    if (!member) throw new ConflictException('Colaborador inválido o no autorizado.');
+
+    return this.prisma.teamAssignment.create({
+      data: {
+        member_id: dto.member_id,
+        position_id: dto.position_id,
+        municipality_id: dto.municipality_id,
+        zone_id: dto.zone_id,
+        polling_station_id: dto.polling_station_id,
+        polling_table_id: dto.polling_table_id,
+        start_date: new Date()
+      }
     });
   }
 }

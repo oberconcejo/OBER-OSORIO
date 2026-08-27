@@ -1,46 +1,44 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { PrismaService } from '../database/prisma.service';
+import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private prisma: PrismaService,
+    private usersService: UsersService,
     private jwtService: JwtService
   ) {}
 
-  async login(email: string, pass: string) {
-    const user = await this.prisma.user.findUnique({
-      where: { email },
-      include: { role: { include: { permissions: { include: { permission: true } } } } }
-    });
-
+  async login(loginDto: LoginDto) {
+    const user = await this.usersService.findByEmail(loginDto.email);
+    
     if (!user) {
-      throw new UnauthorizedException('Credenciales incorrectas.');
+      throw new UnauthorizedException('Credenciales invlidas');
     }
 
-    const isMatch = await bcrypt.compare(pass, user.password_hash);
-    if (!isMatch) {
-      throw new UnauthorizedException('Credenciales incorrectas.');
+    const isPasswordValid = await bcrypt.compare(loginDto.password, user.password_hash);
+    
+    if (!isPasswordValid) {
+      throw new UnauthorizedException('Credenciales invlidas');
     }
-
-    if (user.status !== 'ACTIVE') {
-      throw new UnauthorizedException('La cuenta está suspendida o inactiva.');
-    }
-
-    const userPermissions = user.role.permissions.map(rp => rp.permission.name);
 
     const payload = { 
       sub: user.id, 
       email: user.email, 
-      organizationId: user.organization_id, 
-      permissions: userPermissions 
+      name: user.name, 
+      organization_id: user.organization_id 
     };
 
     return {
-      accessToken: await this.jwtService.signAsync(payload, { expiresIn: '15m' }),
-      refreshToken: await this.jwtService.signAsync(payload, { expiresIn: '7d' })
+      access_token: await this.jwtService.signAsync(payload),
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        status: user.status
+      }
     };
   }
 }

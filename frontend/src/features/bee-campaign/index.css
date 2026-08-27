@@ -1,0 +1,743 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+/* Viewport Root & Mobile First Reset */
+html, body {
+  background-color: #020617;
+  color: #F1F5F9;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  overflow-x: hidden;
+  width: 100%;
+  min-width: 320px;
+  max-width: 100vw;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Touch & Interaction Standards */
+button, a, input, select, textarea, [role="button"] {
+  touch-action: manipulation;
+}
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  /* Responsive Table Container with Horizontal Scroll Isolation */
+  .responsive-table-wrapper {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Fluid Responsive Typography */
+  .text-fluid-hero {
+    font-size: clamp(1.75rem, 4.5vw + 0.5rem, 3.5rem);
+    line-height: 1.12;
+  }
+
+  .text-fluid-title {
+    font-size: clamp(1.25rem, 2.8vw + 0.25rem, 2.25rem);
+    line-height: 1.2;
+  }
+
+  .text-fluid-subtitle {
+    font-size: clamp(0.95rem, 1.4vw + 0.2rem, 1.25rem);
+    line-height: 1.4;
+  }
+
+  /* Circuit board grid pattern for sci-fi dark theme */
+  .bg-circuit-pattern {
+    background-color: #020617;
+    background-image: 
+      radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.14) 0%, transparent 60%),
+      linear-gradient(rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
+    background-size: 100% 100%, 32px 32px, 32px 32px;
+  }
+
+  /* Glassmorphism panel styling */
+  .glass-panel-cyber {
+    background: rgba(4, 19, 41, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 0 14px 0 rgba(6, 182, 212, 0.1);
+  }
+
+  .glass-panel-teal {
+    background: rgba(5, 27, 44, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.15);
+  }
+
+  .glass-panel-cyan {
+    background: rgba(4, 23, 45, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(6, 182, 212, 0.35);
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.15);
+  }
+}
+
+/* ==========================================================================
+   REDSUN & BEE CAMPAIGN AI DESIGN SYSTEM VARIABLES & UTILITIES
+   ========================================================================== */
+:root {
+  /* 60% - Fondos y Neutros (Google Antigravity Developer Dark Theme - Landing Blue Edition) */
+  --redsun-bg: #020617; /* Exact deep space navy background from landing page */
+  --redsun-surface: #0c1325; /* Elegant matched dark navy card background */
+  --redsun-surface-light: #16203a; /* Sub-container and row highlights */
+  --redsun-border: rgba(255, 255, 255, 0.08); /* Clean thin dividers */
+  --redsun-border-hover: rgba(138, 180, 248, 0.35); /* Google active light blue border */
+  
+  /* Text colors */
+  --redsun-text-primary: #e3e3e3; /* Soft readable gray-white */
+  --redsun-text-secondary: #8e918f; /* Secondary text color */
+  --redsun-text-muted: #5f6368; /* Google muted gray */
+  
+  /* 10% - Semantics & Accents */
+  --redsun-coral: #8ab4f8; /* Google Light Blue */
+  --redsun-red: #8ab4f8; /* Blue info */
+  --redsun-orange: #c5a3ff; /* Lavender Strategic/AI */
+  --redsun-pink: #81c995; /* Google Light Green Success */
+  --redsun-gradient: linear-gradient(135deg, #1a73e8, #4285f4); /* Brand Google Blue */
+  --redsun-gradient-hover: linear-gradient(135deg, #4285f4, #8ab4f8);
+  
+  --redsun-radius-sm: 8px;
+  --redsun-radius-md: 16px;
+  --redsun-radius-lg: 24px;
+  --redsun-radius-xl: 32px;
+  --redsun-easing: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Global Color and Surface Overrides for 60/30/10 distribution */
+body {
+  background-color: var(--redsun-bg) !important;
+  color: var(--redsun-text-primary) !important;
+  font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.bg-\[\#020617\],
+.bg-\[\#071927\],
+.bg-slate-900,
+.bg-slate-900\/60,
+.bg-slate-900\/80 {
+  background-color: var(--redsun-bg) !important; /* Main backgrounds */
+}
+
+.bg-\[\#051325\],
+.bg-\[\#05162a\],
+.bg-\[\#0F172A\],
+.bg-\[\#0f172a\],
+.bg-slate-950\/80,
+.bg-slate-950\/60,
+.bg-slate-950\/40 {
+  background-color: var(--redsun-surface) !important; /* Unified cards and panels */
+}
+
+.bg-\[\#111C30\],
+.bg-slate-955,
+.bg-slate-950,
+.bg-\[\#0b0f19\] {
+  background-color: #060b18 !important; /* Sidebar & deep input fields */
+}
+
+.bg-\[\#081d38\],
+.bg-\[\#030d1a\],
+.bg-\[\#031121\] {
+  background-color: var(--redsun-surface-light) !important; /* Secondary highlights */
+}
+
+.border-slate-800,
+.border-slate-800\/80,
+.border-slate-800\/60,
+.border-slate-700,
+.border-slate-700\/80,
+.border-cyan-500\/30,
+.border-cyan-500\/20,
+.border-cyan-500\/25 {
+  border-color: var(--redsun-border) !important; /* Ultra clean borders */
+}
+
+.bg-\[\#006e62\] {
+  background-color: rgba(26, 115, 232, 0.1) !important; /* Google Blue active item */
+  border-color: rgba(26, 115, 232, 0.2) !important;
+  color: #8ab4f8 !important;
+}
+
+/* Button & Input Rounding to Antigravity Pill/Rounded-Full Style */
+button,
+.button,
+.btn {
+  border-radius: 999px !important; /* Antigravity pill style buttons */
+}
+
+/* Google Antigravity Brand Blue Action Button overrides */
+.bg-blue-600,
+.bg-cyan-600,
+.bg-cyan-500 {
+  background-color: #1a73e8 !important; /* Google Antigravity Blue */
+  color: #ffffff !important;
+}
+.bg-blue-600:hover,
+.bg-cyan-600:hover,
+.bg-cyan-500:hover {
+  background-color: #1557b0 !important; /* Google Antigravity Hover Blue */
+}
+
+/* Rounded inputs matching clean Antigravity search box */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+  border-radius: 999px !important;
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+}
+
+
+/* RedSun Specific Keyframe Animations */
+@keyframes redsunMarquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes redsunFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(0.8deg); }
+}
+
+@keyframes redsunPulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+    filter: blur(80px);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.08);
+    filter: blur(95px);
+  }
+}
+
+/* RedSun Utility Classes */
+.bg-redsun-bg {
+  background-color: var(--redsun-bg);
+}
+
+.bg-redsun-surface {
+  background-color: var(--redsun-surface);
+}
+
+.bg-redsun-surface-light {
+  background-color: var(--redsun-surface-light);
+}
+
+.text-redsun-gradient {
+  background: var(--redsun-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-redsun-gradient {
+  background: var(--redsun-gradient);
+}
+
+.bg-redsun-gradient-hover:hover {
+  background: var(--redsun-gradient-hover);
+}
+
+.border-redsun {
+  border-color: var(--redsun-border);
+}
+
+.border-redsun-hover:hover {
+  border-color: var(--redsun-border-hover);
+}
+
+.redsun-glow-coral {
+  box-shadow: 0 0 50px -10px rgba(6, 182, 212, 0.2);
+}
+
+.redsun-card {
+  background-color: var(--redsun-surface);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--redsun-border);
+  border-radius: var(--redsun-radius-md);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.redsun-card:hover {
+  border-color: rgba(6, 182, 212, 0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -15px rgba(6, 182, 212, 0.1);
+}
+
+.redsun-btn-primary {
+  background: var(--redsun-gradient);
+  color: #F1F5F9;
+  font-weight: 700;
+  border-radius: 9999px;
+  padding: 14px 32px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 30px -5px rgba(6, 182, 212, 0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.redsun-btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 16px 40px -5px rgba(6, 182, 212, 0.35);
+  filter: brightness(1.1);
+}
+
+.redsun-btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: #F1F5F9;
+  font-weight: 600;
+  border-radius: 9999px;
+  padding: 14px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.redsun-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  color: #F1F5F9;
+}
+
+.animate-redsun-marquee {
+  display: flex;
+  width: max-content;
+  animation: redsunMarquee 35s linear infinite;
+}
+
+.animate-redsun-marquee:hover {
+  animation-play-state: paused;
+}
+
+.animate-redsun-float {
+  animation: redsunFloat 6s ease-in-out infinite;
+}
+
+.animate-redsun-glow {
+  animation: redsunPulseGlow 8s ease-in-out infinite;
+}
+
+.text-redsun-hero {
+  font-size: clamp(2.2rem, 5.2vw, 5.2rem);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+}
+
+.text-redsun-h2 {
+  font-size: clamp(1.8rem, 3.5vw, 3.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+/* Custom sleek scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(3, 7, 18, 0.8);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(6, 182, 212, 0.35);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 185, 129, 0.6);
+}
+
+/* Leaflet map container fix */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   HIGH CONTRAST & WCAG AA / AAA ACCESSIBILITY SUITE
+   ========================================================================== */
+html.high-contrast,
+body.high-contrast {
+  background-color: #000000 !important;
+  color: #F1F5F9 !important;
+}
+
+html.high-contrast * {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+html.high-contrast .text-slate-400,
+html.high-contrast .text-slate-500,
+html.high-contrast .text-slate-600 {
+  color: #e2e8f0 !important;
+}
+
+html.high-contrast .text-slate-300,
+html.high-contrast .text-slate-200 {
+  color: #F1F5F9 !important;
+}
+
+html.high-contrast .text-cyan-400,
+html.high-contrast .text-cyan-300,
+html.high-contrast .text-cyan-200 {
+  color: #38bdf8 !important;
+  font-weight: 700;
+}
+
+html.high-contrast .text-emerald-400,
+html.high-contrast .text-emerald-300 {
+  color: #4ade80 !important;
+  font-weight: 700;
+}
+
+html.high-contrast .text-amber-400,
+html.high-contrast .text-amber-300,
+html.high-contrast .text-yellow-400 {
+  color: #facc15 !important;
+  font-weight: 700;
+}
+
+html.high-contrast .text-red-400,
+html.high-contrast .text-red-300 {
+  color: #f87171 !important;
+  font-weight: 700;
+}
+
+/* High contrast background overrides for cards and panels */
+html.high-contrast .bg-\[\#020617\],
+html.high-contrast .bg-\[\#020617\],
+html.high-contrast .bg-\[\#020617\],
+html.high-contrast .bg-\[\#020617\],
+html.high-contrast .bg-\[\#07172e\],
+html.high-contrast .bg-\[\#030e1f\],
+html.high-contrast .bg-\[\#030b19\],
+html.high-contrast .bg-\[\#080808\],
+html.high-contrast .bg-\[\#111111\],
+html.high-contrast .glass-panel-cyber,
+html.high-contrast .glass-panel-teal,
+html.high-contrast .glass-panel-cyan,
+html.high-contrast .redsun-card {
+  background: #09090b !important;
+  border: 1.5px solid #F1F5F9 !important;
+}
+
+/* Inputs & Form Controls in High Contrast */
+html.high-contrast input,
+html.high-contrast select,
+html.high-contrast textarea {
+  background-color: #000000 !important;
+  color: #F1F5F9 !important;
+  border: 2px solid #38bdf8 !important;
+  font-weight: 600 !important;
+}
+
+html.high-contrast input:focus,
+html.high-contrast select:focus,
+html.high-contrast textarea:focus {
+  outline: 3px solid #facc15 !important;
+  outline-offset: 2px !important;
+  border-color: #F1F5F9 !important;
+}
+
+/* High contrast buttons */
+html.high-contrast button {
+  border: 1.5px solid rgba(255, 255, 255, 0.7) !important;
+}
+
+html.high-contrast button:focus-visible {
+  outline: 3px solid #facc15 !important;
+  outline-offset: 3px !important;
+}
+
+/* Enhanced Focus Rings class */
+html.enhanced-focus *:focus-visible {
+  outline: 3px solid #facc15 !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 5px rgba(250, 204, 21, 0.35) !important;
+}
+
+/* Underline Links class */
+html.underline-links a,
+html.underline-links button.link-style,
+html.underline-links [role="link"] {
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
+}
+
+/* Font scale modes */
+html.font-scale-lg {
+  font-size: 112.5% !important;
+}
+
+html.font-scale-xl {
+  font-size: 125% !important;
+}
+
+/* Reduced Motion class */
+html.reduce-motion *,
+html.reduce-motion ::before,
+html.reduce-motion ::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Accessibility: Prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Lusion Custom Interactive Cursor style */
+.lusion-cursor-active,
+.lusion-cursor-active * {
+  cursor: none !important;
+}
+
+/* ==========================================================================
+   LIGHT MODE OVERRIDES FOR INTERNAL WORKSPACE MODULES
+   ========================================================================== */
+.theme-light-modules,
+.theme-light-modules.bg-\[\#020617\],
+.theme-light-modules main,
+.theme-light-modules .flex-1.overflow-y-auto {
+  --redsun-bg: #f8fafc; /* Clean light slate background */
+  --redsun-surface: #ffffff; /* Clean white card surfaces */
+  --redsun-surface-light: #f1f5f9; /* Slate 100 table headers and row highlights */
+  --redsun-border: rgba(0, 0, 0, 0.08); /* Low-opacity dark dividers */
+  --redsun-text-primary: #0f172a; /* Slate 900 primary text */
+  --redsun-text-secondary: #475569; /* Slate 600 info text */
+  --redsun-text-muted: #64748b; /* Slate 500 secondary muted text */
+  background-color: #f8fafc !important;
+  background-image: none !important;
+}
+
+/* Hide LusionBackground particles and ambient glow spheres in Light Mode dashboard */
+.theme-light-modules canvas,
+.theme-light-modules .absolute.top-0.right-0,
+.theme-light-modules .absolute.bottom-0.left-0 {
+  display: none !important;
+}
+
+/* Force dark text for general elements and any elements with Tailwind light/white text classes */
+.theme-light-modules h1,
+.theme-light-modules h2,
+.theme-light-modules h3,
+.theme-light-modules h4,
+.theme-light-modules h5,
+.theme-light-modules h6,
+.theme-light-modules p,
+.theme-light-modules span,
+.theme-light-modules label,
+.theme-light-modules td,
+.theme-light-modules th,
+.theme-light-modules .text-white,
+.theme-light-modules .text-slate-100,
+.theme-light-modules .text-slate-200,
+.theme-light-modules .text-slate-300,
+.theme-light-modules .text-slate-400,
+.theme-light-modules .text-gray-100,
+.theme-light-modules .text-gray-200,
+.theme-light-modules .text-gray-300,
+.theme-light-modules .text-gray-400 {
+  color: #0f172a !important; /* Slate 900 text */
+}
+
+/* Keep white text on primary buttons */
+.theme-light-modules .bg-blue-600 .text-white,
+.theme-light-modules .bg-emerald-600 .text-white,
+.theme-light-modules .bg-rose-600 .text-white,
+.theme-light-modules .bg-cyan-600 .text-white,
+.theme-light-modules .bg-indigo-600 .text-white,
+.theme-light-modules button.bg-blue-600,
+.theme-light-modules button.bg-emerald-600,
+.theme-light-modules button.bg-rose-500,
+.theme-light-modules button.bg-emerald-500,
+.theme-light-modules button.bg-cyan-500,
+.theme-light-modules button.bg-indigo-500,
+.theme-light-modules button.bg-blue-500 {
+  color: #ffffff !important;
+}
+
+/* Make navigation sidebar and its sub-elements light theme */
+.theme-light-modules aside,
+.theme-light-modules .sidebar,
+.theme-light-modules .bg-slate-955,
+.theme-light-modules .bg-slate-950,
+.theme-light-modules .bg-\[\#0b0f19\] {
+  background-color: #ffffff !important;
+  border-right: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Sidebar navigation buttons background */
+.theme-light-modules aside button,
+.theme-light-modules .sidebar button,
+.theme-light-modules aside a,
+.theme-light-modules .sidebar a {
+  color: #475569 !important;
+}
+
+.theme-light-modules aside button:hover,
+.theme-light-modules .sidebar button:hover {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+/* Selected active nav button */
+.theme-light-modules aside .bg-slate-900,
+.theme-light-modules .sidebar .bg-slate-900 {
+  background-color: #e2e8f0 !important;
+  color: #1a73e8 !important; /* Active blue text */
+}
+
+/* Card, header and container overrides: Force all cards and boxes to be white background */
+.theme-light-modules .bg-\[\#051325\],
+.theme-light-modules .bg-\[\#05162a\],
+.theme-light-modules .bg-\[\#0F172A\],
+.theme-light-modules .bg-\[\#0f172a\],
+.theme-light-modules .bg-\[\#111c30\],
+.theme-light-modules .bg-\[\#111C30\],
+.theme-light-modules .bg-\[\#081d38\],
+.theme-light-modules .bg-\[\#030d1a\],
+.theme-light-modules .bg-\[\#031121\],
+.theme-light-modules .bg-\[\#1e293b\],
+.theme-light-modules .bg-\[\#071927\],
+.theme-light-modules .bg-\[\#071325\],
+.theme-light-modules .bg-\[\#0b1c24\],
+.theme-light-modules .bg-\[\#111c24\],
+.theme-light-modules .bg-\[\#16222f\],
+.theme-light-modules .bg-\[\#0c1325\],
+.theme-light-modules .bg-\[\#0b0f19\],
+.theme-light-modules .bg-\[\#070e17\],
+.theme-light-modules .bg-slate-955,
+.theme-light-modules .bg-slate-950,
+.theme-light-modules .bg-slate-900,
+.theme-light-modules .bg-slate-900\/60,
+.theme-light-modules .bg-slate-900\/80,
+.theme-light-modules .bg-slate-800,
+.theme-light-modules .bg-slate-800\/50,
+.theme-light-modules .bg-slate-750,
+.theme-light-modules .bg-slate-700,
+.theme-light-modules .bg-slate-650,
+.theme-light-modules .bg-slate-600,
+.theme-light-modules .bg-slate-500,
+.theme-light-modules .bg-slate-950\/80,
+.theme-light-modules .bg-slate-950\/60,
+.theme-light-modules .bg-slate-950\/40,
+.theme-light-modules .bg-slate-900\/40,
+.theme-light-modules [class*="bg-gradient-"],
+.theme-light-modules [class*="from-"],
+.theme-light-modules [class*="via-"],
+.theme-light-modules [class*="to-"] {
+  background-color: #ffffff !important; /* Force all container backgrounds to white */
+  background-image: none !important; /* Hide dark gradients */
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02) !important;
+}
+
+/* Divider lines */
+.theme-light-modules .border-slate-800,
+.theme-light-modules .border-slate-700,
+.theme-light-modules .border-white\/10,
+.theme-light-modules .border-white\/5 {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Muted or secondary text color overrides */
+.theme-light-modules .text-slate-300,
+.theme-light-modules .text-slate-400,
+.theme-light-modules .text-gray-400 {
+  color: #475569 !important; /* Slate 600 */
+}
+
+.theme-light-modules .text-slate-500,
+.theme-light-modules .text-slate-600,
+.theme-light-modules .text-gray-500 {
+  color: #64748b !important; /* Slate 500 */
+}
+
+.theme-light-modules .text-cyan-300,
+.theme-light-modules .text-cyan-400 {
+  color: #0891b2 !important; /* Darker cyan */
+}
+
+.theme-light-modules .text-emerald-300,
+.theme-light-modules .text-emerald-400 {
+  color: #047857 !important; /* Darker green */
+}
+
+/* Forms, inputs and selects */
+.theme-light-modules input,
+.theme-light-modules select,
+.theme-light-modules textarea,
+.theme-light-modules input[type="text"],
+.theme-light-modules input[type="email"],
+.theme-light-modules input[type="password"] {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+}
+
+.theme-light-modules input::placeholder,
+.theme-light-modules textarea::placeholder {
+  color: #94a3b8 !important; /* Slate 400 */
+}
+
+/* Table tr divider borders */
+.theme-light-modules tr {
+  border-bottom-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Pill status tags */
+.theme-light-modules .bg-rose-500\/20 {
+  background-color: rgba(239, 68, 68, 0.1) !important;
+  color: #b91c1c !important;
+}
+.theme-light-modules .bg-emerald-500\/20 {
+  background-color: rgba(16, 185, 129, 0.1) !important;
+  color: #047857 !important;
+}
+.theme-light-modules .bg-cyan-500\/20 {
+  background-color: rgba(6, 182, 212, 0.1) !important;
+  color: #0891b2 !important;
+}
+.theme-light-modules .bg-purple-500\/20 {
+  background-color: rgba(168, 85, 247, 0.1) !important;
+  color: #7e22ce !important;
+}
+
+

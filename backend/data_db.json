@@ -1,0 +1,634 @@
+{
+  "admin": {
+    "users": [
+      {
+        "id": "USR-1001",
+        "name": "Dra. María Paula Restrepo",
+        "cedula": "1085294312",
+        "email": "admin.general@campanaganadora.co",
+        "passwordHash": "AdminSeguro2026!",
+        "role": "Superadmin",
+        "accessLevel": "Nivel 10",
+        "status": "Activo",
+        "createdAt": "2026-01-10"
+      },
+      {
+        "id": "USR-1002",
+        "name": "Ing. Carlos Alberto Mendoza",
+        "cedula": "1020784920",
+        "email": "director.estrategico@campanaganadora.co",
+        "passwordHash": "EstrategiaAI2026!",
+        "role": "Director Político",
+        "accessLevel": "Nivel 9",
+        "status": "Activo",
+        "createdAt": "2026-01-15"
+      },
+      {
+        "id": "USR-1003",
+        "name": "Capitán Fernando Torres",
+        "cedula": "1144028392",
+        "email": "coordinador.e14@campanaganadora.co",
+        "passwordHash": "TestigoE14Pass!",
+        "role": "Coordinador Territorial",
+        "accessLevel": "Nivel 7",
+        "status": "Activo",
+        "createdAt": "2026-02-01"
+      },
+      {
+        "id": "USR-1004",
+        "name": "Dra. Elena Gómez Soler",
+        "cedula": "31894021",
+        "email": "tesoreria@campanaganadora.co",
+        "passwordHash": "FinanzasCNE2026!",
+        "role": "Tesorero / Contador CNE",
+        "accessLevel": "Nivel 8",
+        "status": "Activo",
+        "createdAt": "2026-02-01"
+      }
+    ],
+    "payroll": [
+      {
+        "id": "PAY-101",
+        "concept": "Honorarios Coordinadores de Comuna",
+        "category": "Nómina Campo",
+        "amount": 45000000,
+        "date": "2026-02-01",
+        "status": "Pagado"
+      },
+      {
+        "id": "PAY-102",
+        "concept": "Servicios Servidores Cloud & API OCR",
+        "category": "Tecnología",
+        "amount": 8200000,
+        "date": "2026-02-05",
+        "status": "Pagado"
+      },
+      {
+        "id": "PAY-103",
+        "concept": "Logística de Transporte Día E",
+        "category": "Operación Electoral",
+        "amount": 32000000,
+        "date": "2026-02-06",
+        "status": "Aprobado"
+      }
+    ],
+    "auditLogs": [
+      {
+        "id": "LOG-108",
+        "action": "Estado de Acceso Modificado",
+        "user": "Dra. María Paula Restrepo",
+        "timestamp": "26/8/2026, 10:45:52 p. m.",
+        "details": "Modificación de estado de acceso a usuario: Capitán Fernando Torres (coordinador.e14@campanaganadora.co) -> Activo"
+      },
+      {
+        "id": "LOG-117",
+        "action": "Estado de Acceso Modificado",
+        "user": "Dra. María Paula Restrepo",
+        "timestamp": "26/8/2026, 10:45:18 p. m.",
+        "details": "Modificación de estado de acceso a usuario: Ing. Carlos Alberto Mendoza (director.estrategico@campanaganadora.co) -> Activo"
+      },
+      {
+        "id": "LOG-495",
+        "action": "Estado de Acceso Modificado",
+        "user": "Dra. María Paula Restrepo",
+        "timestamp": "26/8/2026, 10:45:18 p. m.",
+        "details": "Modificación de estado de acceso a usuario: Ing. Carlos Alberto Mendoza (director.estrategico@campanaganadora.co) -> Suspendido"
+      },
+      {
+        "id": "LOG-566",
+        "action": "Estado de Acceso Modificado",
+        "user": "Dra. María Paula Restrepo",
+        "timestamp": "26/8/2026, 10:45:17 p. m.",
+        "details": "Modificación de estado de acceso a usuario: Capitán Fernando Torres (coordinador.e14@campanaganadora.co) -> Suspendido"
+      },
+      {
+        "id": "LOG-864",
+        "action": "Estado de Acceso Modificado",
+        "user": "Dra. María Paula Restrepo",
+        "timestamp": "26/8/2026, 10:45:17 p. m.",
+        "details": "Modificación de estado de acceso a usuario: Capitán Fernando Torres (coordinador.e14@campanaganadora.co) -> Activo"
+      },
+      {
+        "id": "LOG-594",
+        "action": "Estado de Acceso Modificado",
+        "user": "Dra. María Paula Restrepo",
+        "timestamp": "26/8/2026, 10:41:36 p. m.",
+        "details": "Modificación de estado de acceso a usuario: Ing. Carlos Alberto Mendoza (director.estrategico@campanaganadora.co) -> Activo"
+      },
+      {
+        "id": "LOG-968",
+        "action": "Estado de Acceso Modificado",
+        "user": "Dra. María Paula Restrepo",
+        "timestamp": "26/8/2026, 10:41:36 p. m.",
+        "details": "Modificación de estado de acceso a usuario: Ing. Carlos Alberto Mendoza (director.estrategico@campanaganadora.co) -> Suspendido"
+      },
+      {
+        "id": "LOG-465",
+        "action": "Estado de Acceso Modificado",
+        "user": "Dra. María Paula Restrepo",
+        "timestamp": "26/8/2026, 10:41:35 p. m.",
+        "details": "Modificación de estado de acceso a usuario: Ing. Carlos Alberto Mendoza (director.estrategico@campanaganadora.co) -> Activo"
+      },
+      {
+        "id": "LOG-995",
+        "action": "Estado de Acceso Modificado",
+        "user": "Dra. María Paula Restrepo",
+        "timestamp": "26/8/2026, 10:41:34 p. m.",
+        "details": "Modificación de estado de acceso a usuario: Ing. Carlos Alberto Mendoza (director.estrategico@campanaganadora.co) -> Suspendido"
+      },
+      {
+        "id": "LOG-835",
+        "action": "Estado de Acceso Modificado",
+        "user": "Dra. María Paula Restrepo",
+        "timestamp": "26/8/2026, 10:41:33 p. m.",
+        "details": "Modificación de estado de acceso a usuario: Ing. Carlos Alberto Mendoza (director.estrategico@campanaganadora.co) -> Suspendido"
+      },
+      {
+        "id": "LOG-913",
+        "action": "Estado de Acceso Modificado",
+        "user": "Dra. María Paula Restrepo",
+        "timestamp": "26/8/2026, 6:19:22 p. m.",
+        "details": "Modificación de estado de acceso a usuario: Ing. Carlos Alberto Mendoza (director.estrategico@campanaganadora.co) -> Activo"
+      },
+      {
+        "id": "LOG-846",
+        "action": "Estado de Acceso Modificado",
+        "user": "Dra. María Paula Restrepo",
+        "timestamp": "26/8/2026, 6:10:38 p. m.",
+        "details": "Modificación de estado de acceso a usuario: Ing. Carlos Alberto Mendoza (director.estrategico@campanaganadora.co) -> Suspendido"
+      },
+      {
+        "id": "LOG-738",
+        "action": "Estado de Acceso Modificado",
+        "user": "Dra. María Paula Restrepo",
+        "timestamp": "26/8/2026, 6:10:37 p. m.",
+        "details": "Modificación de estado de acceso a usuario: Ing. Carlos Alberto Mendoza (director.estrategico@campanaganadora.co) -> Activo"
+      },
+      {
+        "id": "LOG-801",
+        "action": "Cambio de Permisos RBAC",
+        "user": "Dra. María Paula Restrepo",
+        "timestamp": "2026-08-06 20:30",
+        "details": "Nivel 10 habilitado para módulo E-14"
+      },
+      {
+        "id": "LOG-802",
+        "action": "Verificación SHA-256",
+        "user": "Sistema Automático",
+        "timestamp": "2026-08-06 21:15",
+        "details": "Base de datos sincronizada sin errores"
+      }
+    ],
+    "systemSettings": {
+      "maintenanceMode": false,
+      "apiRateLimit": 1200,
+      "sha256Verification": true
+    }
+  },
+  "strategic": {
+    "dafoEntries": [
+      {
+        "id": "DAF-01",
+        "type": "Fortaleza",
+        "description": "Consolidación de votación en Comunas 2, 17 y 19 con 42% intención de voto.",
+        "impact": "Alto",
+        "status": "Activo"
+      },
+      {
+        "id": "DAF-02",
+        "type": "Oportunidad",
+        "description": "Capta de votantes independientes tras debate televisado regional.",
+        "impact": "Muy Alto",
+        "status": "En Proceso"
+      },
+      {
+        "id": "DAF-03",
+        "type": "Amenaza",
+        "description": "Campaña sucia en redes sociales sobre propuestas de movilidad.",
+        "impact": "Medio",
+        "status": "Mitigado"
+      }
+    ],
+    "budgets": [
+      {
+        "id": "STR-B01",
+        "title": "Publicidad Digital & Redes Sociales",
+        "allocated": 120000000,
+        "executed": 84000000,
+        "department": "Comunicaciones"
+      },
+      {
+        "id": "STR-B02",
+        "title": "Encuestas & Tracking Telefónico",
+        "allocated": 65000000,
+        "executed": 42000000,
+        "department": "Investigación Electoral"
+      },
+      {
+        "id": "STR-B03",
+        "title": "Giras Municipales y Eventos Masivos",
+        "allocated": 180000000,
+        "executed": 125000000,
+        "department": "Dirección Estratégica"
+      },
+      {
+        "id": "STR-B53",
+        "title": "15000000",
+        "allocated": 15000000,
+        "executed": 0,
+        "department": "Comunicaciones"
+      }
+    ],
+    "aiNotes": [
+      {
+        "id": "NTE-01",
+        "topic": "Discurso Cierre de Precampaña",
+        "content": "Énfasis en seguridad urbana, reactivación económica y control transparente de presupuestos.",
+        "date": "2026-08-05"
+      }
+    ],
+    "candidateProfile": {
+      "name": "Dra. María Paula Restrepo",
+      "cedula": "1085294312",
+      "pseudonym": "María Paula \"La Doctora del Pueblo\"",
+      "profession": "Abogada Especialista en Derecho Público y Gestión Territorial",
+      "photo": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&auto=format&fit=crop&q=80",
+      "phone": "+57 310 892 4021",
+      "email": "maria.restrepo@campanaganadora.co",
+      "slogan": "Unidos por el Progreso, la Seguridad y el Futuro de Nuestra Ciudad",
+      "bio": "Líder social con más de 15 años de experiencia en la administración pública, defensora de la transparencia institucional y el desarrollo económico incluyente.",
+      "party": "Movimiento Político Fuerza Ciudadana",
+      "numberOnBallot": "N° 101",
+      "socialMedia": {
+        "whatsapp": "https://wa.me/573108924021",
+        "facebook": "https://facebook.com/mariapaula.restrepo.oficial",
+        "instagram": "https://instagram.com/mariapaularestrepo",
+        "twitter": "https://x.com/mrestrepo2026",
+        "tiktok": "https://tiktok.com/@mariapaularestrepo",
+        "youtube": "https://youtube.com/@mariapaulaoficial",
+        "website": "https://mariapaularestrepo.co"
+      },
+      "dofaStrengths": "Reconocimiento ciudadano alto en innovación pública; Travesía ética intachable sin investigaciones; Sólido respaldo de sectores académicos y jóvenes.",
+      "dofaWeaknesses": "Visibilidad territorial en comunas periféricas por consolidar; Estructura de logística y transporte limitada frente a maquinarias.",
+      "dofaOpportunities": "Alta demanda ciudadana de liderazgos independientes; Alianzas estratégicas con gremios productivos y sectores comunitarios.",
+      "dofaThreats": "Ataques de desinformación de rivales tradicionales; Abstencionismo electoral en puestos de votación periféricos."
+    }
+  },
+  "territorial": {
+    "voters": [
+      {
+        "id": "VOT-001",
+        "name": "Carlos Eduardo Gómez",
+        "cedula": "1085294312",
+        "puesto": "INEM Jorge Isaacs",
+        "mesa": "Mesa 18",
+        "leaderName": "Líder Fernando Torres",
+        "status": "Confirmado"
+      },
+      {
+        "id": "VOT-002",
+        "name": "Ana Lucía Bermúdez",
+        "cedula": "31942081",
+        "puesto": "Colegio Santa Librada",
+        "mesa": "Mesa 05",
+        "leaderName": "Líder Fernando Torres",
+        "status": "Confirmado"
+      },
+      {
+        "id": "VOT-003",
+        "name": "Jorge Ignacio Valencia",
+        "cedula": "16789423",
+        "puesto": "SENA Salomia",
+        "mesa": "Mesa 12",
+        "leaderName": "Líder Beatriz Morales",
+        "status": "Pendiente Movilización"
+      }
+    ],
+    "e14Actas": [
+      {
+        "id": "E14-311",
+        "mesa": "Mesa 01",
+        "puesto": "INEM Jorge Isaacs",
+        "votosCandidato": 184,
+        "votosOponente": 42,
+        "nulos": 0,
+        "status": "Verificada OCR",
+        "timestamp": "8/8/2026, 9:54:20 p. m."
+      },
+      {
+        "id": "E14-101",
+        "mesa": "Mesa 18",
+        "puesto": "INEM Jorge Isaacs",
+        "votosCandidato": 184,
+        "votosOponente": 92,
+        "nulos": 3,
+        "status": "Verificada OCR",
+        "timestamp": "2026-08-06 17:40"
+      },
+      {
+        "id": "E14-102",
+        "mesa": "Mesa 05",
+        "puesto": "Colegio Santa Librada",
+        "votosCandidato": 210,
+        "votosOponente": 88,
+        "nulos": 2,
+        "status": "Verificada OCR",
+        "timestamp": "2026-08-06 17:45"
+      }
+    ],
+    "witnesses": [
+      {
+        "id": "WIT-01",
+        "name": "Capitán Fernando Torres",
+        "puesto": "INEM Jorge Isaacs",
+        "mesa": "Mesa 18",
+        "phone": "3104829102",
+        "geofenceVerified": true,
+        "batteryPct": 94
+      },
+      {
+        "id": "WIT-02",
+        "name": "Beatriz Morales",
+        "puesto": "SENA Salomia",
+        "mesa": "Mesa 12",
+        "phone": "3159201923",
+        "geofenceVerified": true,
+        "batteryPct": 88
+      },
+      {
+        "id": "WIT-03",
+        "name": "Héctor Fabio Ramírez",
+        "puesto": "Coliseo del Pueblo",
+        "mesa": "Mesa 01",
+        "phone": "3001829301",
+        "geofenceVerified": false,
+        "batteryPct": 45
+      }
+    ]
+  },
+  "saas": {
+    "clients": [],
+    "licenses": [],
+    "subscriptions": [],
+    "plans": [],
+    "auditLogs": [
+      {
+        "id": "LOG-G1787753836825",
+        "action": "Modificación de Módulo",
+        "user": "Administrador Global",
+        "timestamp": "26/8/2026, 9:17:16 a. m.",
+        "details": "Actualizó estado del módulo Gestión Estratégica a: Activo",
+        "result": "Éxito",
+        "ip": "127.0.0.1",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/2026"
+      },
+      {
+        "id": "LOG-G1787753835409",
+        "action": "Modificación de Módulo",
+        "user": "Administrador Global",
+        "timestamp": "26/8/2026, 9:17:15 a. m.",
+        "details": "Actualizó estado del módulo Gestión Estratégica a: Inactivo",
+        "result": "Éxito",
+        "ip": "127.0.0.1",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/2026"
+      },
+      {
+        "id": "LOG-G1787753824676",
+        "action": "Modificación de campaña",
+        "user": "Administrador Global",
+        "timestamp": "26/8/2026, 9:17:04 a. m.",
+        "details": "Actualizó campaña: Campaña María Paula Restrepo 2026",
+        "result": "Éxito",
+        "ip": "127.0.0.1",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/2026"
+      },
+      {
+        "id": "LOG-G1787753817060",
+        "action": "Modificación de campaña",
+        "user": "Administrador Global",
+        "timestamp": "26/8/2026, 9:16:57 a. m.",
+        "details": "Actualizó campaña: Campaña María Paula Restrepo 2026",
+        "result": "Éxito",
+        "ip": "127.0.0.1",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/2026"
+      },
+      {
+        "id": "LOG-G1787753817051",
+        "action": "Modificación de campaña",
+        "user": "Administrador Global",
+        "timestamp": "26/8/2026, 9:16:57 a. m.",
+        "details": "Actualizó campaña: Campaña María Paula Restrepo 2026",
+        "result": "Éxito",
+        "ip": "127.0.0.1",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/2026"
+      },
+      {
+        "id": "LOG-G1787753817040",
+        "action": "Modificación de campaña",
+        "user": "Administrador Global",
+        "timestamp": "26/8/2026, 9:16:57 a. m.",
+        "details": "Actualizó campaña: Campaña María Paula Restrepo 2026",
+        "result": "Éxito",
+        "ip": "127.0.0.1",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/2026"
+      },
+      {
+        "id": "LOG-G1787753817010",
+        "action": "Modificación de campaña",
+        "user": "Administrador Global",
+        "timestamp": "26/8/2026, 9:16:57 a. m.",
+        "details": "Actualizó campaña: Campaña María Paula Restrepo 2026",
+        "result": "Éxito",
+        "ip": "127.0.0.1",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/2026"
+      },
+      {
+        "id": "LOG-G1787752805922",
+        "action": "Inicio de sesión",
+        "user": "Administrador Global",
+        "timestamp": "26/8/2026, 9:00:05 a. m.",
+        "details": "Autenticación exitosa del administrador global supremo.",
+        "result": "Éxito",
+        "ip": "127.0.0.1",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/2026"
+      },
+      {
+        "id": "LOG-G1787752706990",
+        "action": "Inicio de sesión",
+        "user": "Administrador Global",
+        "timestamp": "26/8/2026, 8:58:26 a. m.",
+        "details": "Autenticación exitosa del administrador global supremo.",
+        "result": "Éxito",
+        "ip": "127.0.0.1",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/2026"
+      },
+      {
+        "id": "LOG-G1787752585656",
+        "action": "Inicio de sesión",
+        "user": "Administrador Global",
+        "timestamp": "26/8/2026, 8:56:25 a. m.",
+        "details": "Autenticación exitosa del administrador global supremo.",
+        "result": "Éxito",
+        "ip": "127.0.0.1",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/2026"
+      },
+      {
+        "id": "LOG-G1787752549988",
+        "action": "Inicio de sesión",
+        "user": "Administrador Global",
+        "timestamp": "26/8/2026, 8:55:49 a. m.",
+        "details": "Autenticación exitosa del administrador global supremo.",
+        "result": "Éxito",
+        "ip": "127.0.0.1",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/2026"
+      }
+    ]
+  },
+  "globalAdminSettings": {
+    "roles": [
+      {
+        "id": "R-1",
+        "name": "SUPER_ADMIN",
+        "description": "Acceso total a la plataforma y todos sus submódulos.",
+        "permissions": [
+          "ALL"
+        ]
+      },
+      {
+        "id": "R-2",
+        "name": "ADMINISTRADOR",
+        "description": "Administrador de campaña, finanzas, CNE y registro electoral.",
+        "permissions": [
+          "ADMIN_VIEW",
+          "CNE_WRITE"
+        ]
+      },
+      {
+        "id": "R-3",
+        "name": "CANDIDATO",
+        "description": "Visualización estratégica global y reportes.",
+        "permissions": [
+          "STRATEGIC_VIEW"
+        ]
+      },
+      {
+        "id": "R-4",
+        "name": "COORDINADOR_TERRITORIAL",
+        "description": "Gestión de testigos, votantes y distribución.",
+        "permissions": [
+          "TERRITORIAL_WRITE"
+        ]
+      },
+      {
+        "id": "R-5",
+        "name": "TESTIGO_ELECTORAL",
+        "description": "Envío de información de mesa y reporte E-14.",
+        "permissions": [
+          "E14_SUBMIT"
+        ]
+      }
+    ],
+    "modules": [
+      {
+        "id": "modulo_admin",
+        "name": "Gestión Administrativa",
+        "status": "Activo",
+        "mandatory": true,
+        "description": "Control de nóminas, presupuestos, contabilidad CNE, roles de campaña y lugar de votación oficial."
+      },
+      {
+        "id": "gestion_estrategica",
+        "name": "Gestión Estratégica",
+        "status": "Activo",
+        "mandatory": false,
+        "description": "Mapeo DAFO, metas de votos, simulador de escenarios, notas de IA y análisis de tendencias."
+      },
+      {
+        "id": "gestion_territorial",
+        "name": "Gestión Territorial",
+        "status": "Activo",
+        "mandatory": false,
+        "description": "Geolocalización de testigos Día D, reporte de actas de escrutinio E-14 y geocercas en tiempo real."
+      }
+    ],
+    "apis": [
+      {
+        "name": "Registraduría Nacional Censo",
+        "status": "online",
+        "type": "Rest API",
+        "limit": 5000,
+        "usage": 840,
+        "errors": 2,
+        "lastUsed": "Hace 5 mins",
+        "maskKey": "AIzaSyA...L8d2f",
+        "token": "AIzaSyA_Sensor_Token_Key_2026"
+      },
+      {
+        "name": "SMS Masivos Movistar Gateway",
+        "status": "online",
+        "type": "HTTPS Post",
+        "limit": 2000,
+        "usage": 320,
+        "errors": 0,
+        "lastUsed": "Hace 12 mins",
+        "maskKey": "tok_5129...3a8f",
+        "token": "tok_512938472918374a8f"
+      },
+      {
+        "name": "Google reCAPTCHA v2 Verification",
+        "status": "online",
+        "type": "Google API",
+        "limit": 10000,
+        "usage": 70,
+        "errors": 12,
+        "lastUsed": "Hace 1 min",
+        "maskKey": "6Ld_8h...a2fB",
+        "token": "6Ld_8h98a2fB"
+      },
+      {
+        "name": "Leaflet Mapbox Geocoding Routing",
+        "status": "online",
+        "type": "Mapbox REST",
+        "limit": 10000,
+        "usage": 190,
+        "errors": 0,
+        "lastUsed": "Hace 45 mins",
+        "maskKey": "pk.eyJ1...9h3f",
+        "token": "pk.eyJ19h3f"
+      }
+    ],
+    "security": {
+      "failedAttemptsCount": 3,
+      "activeSessionsCount": 1,
+      "blockedUsers": [
+        {
+          "email": "hacker@malicioso.com",
+          "ip": "190.14.82.105",
+          "date": "2026-08-25",
+          "reason": "Fuerza bruta repetida"
+        }
+      ],
+      "settings": {
+        "mfaRequired": false,
+        "passwordComplexity": "Alta",
+        "sessionTimeoutMinutes": 30
+      }
+    },
+    "config": {
+      "maintenanceMode": false,
+      "rateLimit": 1200,
+      "databaseVerification": true
+    },
+    "campaigns": [
+      {
+        "id": "CAMP-001",
+        "name": "Campaña María Paula Restrepo 2026",
+        "status": "Activo",
+        "adminName": "Dra. María Paula Restrepo",
+        "usersCount": 4,
+        "createdAt": "2026-01-10",
+        "lastActivity": "Hace unos momentos"
+      }
+    ]
+  }
+}

@@ -1,5 +1,7 @@
 name = "ober-osorio"
 compatibility_date = "2024-09-03"
+pages_build_output_dir = "frontend/dist"
+
 
 [assets]
 directory = "./frontend/dist"

@@ -197,7 +197,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 bg-slate-950/80 backdrop-blur-md pointer-events-auto"
+          className="fixed inset-0 bg-slate-950/85 pointer-events-auto"
         />
 
         {/* Modal Container */}
@@ -208,9 +208,6 @@ export const LoginModal: React.FC<LoginModalProps> = ({
           transition={{ type: 'spring', stiffness: 350, damping: 30 }}
           className="relative w-full max-w-md bg-[#050c18] border border-cyan-500/25 rounded-3xl shadow-2xl shadow-[#020617]/90 p-6 sm:p-8 z-10 text-slate-100 flex flex-col overflow-hidden max-h-[92vh]"
         >
-          {/* Ambient header glow */}
-          <div className="absolute -top-24 -left-24 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
 
           {/* Close button */}
           <button

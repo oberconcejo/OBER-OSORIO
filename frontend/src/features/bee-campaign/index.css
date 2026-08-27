@@ -629,6 +629,7 @@ html.reduce-motion ::after {
 .theme-light-modules [class*="bg-[#0F172A]"],
 .theme-light-modules [class*="bg-[#0f172a]"],
 .theme-light-modules [class*="bg-[#041224]"],
+.theme-light-modules [class*="bg-[#051428]"],
 .theme-light-modules [class*="bg-[#1e293b]"],
 .theme-light-modules [class*="bg-[#071927]"],
 .theme-light-modules [class*="bg-[#071325]"],
@@ -658,7 +659,9 @@ html.reduce-motion ::after {
 .theme-light-modules [class*="bg-[#111C30]"],
 .theme-light-modules [class*="bg-[#081d38]"],
 .theme-light-modules [class*="bg-[#030d1a]"],
-.theme-light-modules [class*="bg-[#031121]"] {
+.theme-light-modules [class*="bg-[#031121]"],
+.theme-light-modules [class*="bg-[#030e1c]"],
+.theme-light-modules [class*="bg-[#020b16]"] {
   background-color: #f1f5f9 !important; /* Soft highlighted headers, wells and rows */
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.01) !important;

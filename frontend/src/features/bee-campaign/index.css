@@ -199,8 +199,8 @@ input[type="email"],
 input[type="password"],
 select {
   border-radius: 999px !important;
-  padding-left: 1.25rem !important;
-  padding-right: 1.25rem !important;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
 

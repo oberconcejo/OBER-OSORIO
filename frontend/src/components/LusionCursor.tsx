@@ -1,25 +1,39 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export const LusionCursor: React.FC = () => {
-  const [hovered, setHovered] = useState(false);
-  const [visible, setVisible] = useState(false);
-  
   const dotRef = useRef<HTMLDivElement | null>(null);
   const ringRef = useRef<HTMLDivElement | null>(null);
   
   const mouseCoords = useRef({ x: 0, y: 0 });
   const springRef = useRef({ x: 0, y: 0, vx: 0, vy: 0 });
+  const hoveredRef = useRef(false);
+  const visibleRef = useRef(false);
 
   useEffect(() => {
-    // Show cursor only when mouse moves
+    const dot = dotRef.current;
+    const ring = ringRef.current;
+    if (!dot || !ring) return;
+
+    // Initially hide cursor elements
+    dot.style.opacity = '0';
+    ring.style.opacity = '0';
+    dot.style.transition = 'opacity 0.2s ease-in-out';
+    ring.style.transition = 'opacity 0.2s ease-in-out, background-color 0.3s, border-color 0.3s';
+
     const onMouseMove = (e: MouseEvent) => {
       mouseCoords.current.x = e.clientX;
       mouseCoords.current.y = e.clientY;
-      if (!visible) setVisible(true);
+      if (!visibleRef.current) {
+        visibleRef.current = true;
+        dot.style.opacity = '1';
+        ring.style.opacity = '1';
+      }
     };
 
     const onMouseLeave = () => {
-      setVisible(false);
+      visibleRef.current = false;
+      dot.style.opacity = '0';
+      ring.style.opacity = '0';
     };
 
     window.addEventListener('mousemove', onMouseMove);
@@ -32,11 +46,9 @@ export const LusionCursor: React.FC = () => {
       const targetY = mouseCoords.current.y;
       
       // Update Dot position immediately
-      if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${targetX - 3}px, ${targetY - 3}px, 0)`;
-      }
+      dot.style.transform = `translate3d(${targetX - 3}px, ${targetY - 3}px, 0)`;
 
-      // Update Ring position with mass-spring-damper physics (liquid momentum)
+      // Update Ring position with mass-spring-damper physics
       const spring = springRef.current;
       const stiffness = 0.12; // Spring tension
       const damping = 0.65;   // Resistance/Friction
@@ -50,35 +62,35 @@ export const LusionCursor: React.FC = () => {
       spring.x += spring.vx;
       spring.y += spring.vy;
 
-      if (ringRef.current) {
-        const ringSize = hovered ? 48 : 32;
-        const offset = ringSize / 2;
-        ringRef.current.style.width = `${ringSize}px`;
-        ringRef.current.style.height = `${ringSize}px`;
-        ringRef.current.style.transform = `translate3d(${spring.x - offset}px, ${spring.y - offset}px, 0)`;
-      }
+      const hovered = hoveredRef.current;
+      const ringSize = hovered ? 48 : 32;
+      const offset = ringSize / 2;
+      
+      ring.style.width = `${ringSize}px`;
+      ring.style.height = `${ringSize}px`;
+      ring.style.transform = `translate3d(${spring.x - offset}px, ${spring.y - offset}px, 0)`;
+      ring.style.borderColor = hovered ? 'rgba(255, 255, 255, 0.8)' : 'rgba(255, 255, 255, 0.45)';
+      ring.style.backgroundColor = hovered ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0)';
 
       animationId = requestAnimationFrame(updateCursor);
     };
 
     updateCursor();
 
-    // Attach hover listeners to all interactive items on the page
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (
+      if (!target) return;
+      
+      const isInteractive = 
         target.tagName === 'BUTTON' ||
         target.tagName === 'A' ||
         target.tagName === 'INPUT' ||
         target.tagName === 'SELECT' ||
         target.closest('button') ||
         target.closest('a') ||
-        target.classList.contains('cursor-pointer')
-      ) {
-        setHovered(true);
-      } else {
-        setHovered(false);
-      }
+        target.classList.contains('cursor-pointer');
+        
+      hoveredRef.current = !!isInteractive;
     };
 
     window.addEventListener('mouseover', handleMouseOver);
@@ -93,9 +105,7 @@ export const LusionCursor: React.FC = () => {
       cancelAnimationFrame(animationId);
       document.body.classList.remove('lusion-cursor-active');
     };
-  }, [hovered, visible]);
-
-  if (!visible) return null;
+  }, []);
 
   return (
     <>
@@ -107,11 +117,7 @@ export const LusionCursor: React.FC = () => {
       {/* Smooth trailing Lusion lag circle ring */}
       <div
         ref={ringRef}
-        className="fixed top-0 left-0 rounded-full border border-white pointer-events-none z-[9998] mix-blend-difference transition-[background-color,border-color] duration-300"
-        style={{
-          borderColor: hovered ? 'rgba(255, 255, 255, 0.8)' : 'rgba(255, 255, 255, 0.45)',
-          backgroundColor: hovered ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0)',
-        }}
+        className="fixed top-0 left-0 rounded-full border border-white pointer-events-none z-[9998] mix-blend-difference"
       />
     </>
   );

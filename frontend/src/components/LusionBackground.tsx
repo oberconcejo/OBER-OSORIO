@@ -23,7 +23,7 @@ export const LusionBackground: React.FC = () => {
 
     let animationFrameId: number;
     let particles: Particle[] = [];
-    const maxParticles = 60; // Highly optimized limit
+    const maxParticles = 40; // Highly optimized limit
 
     // Handle high DPI screens
     const resizeCanvas = () => {

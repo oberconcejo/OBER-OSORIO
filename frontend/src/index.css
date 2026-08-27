@@ -690,14 +690,24 @@ html.reduce-motion ::after {
   color: #475569 !important; /* Slate 600 */
 }
 
-.theme-light-modules .text-cyan-300,
-.theme-light-modules .text-cyan-400 {
+.theme-light-modules [class*="text-cyan-"] {
   color: #0891b2 !important; /* Darker cyan */
 }
 
-.theme-light-modules .text-emerald-300,
-.theme-light-modules .text-emerald-400 {
+.theme-light-modules [class*="text-emerald-"] {
   color: #047857 !important; /* Darker green */
+}
+
+.theme-light-modules [class*="text-rose-"] {
+  color: #be123c !important; /* Darker rose */
+}
+
+.theme-light-modules [class*="text-amber-"] {
+  color: #b45309 !important; /* Darker amber */
+}
+
+.theme-light-modules [class*="text-purple-"] {
+  color: #7e22ce !important; /* Darker purple */
 }
 
 /* Forms, inputs and selects */

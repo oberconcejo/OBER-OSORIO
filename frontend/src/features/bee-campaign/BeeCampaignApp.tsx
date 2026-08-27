@@ -485,9 +485,6 @@ export default function BeeCampaignApp() {
       <div className="min-h-screen bg-[#020617] text-white relative overflow-hidden">
         <LusionBackground />
         <LusionCursor />
-        {/* Background ambient glows */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cyan-500/10 blur-[150px] rounded-full pointer-events-none -z-10" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-500/10 blur-[150px] rounded-full pointer-events-none -z-10" />
         <div className="relative z-10">
           <ModuleSelectPage 
             onBack={() => setCurrentView('landing')}

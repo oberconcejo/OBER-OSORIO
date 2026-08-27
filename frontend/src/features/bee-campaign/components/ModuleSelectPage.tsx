@@ -100,12 +100,13 @@ export function ModuleSelectPage({ onBack, onSelectModule, onOpenLogin }: Module
   return (
     <div className="min-h-screen w-full bg-[#020617] flex flex-col items-center justify-start sm:justify-center px-3 sm:px-6 py-6 sm:py-12 md:py-16 relative overflow-x-hidden text-slate-100">
 
-      {/* Background ambient glows */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute -top-32 -left-32 w-96 h-96 bg-red-600/10 rounded-full blur-[90px] opacity-60" />
-        <div className="absolute top-1/3 -right-32 w-[30rem] h-[30rem] bg-violet-600/10 rounded-full blur-[100px] opacity-50" />
-        <div className="absolute -bottom-32 left-1/4 w-[28rem] h-[28rem] bg-emerald-600/10 rounded-full blur-[90px] opacity-50" />
-      </div>
+      {/* Background ambient glows - Optimized to avoid blur repaint lag */}
+      <div 
+        className="fixed inset-0 pointer-events-none z-0 opacity-40" 
+        style={{
+          backgroundImage: 'radial-gradient(circle at 10% 10%, rgba(220, 38, 38, 0.08) 0%, transparent 40%), radial-gradient(circle at 90% 40%, rgba(124, 58, 237, 0.06) 0%, transparent 50%), radial-gradient(circle at 30% 95%, rgba(5, 150, 105, 0.06) 0%, transparent 40%)'
+        }}
+      />
 
       {/* Top action bar */}
       <div className="relative z-20 w-full max-w-5xl flex items-center justify-between gap-2 mb-6 sm:mb-8">

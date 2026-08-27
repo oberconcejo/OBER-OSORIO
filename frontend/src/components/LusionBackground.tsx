@@ -90,8 +90,9 @@ export const LusionBackground: React.FC = () => {
         if (mouse.active) {
           const dx = p1.x - mouse.x;
           const dy = p1.y - mouse.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 200) {
+          const distSq = dx * dx + dy * dy;
+          if (distSq < 40000) { // 200 * 200
+            const dist = Math.sqrt(distSq);
             const force = (200 - dist) / 200;
             p1.vx += (dx / dist) * force * 0.09;
             p1.vy += (dy / dist) * force * 0.09;
@@ -127,9 +128,10 @@ export const LusionBackground: React.FC = () => {
           const p2 = particles[j];
           const dx = p1.x - p2.x;
           const dy = p1.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+          const distSq = dx * dx + dy * dy;
 
-          if (dist < 120) {
+          if (distSq < 14400) { // 120 * 120
+            const dist = Math.sqrt(distSq);
             const alpha = (120 - dist) / 120 * 0.15; // Soft opacity connection line
             ctx.strokeStyle = `rgba(138, 180, 248, ${alpha})`;
             ctx.lineWidth = 0.5;
@@ -158,7 +160,6 @@ export const LusionBackground: React.FC = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ mixBlendMode: 'screen' }}
     />
   );
 };

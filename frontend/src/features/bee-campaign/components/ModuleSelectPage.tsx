@@ -99,35 +99,6 @@ export function ModuleSelectPage({ onBack, onSelectModule, onOpenLogin }: Module
 
   return (
     <div className="min-h-screen w-full bg-[#020617] flex flex-col items-center justify-start sm:justify-center px-3 sm:px-6 py-6 sm:py-12 md:py-16 relative overflow-x-hidden text-slate-100">
-      {/* Dynamic Keyframe Style for Hover Color Shift Animation */}
-      <style>{`
-        @keyframes colorCycleBorder {
-          0% {
-            border-color: rgba(6, 182, 212, 0.9);
-            box-shadow: 0 0 40px rgba(6, 182, 212, 0.5), inset 0 0 25px rgba(6, 182, 212, 0.2);
-          }
-          25% {
-            border-color: rgba(16, 185, 129, 0.9);
-            box-shadow: 0 0 40px rgba(16, 185, 129, 0.5), inset 0 0 25px rgba(16, 185, 129, 0.2);
-          }
-          50% {
-            border-color: rgba(168, 85, 247, 0.9);
-            box-shadow: 0 0 40px rgba(168, 85, 247, 0.5), inset 0 0 25px rgba(168, 85, 247, 0.2);
-          }
-          75% {
-            border-color: rgba(245, 158, 11, 0.9);
-            box-shadow: 0 0 40px rgba(245, 158, 11, 0.5), inset 0 0 25px rgba(245, 158, 11, 0.2);
-          }
-          100% {
-            border-color: rgba(6, 182, 212, 0.9);
-            box-shadow: 0 0 40px rgba(6, 182, 212, 0.5), inset 0 0 25px rgba(6, 182, 212, 0.2);
-          }
-        }
-
-        .animated-card-glow {
-          animation: colorCycleBorder 3.5s infinite linear;
-        }
-      `}</style>
 
       {/* Background ambient glows */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
@@ -178,7 +149,11 @@ export function ModuleSelectPage({ onBack, onSelectModule, onOpenLogin }: Module
                 onClick={() => onSelectModule(mod.targetView)}
                 className={`relative group cursor-pointer rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 overflow-hidden min-h-[390px] ${
                   isHovered
-                    ? 'bg-[#0b101c]/95 opacity-100 -translate-y-2.5 scale-[1.02] z-20 animated-card-glow border-2'
+                    ? `bg-[#0b101c]/95 opacity-100 -translate-y-2.5 scale-[1.02] z-20 border-2 ${
+                        mod.id === 'admin' ? 'border-cyan-400 shadow-[0_0_25px_rgba(6,182,212,0.25)]' :
+                        mod.id === 'estrategica' ? 'border-teal-400 shadow-[0_0_25px_rgba(20,184,166,0.25)]' :
+                        'border-purple-400 shadow-[0_0_25px_rgba(168,85,247,0.25)]'
+                      }`
                     : hovered
                     ? 'bg-[#0F172A]/70 opacity-60 scale-[0.98] border border-slate-800'
                     : `bg-[#0F172A]/90 border ${mod.border} shadow-2xl hover:-translate-y-1.5`
@@ -201,7 +176,7 @@ export function ModuleSelectPage({ onBack, onSelectModule, onOpenLogin }: Module
 
                 {/* Opaque Background Tint Overlay on Hover */}
                 <div className={`absolute inset-0 pointer-events-none transition-opacity duration-300 ${
-                  isHovered ? 'bg-[#030d1d]/90 backdrop-blur-xl' : 'opacity-0'
+                  isHovered ? 'bg-[#030d1d]/90' : 'opacity-0'
                 }`} />
 
                 <div className="relative z-10 flex flex-col h-full justify-between flex-1">

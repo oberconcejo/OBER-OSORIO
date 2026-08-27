@@ -655,11 +655,11 @@ html.reduce-motion ::after {
 }
 
 /* Highlight wells, sub-containers, and rows (Soft Light Gray) */
-.theme-light-modules [class*="/40"],
-.theme-light-modules [class*="/50"],
-.theme-light-modules [class*="/60"],
-.theme-light-modules [class*="/80"],
-.theme-light-modules [class*="/90"],
+.theme-light-modules [class*="bg-"][class*="/40"],
+.theme-light-modules [class*="bg-"][class*="/50"],
+.theme-light-modules [class*="bg-"][class*="/60"],
+.theme-light-modules [class*="bg-"][class*="/80"],
+.theme-light-modules [class*="bg-"][class*="/90"],
 .theme-light-modules [class*="bg-[#111c30]"],
 .theme-light-modules [class*="bg-[#111C30]"],
 .theme-light-modules [class*="bg-[#081d38]"],

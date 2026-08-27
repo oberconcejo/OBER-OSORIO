@@ -664,6 +664,41 @@ html.reduce-motion ::after {
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.01) !important;
 }
 
+/* SWOT Pastel Quadrants & Items Overrides */
+.theme-light-modules [class*="bg-sky-955"],
+.theme-light-modules [class*="bg-sky-950"] {
+  background-color: #f0f9ff !important; /* Light pastel blue */
+  border-color: #bae6fd !important;
+}
+.theme-light-modules [class*="bg-amber-955"],
+.theme-light-modules [class*="bg-amber-950"] {
+  background-color: #fffbeb !important; /* Light pastel gold */
+  border-color: #fde68a !important;
+}
+.theme-light-modules [class*="bg-emerald-955"],
+.theme-light-modules [class*="bg-emerald-950"] {
+  background-color: #f0fdf4 !important; /* Light pastel green */
+  border-color: #a7f3d0 !important;
+}
+.theme-light-modules [class*="bg-rose-955"],
+.theme-light-modules [class*="bg-rose-950"] {
+  background-color: #fff1f2 !important; /* Light pastel rose */
+  border-color: #fecdd3 !important;
+}
+
+.theme-light-modules [class*="bg-sky-955"] li,
+.theme-light-modules [class*="bg-sky-950"] li,
+.theme-light-modules [class*="bg-amber-955"] li,
+.theme-light-modules [class*="bg-amber-950"] li,
+.theme-light-modules [class*="bg-emerald-955"] li,
+.theme-light-modules [class*="bg-emerald-950"] li,
+.theme-light-modules [class*="bg-rose-955"] li,
+.theme-light-modules [class*="bg-rose-950"] li {
+  background-color: #ffffff !important; /* White item cards for high contrast on pastel bg */
+  border-color: rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02) !important;
+}
+
 /* Divider lines */
 .theme-light-modules .border-slate-800,
 .theme-light-modules .border-slate-700,
@@ -703,6 +738,10 @@ html.reduce-motion ::after {
 
 .theme-light-modules [class*="text-purple-"] {
   color: #7e22ce !important; /* Darker purple */
+}
+
+.theme-light-modules [class*="text-sky-"] {
+  color: #0369a1 !important; /* Darker sky blue */
 }
 
 /* Forms, inputs and selects */

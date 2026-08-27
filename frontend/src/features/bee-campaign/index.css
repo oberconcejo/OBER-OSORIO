@@ -699,6 +699,57 @@ html.reduce-motion ::after {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02) !important;
 }
 
+/* Color Badge Overrides for Light Theme */
+.theme-light-modules [class*="bg-teal-950"],
+.theme-light-modules [class*="bg-teal-950"] span {
+  background-color: #ccfbf1 !important; /* Light teal */
+  color: #0f766e !important; /* Dark teal text */
+  border-color: #99f6e4 !important;
+}
+
+.theme-light-modules [class*="bg-rose-950"],
+.theme-light-modules [class*="bg-rose-950"] span {
+  background-color: #ffe4e6 !important; /* Light rose */
+  color: #be123c !important; /* Dark rose text */
+  border-color: #fecdd3 !important;
+}
+
+.theme-light-modules [class*="bg-emerald-955"],
+.theme-light-modules [class*="bg-emerald-950"],
+.theme-light-modules [class*="bg-emerald-950"] span {
+  background-color: #d1fae5 !important; /* Light emerald */
+  color: #047857 !important; /* Dark emerald text */
+  border-color: #a7f3d0 !important;
+}
+
+.theme-light-modules [class*="bg-sky-900"],
+.theme-light-modules [class*="bg-sky-900"] span {
+  background-color: #e0f2fe !important; /* Light sky blue */
+  color: #0369a1 !important; /* Dark sky blue text */
+  border-color: #bae6fd !important;
+}
+
+.theme-light-modules [class*="bg-amber-900"],
+.theme-light-modules [class*="bg-amber-900"] span {
+  background-color: #fef3c7 !important; /* Light gold/amber */
+  color: #b45309 !important; /* Dark amber text */
+  border-color: #fde68a !important;
+}
+
+.theme-light-modules [class*="bg-emerald-900"],
+.theme-light-modules [class*="bg-emerald-900"] span {
+  background-color: #d1fae5 !important;
+  color: #047857 !important;
+  border-color: #a7f3d0 !important;
+}
+
+.theme-light-modules [class*="bg-rose-900"],
+.theme-light-modules [class*="bg-rose-900"] span {
+  background-color: #ffe4e6 !important;
+  color: #be123c !important;
+  border-color: #fecdd3 !important;
+}
+
 /* Divider lines */
 .theme-light-modules .border-slate-800,
 .theme-light-modules .border-slate-700,

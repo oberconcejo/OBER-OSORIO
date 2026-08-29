@@ -169,7 +169,7 @@ export const RedSunBeeCampaignLanding: React.FC<RedSunBeeCampaignLandingProps> =
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
               <Zap className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-extrabold tracking-tight text-white bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+            <span className="text-xl font-display font-extrabold tracking-tight text-white bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
               Electoral360
             </span>
           </div>
@@ -278,7 +278,7 @@ export const RedSunBeeCampaignLanding: React.FC<RedSunBeeCampaignLandingProps> =
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="text-5xl md:text-7xl font-extrabold tracking-tight text-white leading-tight"
+            className="text-5xl md:text-7xl font-display font-extrabold tracking-tight text-white leading-tight"
           >
             Gobierna tu campaña con <br className="hidden md:block" />
             <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">
@@ -354,7 +354,7 @@ export const RedSunBeeCampaignLanding: React.FC<RedSunBeeCampaignLandingProps> =
           {/* Left: Who We Are & Mission */}
           <div className="lg:col-span-7 space-y-6">
             <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">Nuestra Misión</span>
-            <h2 className="text-4xl font-black text-white leading-tight">
+            <h2 className="text-4xl font-display font-black text-white leading-tight">
               Tecnología e Inteligencia de Datos para <br className="hidden md:block" />
               <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-400 bg-clip-text text-transparent">
                 Campañas Triunfadoras
@@ -415,7 +415,7 @@ export const RedSunBeeCampaignLanding: React.FC<RedSunBeeCampaignLandingProps> =
           
           {/* Left Column: text */}
           <div className="space-y-6">
-            <h2 className="text-4xl md:text-5xl font-black text-white leading-tight">
+            <h2 className="text-4xl md:text-5xl font-display font-black text-white leading-tight">
               Una arquitectura diseñada para <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">ganar</span>
             </h2>
             <p className="text-slate-400 text-lg font-light leading-relaxed">
@@ -490,7 +490,7 @@ export const RedSunBeeCampaignLanding: React.FC<RedSunBeeCampaignLandingProps> =
       {/* MODULES / TABS PREVIEW SECTION */}
       <section id="modules" className="py-24 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full border-t border-white/5">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <h2 className="text-4xl font-black text-white tracking-tight">
+          <h2 className="text-4xl font-display font-black text-white tracking-tight">
             Módulos Estratégicos de Campaña
           </h2>
           <p className="text-slate-400 text-base font-light">
@@ -592,7 +592,7 @@ export const RedSunBeeCampaignLanding: React.FC<RedSunBeeCampaignLandingProps> =
       <section id="pricing" className="py-24 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full border-t border-white/5">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">Planes y Tarifas</span>
-          <h2 className="text-4xl font-black text-white tracking-tight">
+          <h2 className="text-4xl font-display font-black text-white tracking-tight">
             Planes Flexibles para Cada Escala Electoral
           </h2>
           <p className="text-slate-400 text-base font-light">
@@ -736,7 +736,7 @@ export const RedSunBeeCampaignLanding: React.FC<RedSunBeeCampaignLandingProps> =
       {/* CTA BOTTOM BANNER */}
       <section id="cta" className="py-24 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center border-t border-white/5">
         <div className="max-w-3xl mx-auto space-y-6">
-          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight leading-tight">
+          <h2 className="text-4xl md:text-5xl font-display font-black text-white tracking-tight leading-tight">
             ¿Listo para llevar tu campaña al siguiente nivel?
           </h2>
           <p className="text-slate-400 text-lg font-light leading-relaxed max-w-xl mx-auto">
@@ -762,7 +762,7 @@ export const RedSunBeeCampaignLanding: React.FC<RedSunBeeCampaignLandingProps> =
               <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center shadow-md">
                 <Zap className="w-4 h-4 text-white" />
               </div>
-              <span className="text-lg font-extrabold text-white tracking-tight">Electoral360</span>
+              <span className="text-lg font-display font-extrabold text-white tracking-tight">Electoral360</span>
             </div>
             <p className="text-xs text-slate-500 font-light leading-relaxed max-w-sm">
               Electoral360 es la plataforma premium de analítica geoespacial y gestión de datos electorales. Desarrollada bajo los más estrictos estándares de ciberseguridad, encriptación y cumplimiento de normativas de protección de datos personales (Habeas Data).

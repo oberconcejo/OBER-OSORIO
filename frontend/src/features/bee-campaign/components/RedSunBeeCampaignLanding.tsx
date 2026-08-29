@@ -66,13 +66,13 @@ export const RedSunBeeCampaignLanding: React.FC<RedSunBeeCampaignLandingProps> =
       icon: ShieldCheck,
       color: 'from-cyan-400 to-blue-600',
       shadowColor: 'rgba(6, 182, 212, 0.4)',
-      description: 'Control centralizado de usuarios, roles, presupuestos y configuración general del sistema.',
+      description: 'Solución de gobernanza de nivel empresarial que centraliza el control de accesos, roles adaptativos, auditoría forense inalterable y supervisión presupuestaria electoral.',
       features: [
-        'Gestión de Usuarios y Roles (RBAC)',
-        'Asignación de Presupuesto CNE',
-        'Configuración de Campañas',
-        'Gestión de Testigos y Jurados',
-        'Auditoría y Trazabilidad de Logs'
+        'Control de acceso granular basado en roles (RBAC)',
+        'Auditoría forense inalterable de logs de seguridad',
+        'Configuración centralizada de parámetros del sistema',
+        'Administración y asignación de personal electoral (Testigos y Jurados)',
+        'Seguimiento presupuestario y fiscal alineado a normativas CNE'
       ]
     },
     territory: {
@@ -80,13 +80,13 @@ export const RedSunBeeCampaignLanding: React.FC<RedSunBeeCampaignLandingProps> =
       icon: MapPin,
       color: 'from-emerald-400 to-teal-600',
       shadowColor: 'rgba(16, 185, 129, 0.4)',
-      description: 'Administración y visualización del despliegue en territorio, puestos de votación y zonificación.',
+      description: 'Cartografía avanzada y análisis geoespacial de datos para la coordinación del despliegue en territorio, mapeo de puestos electorales y optimización de rutas operativas.',
       features: [
-        'Mapeo de Puestos de Votación',
-        'Asignación de Zonas y Comunas',
-        'Seguimiento de Cobertura Electoral',
-        'Gestión de Líderes por Zona',
-        'Alertas Tempranas en Territorio'
+        'Visualización cartográfica interactiva y mapas de calor electoral',
+        'Zonificación municipal detallada (comunas, corregimientos y barrios)',
+        'Consola de monitoreo y alertas de incidencias en territorio',
+        'Asignación inteligente de coordinadores y líderes geográficos',
+        'Muestreo y reporte de cobertura de puestos en tiempo real'
       ]
     },
     strategy: {
@@ -94,13 +94,13 @@ export const RedSunBeeCampaignLanding: React.FC<RedSunBeeCampaignLandingProps> =
       icon: Target,
       color: 'from-purple-400 to-indigo-600',
       shadowColor: 'rgba(168, 85, 247, 0.4)',
-      description: 'Definición de metas, seguimiento de KPIs y planificación de la campaña a nivel de comando central.',
+      description: 'Comando de control inteligente impulsado por IA para la definición de metas electorales, predicción de tendencias de votación y análisis estratégico del censo.',
       features: [
-        'Dashboard de Metas Electorales',
-        'Monitoreo de KPIs en Tiempo Real',
-        'Proyecciones y Tendencias de Votos',
-        'Evaluación de Desempeño',
-        'Planificación de Hitos'
+        'Modelos predictivos de tendencias y umbrales de votación',
+        'Cuadro de mando integral (KPIs) en tiempo real',
+        'Consolidación y análisis cuantitativo del censo electoral',
+        'Planificación interactiva del cronograma e hitos clave de campaña',
+        'Evaluación de datos históricos y proyecciones de intención de voto'
       ]
     },
     crm: {
@@ -108,13 +108,13 @@ export const RedSunBeeCampaignLanding: React.FC<RedSunBeeCampaignLandingProps> =
       icon: Users,
       color: 'from-orange-400 to-red-600',
       shadowColor: 'rgba(249, 115, 22, 0.4)',
-      description: 'Registro unificado de simpatizantes, estructuración de bases de datos y fidelización de líderes.',
+      description: 'Plataforma unificada de gestión de relaciones (CRM) para organizar bases de datos de simpatizantes, optimizar estructuras de líderes y habilitar canales de comunicación automatizados.',
       features: [
-        'Registro Unificado de Simpatizantes',
-        'Historial de Contacto y Votos',
-        'Segmentación por Líder y Puesto',
-        'Comunicación Directa vía WhatsApp/SMS',
-        'Reportes de Fidelización de Votos'
+        'Ficha única consolidada de simpatizantes y líderes de red',
+        'Gestión estructurada de redes de fidelización piramidal',
+        'Segmentación avanzada de votantes por puesto, mesa y perfil',
+        'Integración de mensajería multicanal automatizada (WhatsApp y SMS)',
+        'Reportes integrales de retención y efectividad del voto'
       ]
     }
   };
@@ -751,9 +751,80 @@ export const RedSunBeeCampaignLanding: React.FC<RedSunBeeCampaignLandingProps> =
         </div>
       </section>
 
-      {/* Footer copyright */}
-      <footer className="relative z-10 py-8 text-center text-xs text-slate-500 border-t border-white/5">
-        <p>© 2026 Electoral360. Todos los derechos reservados.</p>
+      {/* Footer corporate details */}
+      <footer className="relative z-10 bg-[#020617] border-t border-white/5 pt-16 pb-8 text-slate-400 text-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+          {/* Brand info */}
+          <div className="md:col-span-5 space-y-4">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center shadow-md">
+                <Zap className="w-4 h-4 text-white" />
+              </div>
+              <span className="text-lg font-extrabold text-white tracking-tight">Electoral360</span>
+            </div>
+            <p className="text-xs text-slate-500 font-light leading-relaxed max-w-sm">
+              Electoral360 es la plataforma premium de analítica geoespacial y gestión de datos electorales. Desarrollada bajo los más estrictos estándares de ciberseguridad, encriptación y cumplimiento de normativas de protección de datos personales (Habeas Data).
+            </p>
+            <div className="text-xs text-slate-500 space-y-1.5 pt-2">
+              <p className="flex items-center gap-2">
+                <Globe className="w-3.5 h-3.5 text-cyan-500" />
+                <span>Soporte Global: info@electoral360.com</span>
+              </p>
+              <p className="flex items-center gap-2">
+                <MapPin className="w-3.5 h-3.5 text-cyan-500" />
+                <span>Bogotá, Colombia - Operación Latinoamericana</span>
+              </p>
+            </div>
+          </div>
+
+          {/* Links 1 */}
+          <div className="md:col-span-2 space-y-3">
+            <h4 className="text-white font-bold text-xs uppercase tracking-wider">Módulos</h4>
+            <ul className="space-y-2 text-xs font-light">
+              <li><a href="#modules" className="hover:text-white transition-colors">Administrativo</a></li>
+              <li><a href="#modules" className="hover:text-white transition-colors">Territorial</a></li>
+              <li><a href="#modules" className="hover:text-white transition-colors">Estratégico</a></li>
+              <li><a href="#modules" className="hover:text-white transition-colors">CRM de Votantes</a></li>
+            </ul>
+          </div>
+
+          {/* Links 2 */}
+          <div className="md:col-span-2 space-y-3">
+            <h4 className="text-white font-bold text-xs uppercase tracking-wider">Cumplimiento</h4>
+            <ul className="space-y-2 text-xs font-light">
+              <li><a href="#about" className="hover:text-white transition-colors">Quiénes Somos</a></li>
+              <li><a href="#pricing" className="hover:text-white transition-colors">Planes de Suscripción</a></li>
+              <li><a href="#features" className="hover:text-white transition-colors">Términos de Servicio</a></li>
+              <li><a href="#features" className="hover:text-white transition-colors">Tratamiento de Datos</a></li>
+            </ul>
+          </div>
+
+          {/* Contact Details */}
+          <div className="md:col-span-3 space-y-3">
+            <h4 className="text-white font-bold text-xs uppercase tracking-wider">Soporte Técnico 24/7</h4>
+            <p className="text-xs text-slate-500 leading-normal font-light">
+              Nuestro centro de operaciones está disponible para brindarle soporte táctico antes y durante toda la jornada electoral del Día E.
+            </p>
+            <div className="pt-2">
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-xs font-bold text-white transition-all cursor-pointer"
+              >
+                Abrir Ticket de Soporte
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom copyright block */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-white/5 text-center text-xs text-slate-600 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p>© 2026 Electoral360. Todos los derechos reservados. Marca registrada.</p>
+          <div className="flex gap-4">
+            <a href="#features" className="hover:underline">Políticas de Privacidad</a>
+            <a href="#features" className="hover:underline">Seguridad de Datos</a>
+            <a href="#features" className="hover:underline">Términos y Condiciones</a>
+          </div>
+        </div>
       </footer>
 
       {/* REGISTRATION MODAL / LEAD CAPTURE */}

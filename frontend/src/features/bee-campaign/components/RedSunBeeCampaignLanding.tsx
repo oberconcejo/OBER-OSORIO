@@ -163,43 +163,45 @@ export const RedSunBeeCampaignLanding: React.FC<RedSunBeeCampaignLandingProps> =
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-500/10 blur-[150px] rounded-full pointer-events-none -z-10" />
 
       {/* Navigation Header */}
-      <header className="relative z-50 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
-            <Zap className="w-5 h-5 text-white" />
+      <div className="sticky top-0 z-50 w-full bg-[#020617]/80 backdrop-blur-md border-b border-white/5 transition-all">
+        <header className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+              <Zap className="w-5 h-5 text-white" />
+            </div>
+            <span className="text-xl font-extrabold tracking-tight text-white bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+              Electoral360
+            </span>
           </div>
-          <span className="text-xl font-extrabold tracking-tight text-white bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
-            Electoral360
-          </span>
-        </div>
 
-        {/* Desktop nav links */}
-        <nav className="hidden md:flex items-center gap-8">
-          <a href="#about" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Quiénes Somos</a>
-          <a href="#features" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Características</a>
-          <a href="#modules" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Módulos</a>
-          <a href="#pricing" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Planes</a>
-          <a href="#cta" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Solicitar Demo</a>
-        </nav>
+          {/* Desktop nav links */}
+          <nav className="hidden md:flex items-center gap-8">
+            <a href="#about" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Quiénes Somos</a>
+            <a href="#features" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Características</a>
+            <a href="#modules" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Módulos</a>
+            <a href="#pricing" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Planes</a>
+            <a href="#cta" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Solicitar Demo</a>
+          </nav>
 
-        {/* Desktop CTA */}
-        <div className="hidden md:flex items-center gap-4">
+          {/* Desktop CTA */}
+          <div className="hidden md:flex items-center gap-4">
+            <button
+              onClick={onLogin}
+              className="px-6 py-2.5 rounded-full text-sm font-bold bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all hover:scale-[1.02] active:scale-[0.98]"
+            >
+              Acceso a Módulos
+            </button>
+          </div>
+
+          {/* Mobile menu trigger */}
           <button
-            onClick={onLogin}
-            className="px-6 py-2.5 rounded-full text-sm font-bold bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all hover:scale-[1.02] active:scale-[0.98]"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 text-slate-300 hover:text-white transition-colors"
           >
-            Acceso a Módulos
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
-        </div>
-
-        {/* Mobile menu trigger */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-slate-300 hover:text-white transition-colors"
-        >
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-      </header>
+        </header>
+      </div>
 
       {/* Mobile Drawer menu */}
       <AnimatePresence>
@@ -208,7 +210,7 @@ export const RedSunBeeCampaignLanding: React.FC<RedSunBeeCampaignLandingProps> =
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="md:hidden fixed top-[88px] left-0 w-full bg-[#020617]/95 border-b border-white/5 backdrop-blur-xl z-40 px-6 py-8 flex flex-col gap-6"
+            className="md:hidden fixed top-[72px] left-0 w-full bg-[#020617]/95 border-b border-white/5 backdrop-blur-xl z-40 px-6 py-8 flex flex-col gap-6"
           >
             <a
               href="#about"

@@ -603,9 +603,9 @@ export const RedSunBeeCampaignLanding: React.FC<RedSunBeeCampaignLandingProps> =
           <div className="p-8 rounded-3xl bg-[#0F172A]/50 border border-white/5 flex flex-col justify-between hover:border-white/10 transition-all shadow-xl relative overflow-hidden">
             <div className="space-y-6">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Plan Concejo / Alcaldía Local</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Plan Básico</span>
                 <h3 className="text-2xl font-black text-white mt-2">Inicial</h3>
-                <p className="text-xs text-slate-400 mt-1 leading-relaxed font-light">Ideal para candidatos al concejo, edilatos o campañas municipales pequeñas.</p>
+                <p className="text-xs text-slate-400 mt-1 leading-relaxed font-light">Acceso esencial a herramientas integrales de analítica y gestión electoral.</p>
               </div>
               <div className="py-2">
                 <span className="text-4xl font-black text-white">$499</span>
@@ -648,9 +648,9 @@ export const RedSunBeeCampaignLanding: React.FC<RedSunBeeCampaignLandingProps> =
             </div>
             <div className="space-y-6">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">Plan Alcaldía Mayor / Gobernación</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">Plan Recomendado</span>
                 <h3 className="text-2xl font-black text-white mt-2">Profesional</h3>
-                <p className="text-xs text-slate-400 mt-1 leading-relaxed font-light">Diseñado para alcaldías principales, congresos o gobernaciones con cobertura extendida.</p>
+                <p className="text-xs text-slate-400 mt-1 leading-relaxed font-light">Capacidades analíticas avanzadas, IA en tiempo real y soporte técnico prioritario.</p>
               </div>
               <div className="py-2">
                 <span className="text-4xl font-black text-white">$1,299</span>
@@ -693,9 +693,9 @@ export const RedSunBeeCampaignLanding: React.FC<RedSunBeeCampaignLandingProps> =
           <div className="p-8 rounded-3xl bg-[#0F172A]/50 border border-white/5 flex flex-col justify-between hover:border-white/10 transition-all shadow-xl relative overflow-hidden">
             <div className="space-y-6">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Partidos Políticos y Consultas</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Plan Corporativo</span>
                 <h3 className="text-2xl font-black text-white mt-2">Enterprise</h3>
-                <p className="text-xs text-slate-400 mt-1 leading-relaxed font-light">Para comandos presidenciales, partidos enteros o coaliciones nacionales.</p>
+                <p className="text-xs text-slate-400 mt-1 leading-relaxed font-light">Servidor dedicado con cifrado militar, integraciones a medida y soporte en tiempo real.</p>
               </div>
               <div className="py-2">
                 <span className="text-4xl font-black text-white">A Medida</span>

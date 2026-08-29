@@ -269,34 +269,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
           )}
         </div>
 
-        {/* Modules Accordion Trigger button */}
-        <div className="px-1 py-1">
-          <div className="w-full flex items-center justify-between px-3.5 py-2 rounded-xl bg-white/[0.03] border border-white/5 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-            <span>Módulos</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-          </div>
-        </div>
-
-        {/* Navigation Menu Accordion Modules */}
-        <div className="space-y-5">
+        {/* Navigation Menu Links Filtered By Active Module */}
+        <div className="space-y-4">
           
-          {/* Gestión Administrativa Dropdown Accordion */}
-          <div className="space-y-1">
-            <button
-              onClick={() => {
-                if (onSelectActiveModule) onSelectActiveModule('admin');
-                onSelectView('modulo_admin');
-              }}
-              className={`w-full flex items-center justify-between px-2.5 py-2 text-[10px] font-black uppercase tracking-wider transition-colors cursor-pointer ${
-                activeModule === 'admin' ? 'text-cyan-400' : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              <span>Gestión Administrativa</span>
-              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeModule === 'admin' ? 'rotate-180 text-cyan-400' : 'text-slate-500'}`} />
-            </button>
-
-            {activeModule === 'admin' && (
-              <nav className="space-y-0.5 pl-0.5 mt-1 animate-in slide-in-from-top-1 duration-200">
+          {/* Gestión Administrativa */}
+          {activeModule === 'admin' && (
+            <div>
+              <p className="px-3 text-[10px] font-black uppercase tracking-wider text-cyan-400 mb-2">
+                Gestión Administrativa
+              </p>
+              <nav className="space-y-0.5">
                 {adminMenuItems.map((item) => {
                   let targetView: ViewMode = 'modulo_admin';
                   if (item.tab === 'presupuesto_cne') targetView = 'presupuesto';
@@ -320,14 +302,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         if (onCloseMobile) onCloseMobile();
                       }}
                       style={isActive ? {
-                        background: 'linear-gradient(90deg, rgba(0,207,232,.16), rgba(124,58,237,.12))',
-                        border: '1px solid rgba(0,207,232,.35)',
-                        boxShadow: '0 0 20px rgba(0,207,232,.10)'
+                        background: 'linear-gradient(90deg, rgba(6,182,212,0.15), rgba(59,130,246,0.1))',
+                        borderColor: 'rgba(6,182,212,0.4)',
+                        boxShadow: '0 0 15px rgba(6,182,212,0.08)'
                       } : undefined}
-                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer ${
+                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer border-l-2 ${
                         isActive
                           ? 'text-white font-bold'
-                          : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.02] border border-transparent'
+                          : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.02] border-transparent'
                       }`}
                     >
                       <div className={`shrink-0 transition-transform ${isActive ? 'scale-110 text-cyan-400' : 'text-slate-500'}`}>
@@ -338,26 +320,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   );
                 })}
               </nav>
-            )}
-          </div>
+            </div>
+          )}
 
-          {/* Gestión Estratégica Dropdown Accordion */}
-          <div className="space-y-1">
-            <button
-              onClick={() => {
-                if (onSelectActiveModule) onSelectActiveModule('estrategica');
-                onSelectView('gestion_estrategica');
-              }}
-              className={`w-full flex items-center justify-between px-2.5 py-2 text-[10px] font-black uppercase tracking-wider transition-colors cursor-pointer ${
-                activeModule === 'estrategica' ? 'text-purple-400' : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              <span>Gestión Estratégica</span>
-              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeModule === 'estrategica' ? 'rotate-180 text-purple-400' : 'text-slate-500'}`} />
-            </button>
-
-            {activeModule === 'estrategica' && (
-              <nav className="space-y-0.5 pl-0.5 mt-1 animate-in slide-in-from-top-1 duration-200">
+          {/* Gestión Estratégica */}
+          {activeModule === 'estrategica' && (
+            <div>
+              <p className="px-3 text-[10px] font-black uppercase tracking-wider text-purple-400 mb-2">
+                Gestión Estratégica
+              </p>
+              <nav className="space-y-0.5">
                 {strategicMenuItems.map((item) => {
                   const isActive = isStrategicItemActive(item.tab);
                   
@@ -373,14 +345,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         if (onCloseMobile) onCloseMobile();
                       }}
                       style={isActive ? {
-                        background: 'linear-gradient(90deg, rgba(0,207,232,.16), rgba(124,58,237,.12))',
-                        border: '1px solid rgba(0,207,232,.35)',
-                        boxShadow: '0 0 20px rgba(0,207,232,.10)'
+                        background: 'linear-gradient(90deg, rgba(168,85,247,0.15), rgba(236,72,153,0.1))',
+                        borderColor: 'rgba(168,85,247,0.4)',
+                        boxShadow: '0 0 15px rgba(168,85,247,0.08)'
                       } : undefined}
-                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer ${
+                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer border-l-2 ${
                         isActive
                           ? 'text-white font-bold'
-                          : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.02] border border-transparent'
+                          : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.02] border-transparent'
                       }`}
                     >
                       <div className={`shrink-0 transition-transform ${isActive ? 'scale-110 text-purple-400' : 'text-slate-500'}`}>
@@ -391,26 +363,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   );
                 })}
               </nav>
-            )}
-          </div>
+            </div>
+          )}
 
-          {/* Gestión Territorial Dropdown Accordion */}
-          <div className="space-y-1">
-            <button
-              onClick={() => {
-                if (onSelectActiveModule) onSelectActiveModule('territorial');
-                onSelectView('gestion_territorial');
-              }}
-              className={`w-full flex items-center justify-between px-2.5 py-2 text-[10px] font-black uppercase tracking-wider transition-colors cursor-pointer ${
-                activeModule === 'territorial' ? 'text-emerald-400' : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              <span>Gestión Territorial</span>
-              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeModule === 'territorial' ? 'rotate-180 text-emerald-400' : 'text-slate-500'}`} />
-            </button>
-
-            {activeModule === 'territorial' && (
-              <nav className="space-y-0.5 pl-0.5 mt-1 animate-in slide-in-from-top-1 duration-200">
+          {/* Gestión Territorial */}
+          {activeModule === 'territorial' && (
+            <div>
+              <p className="px-3 text-[10px] font-black uppercase tracking-wider text-emerald-400 mb-2">
+                Gestión Territorial
+              </p>
+              <nav className="space-y-0.5">
                 {territorialMenuItems.map((item) => {
                   const isActive = isTerritorialItemActive(item.tab);
                   
@@ -439,14 +401,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         if (onCloseMobile) onCloseMobile();
                       }}
                       style={isActive ? {
-                        background: 'linear-gradient(90deg, rgba(0,207,232,.16), rgba(124,58,237,.12))',
-                        border: '1px solid rgba(0,207,232,.35)',
-                        boxShadow: '0 0 20px rgba(0,207,232,.10)'
+                        background: 'linear-gradient(90deg, rgba(16,185,129,0.15), rgba(6,182,212,0.1))',
+                        borderColor: 'rgba(16,185,129,0.4)',
+                        boxShadow: '0 0 15px rgba(16,185,129,0.08)'
                       } : undefined}
-                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer ${
+                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer border-l-2 ${
                         isActive
                           ? 'text-white font-bold'
-                          : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.02] border border-transparent'
+                          : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.02] border-transparent'
                       }`}
                     >
                       <div className={`shrink-0 transition-transform ${isActive ? 'scale-110 text-emerald-400' : 'text-slate-500'}`}>
@@ -457,8 +419,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   );
                 })}
               </nav>
-            )}
-          </div>
+            </div>
+          )}
 
           {/* Sistema Configuration link */}
           {activeModule !== 'admin' && (

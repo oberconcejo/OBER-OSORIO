@@ -530,12 +530,12 @@ export default function BeeCampaignApp() {
 
   if (currentView === 'global_admin') {
     return (
-      <div className="min-h-screen bg-[#050816] text-slate-100 relative overflow-hidden">
+      <div className="min-h-screen bg-[#020617] text-slate-100 relative overflow-hidden">
         <LusionBackground />
         <LusionCursor />
         {/* Background ambient glows */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#00CFE8]/5 blur-[150px] rounded-full pointer-events-none -z-10" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#7C3AED]/5 blur-[150px] rounded-full pointer-events-none -z-10" />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cyan-500/10 blur-[150px] rounded-full pointer-events-none -z-10" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-500/10 blur-[150px] rounded-full pointer-events-none -z-10" />
         <div className="relative z-10">
           <PanelAdminGlobal 
             onSelectView={handleSelectView}
@@ -548,19 +548,19 @@ export default function BeeCampaignApp() {
   }
 
   return (
-    <div className="h-screen max-h-screen overflow-hidden flex flex-col bg-[#050816] text-slate-100 selection:bg-[#00CFE8] selection:text-black relative theme-light-modules">
+    <div className="h-screen max-h-screen overflow-hidden flex flex-col bg-[#020617] text-slate-100 selection:bg-cyan-500 selection:text-black relative theme-light-modules">
       <LusionBackground />
       <LusionCursor />
       {/* Background ambient glows */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#00CFE8]/5 blur-[150px] rounded-full pointer-events-none -z-10" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#7C3AED]/5 blur-[150px] rounded-full pointer-events-none -z-10" />
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cyan-500/10 blur-[150px] rounded-full pointer-events-none -z-10" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-500/10 blur-[150px] rounded-full pointer-events-none -z-10" />
       {/* Mobile Top Bar */}
-      <div className="lg:hidden flex items-center justify-between px-4 py-2.5 bg-[#050816]/95 border-b border-white/5 sticky top-0 z-30 w-full shrink-0 backdrop-blur-md">
+      <div className="lg:hidden flex items-center justify-between px-4 py-3 bg-[#111C30] border-b border-cyan-500/15 sticky top-0 z-30 w-full shrink-0">
         <div className="flex items-center gap-2.5">
           <button
             onClick={() => setSidebarOpen(true)}
             aria-label="Abrir menú"
-            className="p-2 rounded-xl bg-white/5 border border-white/5 text-slate-300 hover:text-white cursor-pointer transition-all min-h-[36px] min-w-[36px] flex items-center justify-center"
+            className="p-2 rounded-xl bg-slate-900 border border-cyan-500/20 text-cyan-300 hover:text-white cursor-pointer transition-all min-h-[38px] min-w-[38px] flex items-center justify-center"
           >
             <Menu className="w-4 h-4" />
           </button>
@@ -604,7 +604,7 @@ export default function BeeCampaignApp() {
         />
 
         {/* Main Content Area with Smooth Motion Transitions */}
-        <main className="flex-1 overflow-y-auto bg-[#050816] relative custom-scrollbar">
+        <main className="flex-1 overflow-y-auto bg-gradient-to-b from-[#020617] via-[#020617] to-[#020617] relative custom-scrollbar">
           <ErrorBoundary 
             moduleName={currentView}
           >

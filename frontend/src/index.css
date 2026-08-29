@@ -651,10 +651,10 @@ html.reduce-motion ::after {
 .theme-light-modules [class*="bg-[#0c1325]"],
 .theme-light-modules [class*="bg-[#0b0f19]"],
 .theme-light-modules [class*="bg-[#070e17]"],
-.theme-light-modules [class*="bg-gradient-"],
-.theme-light-modules [class*="from-"],
-.theme-light-modules [class*="via-"],
-.theme-light-modules [class*="to-"] {
+.theme-light-modules [class*="bg-gradient-"]:not([class*="bg-clip-text"]):not(span),
+.theme-light-modules [class*="from-"]:not([class*="bg-clip-text"]):not(span),
+.theme-light-modules [class*="via-"]:not([class*="bg-clip-text"]):not(span),
+.theme-light-modules [class*="to-"]:not([class*="bg-clip-text"]):not(span) {
   background-color: #ffffff !important;
   background-image: none !important; /* Hide dark gradients */
   border: 1px solid rgba(0, 0, 0, 0.08) !important;

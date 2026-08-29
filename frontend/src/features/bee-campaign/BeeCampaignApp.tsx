@@ -19,7 +19,6 @@ import { Modals } from './components/common/Modals';
 import { LoginModal } from './components/LoginModal';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
 import { LusionBackground } from '../../components/LusionBackground';
-import { LusionCursor } from '../../components/LusionCursor';
 
 // Landing Page & Module Selector (from repo1)
 import { RedSunBeeCampaignLanding } from './components/RedSunBeeCampaignLanding';
@@ -484,7 +483,6 @@ export default function BeeCampaignApp() {
     return (
       <div className="min-h-screen bg-[#020617] text-white relative overflow-hidden">
         <LusionBackground />
-        <LusionCursor />
         <div className="relative z-10">
           <ModuleSelectPage 
             onBack={() => setCurrentView('landing')}
@@ -514,7 +512,6 @@ export default function BeeCampaignApp() {
     return (
       <div className="min-h-screen bg-[#020617] text-slate-100 relative overflow-hidden">
         <LusionBackground />
-        <LusionCursor />
         {/* Background ambient glows */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cyan-500/10 blur-[150px] rounded-full pointer-events-none -z-10" />
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-500/10 blur-[150px] rounded-full pointer-events-none -z-10" />
@@ -532,7 +529,6 @@ export default function BeeCampaignApp() {
     return (
       <div className="min-h-screen bg-[#020617] text-slate-100 relative overflow-hidden">
         <LusionBackground />
-        <LusionCursor />
         {/* Background ambient glows */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cyan-500/10 blur-[150px] rounded-full pointer-events-none -z-10" />
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-500/10 blur-[150px] rounded-full pointer-events-none -z-10" />
@@ -550,7 +546,6 @@ export default function BeeCampaignApp() {
   return (
     <div className="h-screen max-h-screen overflow-hidden flex flex-col bg-[#020617] text-slate-100 selection:bg-cyan-500 selection:text-black relative theme-light-modules">
       <LusionBackground />
-      <LusionCursor />
       {/* Background ambient glows */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cyan-500/10 blur-[150px] rounded-full pointer-events-none -z-10" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-500/10 blur-[150px] rounded-full pointer-events-none -z-10" />

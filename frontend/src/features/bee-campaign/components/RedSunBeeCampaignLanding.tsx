@@ -175,8 +175,10 @@ export const RedSunBeeCampaignLanding: React.FC<RedSunBeeCampaignLandingProps> =
 
         {/* Desktop nav links */}
         <nav className="hidden md:flex items-center gap-8">
+          <a href="#about" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Quiénes Somos</a>
           <a href="#features" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Características</a>
           <a href="#modules" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Módulos</a>
+          <a href="#pricing" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Planes</a>
           <a href="#cta" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Solicitar Demo</a>
         </nav>
 
@@ -209,6 +211,13 @@ export const RedSunBeeCampaignLanding: React.FC<RedSunBeeCampaignLandingProps> =
             className="md:hidden fixed top-[88px] left-0 w-full bg-[#020617]/95 border-b border-white/5 backdrop-blur-xl z-40 px-6 py-8 flex flex-col gap-6"
           >
             <a
+              href="#about"
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-lg font-semibold text-slate-300 hover:text-white"
+            >
+              Quiénes Somos
+            </a>
+            <a
               href="#features"
               onClick={() => setMobileMenuOpen(false)}
               className="text-lg font-semibold text-slate-300 hover:text-white"
@@ -221,6 +230,13 @@ export const RedSunBeeCampaignLanding: React.FC<RedSunBeeCampaignLandingProps> =
               className="text-lg font-semibold text-slate-300 hover:text-white"
             >
               Módulos
+            </a>
+            <a
+              href="#pricing"
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-lg font-semibold text-slate-300 hover:text-white"
+            >
+              Planes
             </a>
             <a
               href="#cta"
@@ -325,6 +341,67 @@ export const RedSunBeeCampaignLanding: React.FC<RedSunBeeCampaignLandingProps> =
               </div>
               <div className="text-5xl font-black mb-2 text-white">99.9%</div>
               <div className="text-blue-200/70 font-medium text-lg uppercase tracking-wider">Uptime del Sistema</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ABOUT US SECTION */}
+      <section id="about" className="py-20 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full border-t border-white/5">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          {/* Left: Who We Are & Mission */}
+          <div className="lg:col-span-7 space-y-6">
+            <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">Nuestra Misión</span>
+            <h2 className="text-4xl font-black text-white leading-tight">
+              Tecnología e Inteligencia de Datos para <br className="hidden md:block" />
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-400 bg-clip-text text-transparent">
+                Campañas Triunfadoras
+              </span>
+            </h2>
+            <p className="text-slate-400 text-base leading-relaxed font-light">
+              Somos un equipo multidisciplinario de ingenieros de software, analistas de datos y consultores de estrategia electoral dedicados a transformar la forma en que se estructuran y ejecutan las campañas en la era digital. 
+            </p>
+            <p className="text-slate-400 text-base leading-relaxed font-light">
+              Nuestra meta es democratizar herramientas analíticas avanzadas que antes estaban reservadas únicamente para presupuestos presidenciales de escala masiva. Con <strong>Electoral360</strong>, permitimos que candidaturas de todos los niveles organicen su territorio con precisión quirúrgica, prevengan riesgos de fraude y optimicen su comunicación en base a hechos medibles, no a especulaciones.
+            </p>
+          </div>
+
+          {/* Right: Core Values Cards */}
+          <div className="lg:col-span-5 flex flex-col gap-4">
+            <div className="p-5 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-4">
+              <div className="w-10 h-10 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 shrink-0">
+                <Globe className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="text-white font-bold text-sm">Alcance y Cobertura 360°</h4>
+                <p className="text-slate-400 text-xs mt-1 leading-normal font-light">
+                  Integración total de redes, territorio, censo y control electoral en una sola interfaz en tiempo real.
+                </p>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-4">
+              <div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400 shrink-0">
+                <Lock className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="text-white font-bold text-sm">Transparencia y Ciberseguridad</h4>
+                <p className="text-slate-400 text-xs mt-1 leading-normal font-light">
+                  Protocolos robustos de cifrado, cumplimiento estricto de Habeas Data y registros de auditoría electoral (Audit Logs).
+                </p>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-4">
+              <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 shrink-0">
+                <Activity className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="text-white font-bold text-sm">Acompañamiento Estratégico</h4>
+                <p className="text-slate-400 text-xs mt-1 leading-normal font-light">
+                  Soporte técnico dedicado, monitoreo del Día E en vivo y capacitación constante para líderes y coordinadores.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -506,6 +583,151 @@ export const RedSunBeeCampaignLanding: React.FC<RedSunBeeCampaignLandingProps> =
             </AnimatePresence>
           </div>
 
+        </div>
+      </section>
+
+      {/* PRICING PLANS SECTION */}
+      <section id="pricing" className="py-24 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full border-t border-white/5">
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">Planes y Tarifas</span>
+          <h2 className="text-4xl font-black text-white tracking-tight">
+            Planes Flexibles para Cada Escala Electoral
+          </h2>
+          <p className="text-slate-400 text-base font-light">
+            Selecciona la solución que mejor se adapte a las metas y dimensiones de tu contienda electoral.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+          {/* Plan 1 */}
+          <div className="p-8 rounded-3xl bg-[#0F172A]/50 border border-white/5 flex flex-col justify-between hover:border-white/10 transition-all shadow-xl relative overflow-hidden">
+            <div className="space-y-6">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Plan Concejo / Alcaldía Local</span>
+                <h3 className="text-2xl font-black text-white mt-2">Inicial</h3>
+                <p className="text-xs text-slate-400 mt-1 leading-relaxed font-light">Ideal para candidatos al concejo, edilatos o campañas municipales pequeñas.</p>
+              </div>
+              <div className="py-2">
+                <span className="text-4xl font-black text-white">$499</span>
+                <span className="text-xs text-slate-400 font-mono"> USD / mes</span>
+              </div>
+              <ul className="space-y-3 border-t border-white/5 pt-6 text-sm text-slate-300 font-light">
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <span>Hasta 10,000 Simpatizantes (CRM)</span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <span>Hasta 20 Puestos de Votación</span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <span>Gestión de hasta 50 Testigos</span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <span>Soporte Estándar por Email</span>
+                </li>
+              </ul>
+            </div>
+            <div className="pt-8">
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="w-full py-3.5 rounded-xl font-bold bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all text-sm cursor-pointer"
+              >
+                Solicitar Demo Inicial
+              </button>
+            </div>
+          </div>
+
+          {/* Plan 2 - Destacado */}
+          <div className="p-8 rounded-3xl bg-[#0F172A] border border-cyan-500/30 flex flex-col justify-between hover:border-cyan-500/50 transition-all shadow-2xl relative overflow-hidden ring-2 ring-cyan-500/20">
+            {/* Featured Badge */}
+            <div className="absolute top-0 right-0 bg-gradient-to-l from-cyan-500 to-blue-600 px-4 py-1 rounded-bl-xl text-[10px] font-black uppercase tracking-widest text-white shadow-lg">
+              Popular / Recomendado
+            </div>
+            <div className="space-y-6">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">Plan Alcaldía Mayor / Gobernación</span>
+                <h3 className="text-2xl font-black text-white mt-2">Profesional</h3>
+                <p className="text-xs text-slate-400 mt-1 leading-relaxed font-light">Diseñado para alcaldías principales, congresos o gobernaciones con cobertura extendida.</p>
+              </div>
+              <div className="py-2">
+                <span className="text-4xl font-black text-white">$1,299</span>
+                <span className="text-xs text-slate-400 font-mono"> USD / mes</span>
+              </div>
+              <ul className="space-y-3 border-t border-white/5 pt-6 text-sm text-slate-200 font-light">
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <span><strong>Simpatizantes Ilimitados (CRM)</strong></span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <span>Mapeo del 100% de Puestos Electorales</span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <span>Testigos y Jurados Electorales Ilimitados</span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <span>Proyecciones IA y Análisis de Sentimiento</span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <span>Soporte Prioritario 24/7 y Capacitación</span>
+                </li>
+              </ul>
+            </div>
+            <div className="pt-8">
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="w-full py-3.5 rounded-xl font-bold bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/20 hover:from-cyan-400 hover:to-blue-500 transition-all text-sm cursor-pointer"
+              >
+                Comenzar Demo Profesional
+              </button>
+            </div>
+          </div>
+
+          {/* Plan 3 */}
+          <div className="p-8 rounded-3xl bg-[#0F172A]/50 border border-white/5 flex flex-col justify-between hover:border-white/10 transition-all shadow-xl relative overflow-hidden">
+            <div className="space-y-6">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Partidos Políticos y Consultas</span>
+                <h3 className="text-2xl font-black text-white mt-2">Enterprise</h3>
+                <p className="text-xs text-slate-400 mt-1 leading-relaxed font-light">Para comandos presidenciales, partidos enteros o coaliciones nacionales.</p>
+              </div>
+              <div className="py-2">
+                <span className="text-4xl font-black text-white">A Medida</span>
+              </div>
+              <ul className="space-y-3 border-t border-white/5 pt-6 text-sm text-slate-300 font-light">
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <span>Federación de Múltiples Campañas en Red</span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <span>Servidor Dedicado en la Nube con Cifrado Militar</span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <span>API Exclusiva de Integración con WhatsApp/SMS</span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <span>Analistas y Estrategas Dedicados en Comando</span>
+                </li>
+              </ul>
+            </div>
+            <div className="pt-8">
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="w-full py-3.5 rounded-xl font-bold bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all text-sm cursor-pointer"
+              >
+                Contactar a Ventas
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 

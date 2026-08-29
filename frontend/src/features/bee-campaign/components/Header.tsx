@@ -188,51 +188,65 @@ export const Header: React.FC<HeaderProps> = ({
   const allowedViews = allViews.filter(v => userRole === 'superadmin' || (isViewAllowed(userRole, v.id) && isViewAllowedForModule(authUser?.moduleName, v.id)));
   const currentViewData = allViews.find(v => v.id === currentView) || allowedViews[0] || allViews[0];
 
+  const getModuleHeaderInfo = () => {
+    const viewStr = currentView as string;
+    if (viewStr === 'modulo_admin' || viewStr === 'presupuesto') {
+      return {
+        title: 'GESTIÓN ADMINISTRATIVA',
+        description: 'Administración central de recursos y operación electoral.'
+      };
+    }
+    if (viewStr === 'gestion_estrategica') {
+      return {
+        title: 'GESTIÓN ESTRATÉGICA',
+        description: 'Planificación, análisis y diseño de estrategias inteligentes.'
+      };
+    }
+    if (viewStr === 'gestion_territorial' || viewStr === 'testigo_campo' || viewStr === 'jurado_campo' || viewStr === 'encuestas') {
+      return {
+        title: 'GESTIÓN TERRITORIAL',
+        description: 'Trabajo en campo, registro de información y despliegue territorial.'
+      };
+    }
+    return {
+      title: 'ELECTORAL360',
+      description: 'Plataforma premium de gestión y analítica electoral.'
+    };
+  };
+
+  const headerInfo = getModuleHeaderInfo();
+
   return (
-    <header className="sticky top-0 z-50 bg-gradient-to-b from-[#08152e] to-[#020617] border-b border-cyan-500/25 text-white px-2.5 py-2.5 sm:px-5 sm:py-3.5 md:py-4 shadow-2xl backdrop-blur-2xl transition-all w-full">
+    <header className="sticky top-0 z-40 bg-[#050816]/90 border-b border-white/5 text-white px-4 py-2.5 sm:px-6 sm:py-3 shadow-xl backdrop-blur-md transition-all w-full">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
 
-        {/* Left Side: Hamburger + Brand Logo + Active View Title & Role Pill */}
-        <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+        {/* Left Side: Hamburger + Active Module Title & Description */}
+        <div className="flex items-center gap-3 min-w-0">
           {onToggleSidebar && (
             <button
               onClick={onToggleSidebar}
               aria-label="Abrir menú de navegación"
-              className="lg:hidden p-2 sm:p-2.5 rounded-xl bg-[#0a1833] hover:bg-cyan-500/20 active:bg-cyan-500/30 border border-cyan-500/40 text-cyan-300 transition-all cursor-pointer shrink-0 min-h-[40px] min-w-[40px] flex items-center justify-center"
+              className="lg:hidden p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 text-slate-300 transition-all cursor-pointer shrink-0 min-h-[36px] min-w-[36px] flex items-center justify-center"
               title="Abrir menú"
             >
-              <Menu className="w-5 h-5" />
+              <Menu className="w-4 h-4" />
             </button>
           )}
           
-          <div className="flex items-center gap-2 sm:gap-3.5 min-w-0">
-            <div className="shrink-0">
-              <CampaignLogoBadge size="sm" className="sm:hidden" />
-              <CampaignLogoBadge size="md" className="hidden sm:flex" />
-            </div>
-            
-            <div className="min-w-0">
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <h1 className="font-extrabold text-xs sm:text-sm md:text-lg lg:text-xl tracking-tight bg-gradient-to-r from-white via-cyan-100 to-cyan-300 bg-clip-text text-transparent truncate max-w-[110px] xs:max-w-[150px] sm:max-w-[220px] md:max-w-none">
-                  Campaña Ganadora IA
-                </h1>
-                <span className="text-[8px] sm:text-[10px] md:text-xs bg-emerald-500/25 text-emerald-300 border border-emerald-500/40 px-1 sm:px-2 py-0.5 rounded-full font-bold uppercase tracking-wider shrink-0">
-                  {userRole === 'administrador' || userRole === 'superadmin' ? 'ADMIN' : userRole === 'coordinador_zona' || userRole === 'coordinador_general_zona' ? 'TERRITORIAL' : userRole === 'candidato' ? 'CANDIDATO' : userRole.toUpperCase()}
-                </span>
-              </div>
-              <p className="text-[9px] sm:text-[11px] md:text-xs text-cyan-200/90 flex items-center gap-1 sm:gap-1.5 mt-0.5 min-w-0">
-                <span className="font-semibold text-white truncate max-w-[100px] xs:max-w-[160px] sm:max-w-none">{currentViewData.title}</span>
-                <span className="text-cyan-500/40 shrink-0 hidden xs:inline">•</span>
-                <span className="text-cyan-300/80 truncate max-w-[120px] sm:max-w-none hidden sm:inline">{currentViewData.subtitle}</span>
-              </p>
-            </div>
+          <div className="min-w-0">
+            <h1 className="font-display font-extrabold text-xs sm:text-sm tracking-wide text-white uppercase leading-none">
+              {headerInfo.title}
+            </h1>
+            <p className="text-[10px] sm:text-xs text-slate-400 truncate mt-1.5 leading-normal font-light hidden sm:block">
+              {headerInfo.description}
+            </p>
           </div>
         </div>
 
         {/* Right Status Controls */}
         <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
           {/* Live Timer */}
-          <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0a1833] border border-cyan-500/40 text-cyan-300 text-xs font-mono shadow-md font-bold">
+          <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/5 text-slate-300 text-xs font-mono shadow-md font-bold">
             <Clock className="w-3.5 h-3.5 text-cyan-400 animate-spin" style={{ animationDuration: '8s' }} />
             <span>{time}</span>
           </div>
@@ -242,9 +256,9 @@ export const Header: React.FC<HeaderProps> = ({
             <button 
               onClick={() => setShowNotifications(!showNotifications)}
               aria-label="Notificaciones"
-              className="relative p-2 sm:p-2.5 rounded-xl bg-[#0a1833] hover:bg-cyan-500/20 active:bg-cyan-500/30 border border-cyan-500/40 text-cyan-300 transition-all cursor-pointer shadow-md min-h-[38px] min-w-[38px] sm:min-h-[42px] sm:min-w-[42px] flex items-center justify-center"
+              className="relative p-2 sm:p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 text-slate-300 hover:text-white transition-all cursor-pointer shadow-md min-h-[38px] min-w-[38px] sm:min-h-[40px] sm:min-w-[40px] flex items-center justify-center"
             >
-              <Bell className="w-4 h-4 text-cyan-300" />
+              <Bell className="w-4 h-4 text-slate-300" />
               {unreadNotifications > 0 && (
                 <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center animate-bounce">
                   {unreadNotifications}
@@ -253,8 +267,8 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
 
             {showNotifications && (
-              <div className="fixed sm:absolute right-2 sm:right-0 top-14 sm:top-auto sm:mt-3.5 w-[calc(100vw-1rem)] sm:w-80 max-w-[340px] bg-slate-900/98 border border-cyan-500/40 rounded-2xl p-3.5 sm:p-4 shadow-2xl backdrop-blur-xl z-50 text-left space-y-3">
-                <div className="flex items-center justify-between border-b border-cyan-500/15 pb-2">
+              <div className="fixed sm:absolute right-2 sm:right-0 top-14 sm:top-auto sm:mt-3.5 w-[calc(100vw-1rem)] sm:w-80 max-w-[340px] bg-slate-900/98 border border-white/5 rounded-2xl p-3.5 sm:p-4 shadow-2xl backdrop-blur-xl z-50 text-left space-y-3">
+                <div className="flex items-center justify-between border-b border-white/5 pb-2">
                   <h3 className="text-xs font-black uppercase tracking-wider text-slate-200">Notificaciones</h3>
                   {unreadNotifications > 0 && (
                     <button
@@ -274,7 +288,7 @@ export const Header: React.FC<HeaderProps> = ({
                         key={notif.id} 
                         className={`p-2.5 rounded-xl border transition-all ${
                           notif.read 
-                            ? 'bg-slate-950/40 border-slate-800/80 text-slate-400' 
+                            ? 'bg-slate-950/40 border-white/5 text-slate-400' 
                             : 'bg-cyan-500/10 border-cyan-500/30 text-slate-200 shadow-sm'
                         }`}
                       >
@@ -289,18 +303,18 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           {/* User Profile & Logout */}
-          <div className="flex items-center gap-1.5 sm:gap-3 pl-1.5 sm:pl-3 border-l border-cyan-500/20">
+          <div className="flex items-center gap-1.5 sm:gap-3 pl-1.5 sm:pl-3 border-l border-white/5">
             {candidatePhoto ? (
-              <div className="relative group cursor-pointer w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 shrink-0">
+              <div className="relative group cursor-pointer w-8 h-8 sm:w-9 sm:h-9 shrink-0">
                 <img
                   src={candidatePhoto}
                   alt={authUser?.name || "Usuario"}
-                  className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full border-2 border-emerald-400 object-cover shadow-lg shadow-emerald-950/50 transition-all duration-300 group-hover:border-cyan-300"
+                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border-2 border-emerald-400 object-cover shadow-lg shadow-emerald-950/50 transition-all duration-300 group-hover:border-cyan-300"
                   onClick={() => fileInputRef.current?.click()}
                   loading="lazy"
                   decoding="async"
-                  width={40}
-                  height={40}
+                  width={36}
+                  height={36}
                 />
                 <div 
                   className="absolute inset-0 bg-black/60 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -312,7 +326,7 @@ export const Header: React.FC<HeaderProps> = ({
             ) : (
               <button
                 onClick={() => fileInputRef.current?.click()}
-                className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full border-2 border-cyan-500/40 bg-[#0a1833]/80 hover:bg-cyan-500/20 text-cyan-300 hover:text-cyan-100 flex items-center justify-center font-black text-xs sm:text-sm tracking-wider shadow-lg transition-all shrink-0 cursor-pointer"
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border-2 border-cyan-500/40 bg-white/5 hover:bg-white/10 text-cyan-300 hover:text-cyan-100 flex items-center justify-center font-black text-xs sm:text-sm tracking-wider shadow-lg transition-all shrink-0 cursor-pointer animate-pulse"
                 title="Subir foto del candidato"
                 aria-label="Perfil de usuario"
               >
@@ -331,8 +345,8 @@ export const Header: React.FC<HeaderProps> = ({
               <div className="font-bold text-xs lg:text-sm text-slate-100 leading-tight truncate max-w-[120px] lg:max-w-[160px]">
                 {authUser?.name || 'Usuario'}
               </div>
-              <div className="text-[10px] lg:text-[11px] text-emerald-400 font-semibold tracking-wide truncate max-w-[120px] lg:max-w-[160px]">
-                {authUser?.roleName || authUser?.moduleName || 'Rol Activo'}
+              <div className="text-[10px] lg:text-[11px] text-cyan-400 font-bold uppercase tracking-wider truncate max-w-[120px] lg:max-w-[160px]">
+                {authUser?.role === 'superadmin' ? 'SUPERADMIN' : (authUser?.role || 'ADMIN').toUpperCase()}
               </div>
             </div>
             
@@ -341,10 +355,10 @@ export const Header: React.FC<HeaderProps> = ({
                 onClick={onLogout}
                 title="Cerrar Sesión"
                 aria-label="Cerrar sesión"
-                className="px-2 sm:px-3 py-1.5 sm:py-2 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 active:bg-rose-500/35 border border-rose-500/45 text-rose-300 hover:text-white transition-all cursor-pointer flex items-center gap-1.5 text-xs font-extrabold shadow-md shadow-rose-950/40 min-h-[38px] sm:min-h-[40px]"
+                className="px-2 sm:px-3 py-1.5 sm:py-2 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 active:bg-rose-500/35 border border-rose-500/45 text-rose-300 hover:text-white transition-all cursor-pointer flex items-center gap-1.5 text-xs font-extrabold shadow-md shadow-rose-950/40 min-h-[36px]"
               >
                 <LogOut className="w-3.5 h-3.5" />
-                <span className="hidden xl:inline">Cerrar Sesión</span>
+                <span className="hidden xl:inline">Salir</span>
               </button>
             )}
           </div>

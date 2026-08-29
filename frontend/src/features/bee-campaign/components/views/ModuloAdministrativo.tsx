@@ -1663,11 +1663,11 @@ export const ModuloAdministrativo: React.FC<ModuloAdministrativoProps> = ({
         {/* ---------------------------------------------------------------------- */}
         {activeTab === 'inicio' && (() => {
           const pieData = [
-            { name: 'Candidato A', value: 45.2, color: '#3b82f6' },
-            { name: 'Candidato B', value: 28.7, color: '#a855f7' },
-            { name: 'Candidato C', value: 15.3, color: '#ec4899' },
-            { name: 'Indecisos', value: 7.8, color: '#f97316' },
-            { name: 'Ninguno', value: 3.0, color: '#06b6d4' }
+            { name: 'Candidato A', value: 45.2, color: '#1677FF' },
+            { name: 'Candidato B', value: 28.7, color: '#7C3AED' },
+            { name: 'Candidato C', value: 15.3, color: '#FF3B6B' },
+            { name: 'Indecisos', value: 7.8, color: '#FF8A00' },
+            { name: 'Ninguno', value: 3.0, color: '#00CFE8' }
           ];
 
           return (
@@ -1677,13 +1677,25 @@ export const ModuloAdministrativo: React.FC<ModuloAdministrativoProps> = ({
                   0%, 100% { transform: translateY(0) scale(1); opacity: 0.35; }
                   50% { transform: translateY(-4px) scale(1.02); opacity: 0.65; }
                 }
+                .premium-card {
+                  background: rgba(15,23,42,.70) !important;
+                  border: 1px solid rgba(148,163,184,.12) !important;
+                  border-radius: 20px !important;
+                  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+                  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+                }
+                .premium-card:hover {
+                  transform: translateY(-2px) !important;
+                  border-color: rgba(0,207,232,.35) !important;
+                  box-shadow: 0 0 20px rgba(0,207,232,.10) !important;
+                }
               `}</style>
               
               {/* TOP LAYOUT: Hero Card + Resumen General Grid */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
                 
                 {/* HERO BANNER CARD (40% width / 5 cols) */}
-                <div className="lg:col-span-5 relative overflow-hidden rounded-3xl border border-white/5 bg-[#081225]/40 backdrop-blur-xl p-8 flex flex-col justify-between min-h-[320px] shadow-2xl group">
+                <div className="lg:col-span-5 relative overflow-hidden rounded-3xl border border-white/5 bg-[#0b1224]/50 backdrop-blur-xl p-8 flex flex-col justify-between min-h-[320px] shadow-2xl group">
                   {/* Glowing particle wave SVG animation */}
                   <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
                     <svg className="w-full h-full" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1699,14 +1711,14 @@ export const ModuloAdministrativo: React.FC<ModuloAdministrativoProps> = ({
                       
                       <defs>
                         <linearGradient id="cyanGlowGrad" x1="0" y1="0" x2="1" y2="0">
-                          <stop offset="0%" stopColor="#00f2fe" stopOpacity="0" />
-                          <stop offset="50%" stopColor="#06b6d4" stopOpacity="0.8" />
-                          <stop offset="100%" stopColor="#00f2fe" stopOpacity="0" />
+                          <stop offset="0%" stopColor="#00CFE8" stopOpacity="0" />
+                          <stop offset="50%" stopColor="#00CFE8" stopOpacity="0.8" />
+                          <stop offset="100%" stopColor="#00CFE8" stopOpacity="0" />
                         </linearGradient>
                         <linearGradient id="blueGlowGrad" x1="0" y1="0" x2="1" y2="0">
-                          <stop offset="0%" stopColor="#3b82f6" stopOpacity="0" />
-                          <stop offset="60%" stopColor="#6366f1" stopOpacity="0.6" />
-                          <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
+                          <stop offset="0%" stopColor="#1677FF" stopOpacity="0" />
+                          <stop offset="60%" stopColor="#7C3AED" stopOpacity="0.6" />
+                          <stop offset="100%" stopColor="#1677FF" stopOpacity="0" />
                         </linearGradient>
                       </defs>
                     </svg>
@@ -1716,19 +1728,19 @@ export const ModuloAdministrativo: React.FC<ModuloAdministrativoProps> = ({
                   <div className="relative z-10 space-y-4 my-auto">
                     <h2 className="text-4xl font-display font-black text-white leading-tight">
                       Gestión <br />
-                      <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-400 bg-clip-text text-transparent">
+                      <span className="bg-gradient-to-r from-[#00CFE8] via-[#1677FF] to-[#7C3AED] bg-clip-text text-transparent">
                         Administrativa
                       </span>
                     </h2>
                     <p className="text-xs sm:text-sm text-slate-400 max-w-sm leading-relaxed font-light">
-                      Administra usuarios, campañas, testigos, jurados y todos los recursos de tu organización.
+                      Administración integral de usuarios, campañas, recursos y operación electoral.
                     </p>
                   </div>
                   
                   <div className="relative z-10 pt-4">
                     <button
                       onClick={() => setActiveTab('gestion_campana')}
-                      className="px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white shadow-lg shadow-cyan-500/20 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer inline-flex items-center gap-2"
+                      className="px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-[#00CFE8] to-[#1677FF] hover:from-[#00dff8] hover:to-[#2b88ff] text-white shadow-lg shadow-cyan-500/25 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer inline-flex items-center gap-2"
                     >
                       <span>Explorar Módulo</span>
                       <ChevronRight className="w-3.5 h-3.5" />
@@ -1749,9 +1761,9 @@ export const ModuloAdministrativo: React.FC<ModuloAdministrativoProps> = ({
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow">
                     
                     {/* Card 1: Líderes Activos */}
-                    <div className="rounded-2xl border border-white/5 bg-[#070c17]/60 p-5 flex flex-col justify-between shadow-xl hover:border-white/10 transition-all">
+                    <div className="premium-card p-5 flex flex-col justify-between">
                       <div className="flex items-start justify-between">
-                        <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center shrink-0">
+                        <div className="w-10 h-10 rounded-xl bg-[#00CFE8]/10 border border-[#00CFE8]/20 text-[#00CFE8] flex items-center justify-center shrink-0">
                           <Users className="w-5 h-5" />
                         </div>
                         <div className="text-right">
@@ -1760,11 +1772,11 @@ export const ModuloAdministrativo: React.FC<ModuloAdministrativoProps> = ({
                         </div>
                       </div>
                       <div className="mt-4 flex items-center justify-between border-t border-white/5 pt-3">
-                        <span className="text-[10px] text-emerald-400 font-bold flex items-center gap-0.5">
+                        <span className="text-[10px] text-[#00D4AA] font-bold flex items-center gap-0.5">
                           <TrendingUp className="w-3 h-3" /> +12.5% <span className="text-[9px] text-slate-500 font-normal">vs. mes anterior</span>
                         </span>
                         <div className="w-20 h-6 shrink-0">
-                          <svg viewBox="0 0 100 20" className="w-full h-full text-blue-400 fill-none stroke-current stroke-2">
+                          <svg viewBox="0 0 100 20" className="w-full h-full text-[#00CFE8] fill-none stroke-current stroke-2">
                             <path d="M0 15 Q 15 10, 30 14 T 60 5 T 90 12 T 100 8" />
                           </svg>
                         </div>
@@ -1772,9 +1784,9 @@ export const ModuloAdministrativo: React.FC<ModuloAdministrativoProps> = ({
                     </div>
                     
                     {/* Card 2: Votantes Registrados */}
-                    <div className="rounded-2xl border border-white/5 bg-[#070c17]/60 p-5 flex flex-col justify-between shadow-xl hover:border-white/10 transition-all">
+                    <div className="premium-card p-5 flex flex-col justify-between">
                       <div className="flex items-start justify-between">
-                        <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0">
+                        <div className="w-10 h-10 rounded-xl bg-[#1677FF]/10 border border-[#1677FF]/20 text-[#1677FF] flex items-center justify-center shrink-0">
                           <UserCheck className="w-5 h-5" />
                         </div>
                         <div className="text-right">
@@ -1783,11 +1795,11 @@ export const ModuloAdministrativo: React.FC<ModuloAdministrativoProps> = ({
                         </div>
                       </div>
                       <div className="mt-4 flex items-center justify-between border-t border-white/5 pt-3">
-                        <span className="text-[10px] text-emerald-400 font-bold flex items-center gap-0.5">
+                        <span className="text-[10px] text-[#00D4AA] font-bold flex items-center gap-0.5">
                           <TrendingUp className="w-3 h-3" /> +8.3% <span className="text-[9px] text-slate-500 font-normal">vs. mes anterior</span>
                         </span>
                         <div className="w-20 h-6 shrink-0">
-                          <svg viewBox="0 0 100 20" className="w-full h-full text-cyan-400 fill-none stroke-current stroke-2">
+                          <svg viewBox="0 0 100 20" className="w-full h-full text-[#1677FF] fill-none stroke-current stroke-2">
                             <path d="M0 18 Q 15 12, 30 16 T 60 8 T 90 14 T 100 5" />
                           </svg>
                         </div>
@@ -1795,9 +1807,9 @@ export const ModuloAdministrativo: React.FC<ModuloAdministrativoProps> = ({
                     </div>
                     
                     {/* Card 3: Cobertura Territorial */}
-                    <div className="rounded-2xl border border-white/5 bg-[#070c17]/60 p-5 flex flex-col justify-between shadow-xl hover:border-white/10 transition-all">
+                    <div className="premium-card p-5 flex flex-col justify-between">
                       <div className="flex items-start justify-between">
-                        <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center shrink-0">
+                        <div className="w-10 h-10 rounded-xl bg-[#7C3AED]/10 border border-[#7C3AED]/20 text-[#7C3AED] flex items-center justify-center shrink-0">
                           <PieChart className="w-5 h-5" />
                         </div>
                         <div className="text-right">
@@ -1806,11 +1818,11 @@ export const ModuloAdministrativo: React.FC<ModuloAdministrativoProps> = ({
                         </div>
                       </div>
                       <div className="mt-4 flex items-center justify-between border-t border-white/5 pt-3">
-                        <span className="text-[10px] text-emerald-400 font-bold flex items-center gap-0.5">
+                        <span className="text-[10px] text-[#00D4AA] font-bold flex items-center gap-0.5">
                           <TrendingUp className="w-3 h-3" /> +5.6% <span className="text-[9px] text-slate-500 font-normal">vs. mes anterior</span>
                         </span>
                         <div className="w-20 h-6 shrink-0">
-                          <svg viewBox="0 0 100 20" className="w-full h-full text-purple-400 fill-none stroke-current stroke-2">
+                          <svg viewBox="0 0 100 20" className="w-full h-full text-[#7C3AED] fill-none stroke-current stroke-2">
                             <path d="M0 12 Q 15 15, 30 8 T 60 14 T 90 6 T 100 10" />
                           </svg>
                         </div>
@@ -1818,9 +1830,9 @@ export const ModuloAdministrativo: React.FC<ModuloAdministrativoProps> = ({
                     </div>
                     
                     {/* Card 4: Testigos Activos */}
-                    <div className="rounded-2xl border border-white/5 bg-[#070c17]/60 p-5 flex flex-col justify-between shadow-xl hover:border-white/10 transition-all">
+                    <div className="premium-card p-5 flex flex-col justify-between">
                       <div className="flex items-start justify-between">
-                        <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                        <div className="w-10 h-10 rounded-xl bg-[#00D4AA]/10 border border-[#00D4AA]/20 text-[#00D4AA] flex items-center justify-center shrink-0">
                           <ShieldCheck className="w-5 h-5" />
                         </div>
                         <div className="text-right">
@@ -1829,11 +1841,11 @@ export const ModuloAdministrativo: React.FC<ModuloAdministrativoProps> = ({
                         </div>
                       </div>
                       <div className="mt-4 flex items-center justify-between border-t border-white/5 pt-3">
-                        <span className="text-[10px] text-emerald-400 font-bold flex items-center gap-0.5">
+                        <span className="text-[10px] text-[#00D4AA] font-bold flex items-center gap-0.5">
                           <TrendingUp className="w-3 h-3" /> +15.1% <span className="text-[9px] text-slate-500 font-normal">vs. mes anterior</span>
                         </span>
                         <div className="w-20 h-6 shrink-0">
-                          <svg viewBox="0 0 100 20" className="w-full h-full text-emerald-400 fill-none stroke-current stroke-2">
+                          <svg viewBox="0 0 100 20" className="w-full h-full text-[#00D4AA] fill-none stroke-current stroke-2">
                             <path d="M0 14 Q 15 8, 30 12 T 60 6 T 90 10 T 100 4" />
                           </svg>
                         </div>
@@ -1849,7 +1861,7 @@ export const ModuloAdministrativo: React.FC<ModuloAdministrativoProps> = ({
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
                 
                 {/* 1. Distribución Electoral (Doughnut Chart) (5 cols) */}
-                <div className="lg:col-span-5 rounded-3xl border border-white/5 bg-[#070c17]/60 p-6 flex flex-col justify-between shadow-xl">
+                <div className="lg:col-span-5 premium-card p-6 flex flex-col justify-between">
                   <div className="border-b border-white/5 pb-3">
                     <h3 className="font-bold text-white text-xs uppercase tracking-wider">Distribución Electoral</h3>
                   </div>
@@ -1896,54 +1908,54 @@ export const ModuloAdministrativo: React.FC<ModuloAdministrativoProps> = ({
                 </div>
 
                 {/* 2. Actividad Reciente (4 cols) */}
-                <div className="lg:col-span-4 rounded-3xl border border-white/5 bg-[#070c17]/60 p-6 flex flex-col justify-between shadow-xl">
+                <div className="lg:col-span-4 premium-card p-6 flex flex-col justify-between">
                   <div className="border-b border-white/5 pb-3">
                     <h3 className="font-bold text-white text-xs uppercase tracking-wider">Actividad Reciente</h3>
                   </div>
                   
                   <div className="space-y-4 flex-1 py-4">
                     <div className="flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center shrink-0">
+                      <div className="w-8 h-8 rounded-lg bg-[#1677FF]/10 border border-[#1677FF]/20 text-[#1677FF] flex items-center justify-center shrink-0">
                         <Users className="w-4 h-4" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-[11px] text-white font-bold leading-normal">Nuevo líder registrado en Medellín</p>
-                        <p className="text-[9px] text-slate-500 mt-0.5">Juan Pérez - Comuna 13</p>
+                        <p className="text-[9px] text-slate-500 mt-0.5">Juan Pérez • Comuna 13</p>
                       </div>
-                      <span className="text-[9px] text-slate-500 shrink-0">Hace 20 min</span>
+                      <span className="text-[9px] text-slate-500 shrink-0">Hace 20m</span>
                     </div>
 
                     <div className="flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center shrink-0">
+                      <div className="w-8 h-8 rounded-lg bg-[#7C3AED]/10 border border-[#7C3AED]/20 text-[#7C3AED] flex items-center justify-center shrink-0">
                         <UserCheck className="w-4 h-4" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-[11px] text-white font-bold leading-normal">Votante registrado en Cali</p>
-                        <p className="text-[9px] text-slate-500 mt-0.5">María González - Comuna 7</p>
+                        <p className="text-[9px] text-slate-500 mt-0.5">María González • Comuna 7</p>
                       </div>
-                      <span className="text-[9px] text-slate-500 shrink-0">Hace 45 min</span>
+                      <span className="text-[9px] text-slate-500 shrink-0">Hace 45m</span>
                     </div>
 
                     <div className="flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0">
+                      <div className="w-8 h-8 rounded-lg bg-[#F5C542]/10 border border-[#F5C542]/20 text-[#F5C542] flex items-center justify-center shrink-0">
                         <CreditCard className="w-4 h-4" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-[11px] text-white font-bold leading-normal">Presupuesto actualizado</p>
                         <p className="text-[9px] text-slate-500 mt-0.5">Campaña Alcaldía 2026</p>
                       </div>
-                      <span className="text-[9px] text-slate-500 shrink-0">Hace 1 hora</span>
+                      <span className="text-[9px] text-slate-500 shrink-0">Hace 1h</span>
                     </div>
 
                     <div className="flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                      <div className="w-8 h-8 rounded-lg bg-[#00D4AA]/10 border border-[#00D4AA]/20 text-[#00D4AA] flex items-center justify-center shrink-0">
                         <ShieldCheck className="w-4 h-4" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-[11px] text-white font-bold leading-normal">Testigo asignado en Barranquilla</p>
-                        <p className="text-[9px] text-slate-500 mt-0.5">Carlos Martínez - Puesto 45</p>
+                        <p className="text-[9px] text-slate-500 mt-0.5">Carlos Martínez • Puesto 45</p>
                       </div>
-                      <span className="text-[9px] text-slate-500 shrink-0">Hace 2 horas</span>
+                      <span className="text-[9px] text-slate-500 shrink-0">Hace 2h</span>
                     </div>
                   </div>
                   
@@ -1956,7 +1968,7 @@ export const ModuloAdministrativo: React.FC<ModuloAdministrativoProps> = ({
                 </div>
 
                 {/* 3. Holographic Security Panel (3 cols) */}
-                <div className="lg:col-span-3 rounded-3xl border border-white/5 bg-[#070c17]/60 p-6 flex flex-col items-center justify-between shadow-xl relative overflow-hidden group">
+                <div className="lg:col-span-3 premium-card p-6 flex flex-col items-center justify-between relative overflow-hidden group">
                   <div className="w-full border-b border-white/5 pb-3">
                     <h3 className="font-bold text-white text-xs uppercase tracking-wider">Estado de Seguridad</h3>
                   </div>
@@ -1979,7 +1991,7 @@ export const ModuloAdministrativo: React.FC<ModuloAdministrativoProps> = ({
                   </div>
                   
                   <div className="w-full text-center space-y-1.5">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#00D4AA]/10 text-[#00D4AA] border border-[#00D4AA]/20">
                       Encriptado E2E
                     </span>
                     <p className="text-[10px] text-slate-500">Respaldos en Supabase</p>

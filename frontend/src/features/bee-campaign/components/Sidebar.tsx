@@ -237,7 +237,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         />
       )}
 
-      <aside className={`fixed inset-y-0 left-0 z-50 w-[280px] xs:w-72 md:w-64 max-w-[85vw] bg-[#030712]/95 border-r border-white/5 text-slate-100 flex flex-col justify-between shrink-0 transition-transform duration-300 ease-in-out select-none lg:relative lg:translate-x-0 ${
+      <aside className={`fixed inset-y-0 left-0 z-50 w-[280px] xs:w-72 md:w-64 max-w-[85vw] bg-[#050816]/95 border-r border-white/5 text-slate-100 flex flex-col justify-between shrink-0 transition-transform duration-300 ease-in-out select-none lg:relative lg:translate-x-0 ${
         isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
       }`}>
       <div className="p-4 sm:p-5 space-y-5 overflow-y-auto max-h-[calc(100vh-80px)] custom-scrollbar">
@@ -319,10 +319,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         }
                         if (onCloseMobile) onCloseMobile();
                       }}
-                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer border-l-2 ${
+                      style={isActive ? {
+                        background: 'linear-gradient(90deg, rgba(0,207,232,.16), rgba(124,58,237,.12))',
+                        border: '1px solid rgba(0,207,232,.35)',
+                        boxShadow: '0 0 20px rgba(0,207,232,.10)'
+                      } : undefined}
+                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer ${
                         isActive
-                          ? 'bg-cyan-500/10 text-white border-cyan-400 shadow-[inset_0_0_12px_rgba(6,182,212,0.15)] font-bold'
-                          : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.02] border-transparent'
+                          ? 'text-white font-bold'
+                          : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.02] border border-transparent'
                       }`}
                     >
                       <div className={`shrink-0 transition-transform ${isActive ? 'scale-110 text-cyan-400' : 'text-slate-500'}`}>
@@ -367,10 +372,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         }
                         if (onCloseMobile) onCloseMobile();
                       }}
-                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer border-l-2 ${
+                      style={isActive ? {
+                        background: 'linear-gradient(90deg, rgba(0,207,232,.16), rgba(124,58,237,.12))',
+                        border: '1px solid rgba(0,207,232,.35)',
+                        boxShadow: '0 0 20px rgba(0,207,232,.10)'
+                      } : undefined}
+                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer ${
                         isActive
-                          ? 'bg-purple-500/10 text-white border-purple-400 shadow-[inset_0_0_12px_rgba(168,85,247,0.15)] font-bold'
-                          : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.02] border-transparent'
+                          ? 'text-white font-bold'
+                          : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.02] border border-transparent'
                       }`}
                     >
                       <div className={`shrink-0 transition-transform ${isActive ? 'scale-110 text-purple-400' : 'text-slate-500'}`}>
@@ -428,10 +438,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         }
                         if (onCloseMobile) onCloseMobile();
                       }}
-                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer border-l-2 ${
+                      style={isActive ? {
+                        background: 'linear-gradient(90deg, rgba(0,207,232,.16), rgba(124,58,237,.12))',
+                        border: '1px solid rgba(0,207,232,.35)',
+                        boxShadow: '0 0 20px rgba(0,207,232,.10)'
+                      } : undefined}
+                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer ${
                         isActive
-                          ? 'bg-emerald-500/10 text-white border-emerald-400 shadow-[inset_0_0_12px_rgba(16,185,129,0.15)] font-bold'
-                          : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.02] border-transparent'
+                          ? 'text-white font-bold'
+                          : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.02] border border-transparent'
                       }`}
                     >
                       <div className={`shrink-0 transition-transform ${isActive ? 'scale-110 text-emerald-400' : 'text-slate-500'}`}>

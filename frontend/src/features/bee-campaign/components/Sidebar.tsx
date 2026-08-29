@@ -32,7 +32,9 @@ import {
   ClipboardList,
   Vote,
   Search,
-  Map as MapIcon
+  Map as MapIcon,
+  ChevronDown,
+  Zap
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -235,20 +237,22 @@ export const Sidebar: React.FC<SidebarProps> = ({
         />
       )}
 
-      <aside className={`fixed inset-y-0 left-0 z-50 w-[280px] xs:w-72 md:w-64 max-w-[85vw] bg-[#111C30] border-r border-cyan-500/25 text-slate-100 flex flex-col justify-between shrink-0 transition-transform duration-300 ease-in-out select-none lg:relative lg:translate-x-0 ${
+      <aside className={`fixed inset-y-0 left-0 z-50 w-[280px] xs:w-72 md:w-64 max-w-[85vw] bg-[#030712]/95 border-r border-white/5 text-slate-100 flex flex-col justify-between shrink-0 transition-transform duration-300 ease-in-out select-none lg:relative lg:translate-x-0 ${
         isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
       }`}>
-      <div className="p-4 sm:p-5 space-y-4 sm:space-y-5 overflow-y-auto max-h-[calc(100vh-80px)] custom-scrollbar">
+      <div className="p-4 sm:p-5 space-y-5 overflow-y-auto max-h-[calc(100vh-80px)] custom-scrollbar">
         
         {/* Header Block matching app design */}
-        <div className="flex items-center justify-between gap-3 pb-2 border-b border-cyan-500/15">
+        <div className="flex items-center justify-between gap-3 pb-3 border-b border-white/5">
           <div className="flex items-center gap-3">
-            <CampaignLogoBadge size="md" />
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20 shrink-0 animate-pulse">
+              <Zap className="w-5 h-5 text-white" />
+            </div>
             <div>
-              <h1 className="font-extrabold text-sm tracking-wide text-white leading-tight">
-                Campaña Ganadora IA
+              <h1 className="font-display font-extrabold text-sm tracking-wide text-white leading-tight">
+                Electoral360
               </h1>
-              <p className="text-[11px] font-semibold text-emerald-400/90 mt-0.5">
+              <p className="text-[10px] font-semibold text-cyan-400/90 mt-0.5 uppercase tracking-wider">
                 Panel de Control
               </p>
             </div>
@@ -257,7 +261,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <button
               onClick={onCloseMobile}
               aria-label="Cerrar menú"
-              className="lg:hidden p-2 rounded-xl bg-slate-900 border border-cyan-500/30 text-cyan-300 hover:text-white cursor-pointer transition-all min-h-[38px] min-w-[38px] flex items-center justify-center"
+              className="lg:hidden p-2 rounded-xl bg-slate-900 border border-white/10 text-slate-300 hover:text-white cursor-pointer transition-all min-h-[38px] min-w-[38px] flex items-center justify-center"
               title="Cerrar menú"
             >
               <X className="w-4 h-4" />
@@ -265,20 +269,34 @@ export const Sidebar: React.FC<SidebarProps> = ({
           )}
         </div>
 
+        {/* Modules Accordion Trigger button */}
+        <div className="px-1 py-1">
+          <div className="w-full flex items-center justify-between px-3.5 py-2 rounded-xl bg-white/[0.03] border border-white/5 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+            <span>Módulos</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+          </div>
+        </div>
 
-
-
-
-        {/* Navigation Menu Links Filtered By Active Module */}
-        <div className="space-y-4">
+        {/* Navigation Menu Accordion Modules */}
+        <div className="space-y-5">
           
-          {/* Gestión Administrativa */}
-          {activeModule === 'admin' && (
-            <div>
-              <p className="px-3 text-[10px] font-black uppercase tracking-wider text-cyan-400/80 mb-2">
-                Gestión Administrativa
-              </p>
-              <nav className="space-y-1">
+          {/* Gestión Administrativa Dropdown Accordion */}
+          <div className="space-y-1">
+            <button
+              onClick={() => {
+                if (onSelectActiveModule) onSelectActiveModule('admin');
+                onSelectView('modulo_admin');
+              }}
+              className={`w-full flex items-center justify-between px-2.5 py-2 text-[10px] font-black uppercase tracking-wider transition-colors cursor-pointer ${
+                activeModule === 'admin' ? 'text-cyan-400' : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <span>Gestión Administrativa</span>
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeModule === 'admin' ? 'rotate-180 text-cyan-400' : 'text-slate-500'}`} />
+            </button>
+
+            {activeModule === 'admin' && (
+              <nav className="space-y-0.5 pl-0.5 mt-1 animate-in slide-in-from-top-1 duration-200">
                 {adminMenuItems.map((item) => {
                   let targetView: ViewMode = 'modulo_admin';
                   if (item.tab === 'presupuesto_cne') targetView = 'presupuesto';
@@ -301,13 +319,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         }
                         if (onCloseMobile) onCloseMobile();
                       }}
-                      className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
+                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer border-l-2 ${
                         isActive
-                          ? 'bg-[#006e62] text-white shadow-lg shadow-teal-900/40 border border-emerald-400/30'
-                          : 'text-slate-300 hover:text-white hover:bg-cyan-500/10'
+                          ? 'bg-cyan-500/10 text-white border-cyan-400 shadow-[inset_0_0_12px_rgba(6,182,212,0.15)] font-bold'
+                          : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.02] border-transparent'
                       }`}
                     >
-                      <div className={`shrink-0 transition-transform ${isActive ? 'scale-110 text-white' : 'text-slate-400'}`}>
+                      <div className={`shrink-0 transition-transform ${isActive ? 'scale-110 text-cyan-400' : 'text-slate-500'}`}>
                         {item.icon}
                       </div>
                       <span className="truncate tracking-wide">{item.label}</span>
@@ -315,16 +333,26 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   );
                 })}
               </nav>
-            </div>
-          )}
+            )}
+          </div>
 
-          {/* Gestión Estratégica */}
-          {activeModule === 'estrategica' && (
-            <div>
-              <p className="px-3 text-[10px] font-black uppercase tracking-wider text-cyan-400/80 mb-2">
-                Gestión Estratégica
-              </p>
-              <nav className="space-y-1">
+          {/* Gestión Estratégica Dropdown Accordion */}
+          <div className="space-y-1">
+            <button
+              onClick={() => {
+                if (onSelectActiveModule) onSelectActiveModule('estrategica');
+                onSelectView('gestion_estrategica');
+              }}
+              className={`w-full flex items-center justify-between px-2.5 py-2 text-[10px] font-black uppercase tracking-wider transition-colors cursor-pointer ${
+                activeModule === 'estrategica' ? 'text-purple-400' : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <span>Gestión Estratégica</span>
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeModule === 'estrategica' ? 'rotate-180 text-purple-400' : 'text-slate-500'}`} />
+            </button>
+
+            {activeModule === 'estrategica' && (
+              <nav className="space-y-0.5 pl-0.5 mt-1 animate-in slide-in-from-top-1 duration-200">
                 {strategicMenuItems.map((item) => {
                   const isActive = isStrategicItemActive(item.tab);
                   
@@ -339,13 +367,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         }
                         if (onCloseMobile) onCloseMobile();
                       }}
-                      className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
+                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer border-l-2 ${
                         isActive
-                          ? 'bg-[#006e62] text-white shadow-lg shadow-teal-900/40 border border-emerald-400/30'
-                          : 'text-slate-300 hover:text-white hover:bg-cyan-500/10'
+                          ? 'bg-purple-500/10 text-white border-purple-400 shadow-[inset_0_0_12px_rgba(168,85,247,0.15)] font-bold'
+                          : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.02] border-transparent'
                       }`}
                     >
-                      <div className={`shrink-0 transition-transform ${isActive ? 'scale-110 text-white' : 'text-slate-400'}`}>
+                      <div className={`shrink-0 transition-transform ${isActive ? 'scale-110 text-purple-400' : 'text-slate-500'}`}>
                         {item.icon}
                       </div>
                       <span className="truncate tracking-wide">{item.label}</span>
@@ -353,16 +381,26 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   );
                 })}
               </nav>
-            </div>
-          )}
+            )}
+          </div>
 
-          {/* Gestión Territorial */}
-          {activeModule === 'territorial' && (
-            <div>
-              <p className="px-3 text-[10px] font-black uppercase tracking-wider text-cyan-400/80 mb-2">
-                Gestión Territorial
-              </p>
-              <nav className="space-y-1">
+          {/* Gestión Territorial Dropdown Accordion */}
+          <div className="space-y-1">
+            <button
+              onClick={() => {
+                if (onSelectActiveModule) onSelectActiveModule('territorial');
+                onSelectView('gestion_territorial');
+              }}
+              className={`w-full flex items-center justify-between px-2.5 py-2 text-[10px] font-black uppercase tracking-wider transition-colors cursor-pointer ${
+                activeModule === 'territorial' ? 'text-emerald-400' : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <span>Gestión Territorial</span>
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeModule === 'territorial' ? 'rotate-180 text-emerald-400' : 'text-slate-500'}`} />
+            </button>
+
+            {activeModule === 'territorial' && (
+              <nav className="space-y-0.5 pl-0.5 mt-1 animate-in slide-in-from-top-1 duration-200">
                 {territorialMenuItems.map((item) => {
                   const isActive = isTerritorialItemActive(item.tab);
                   
@@ -390,13 +428,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         }
                         if (onCloseMobile) onCloseMobile();
                       }}
-                      className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
+                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer border-l-2 ${
                         isActive
-                          ? 'bg-[#006e62] text-white shadow-lg shadow-teal-900/40 border border-emerald-400/30'
-                          : 'text-slate-300 hover:text-white hover:bg-cyan-500/10'
+                          ? 'bg-emerald-500/10 text-white border-emerald-400 shadow-[inset_0_0_12px_rgba(16,185,129,0.15)] font-bold'
+                          : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.02] border-transparent'
                       }`}
                     >
-                      <div className={`shrink-0 transition-transform ${isActive ? 'scale-110 text-white' : 'text-slate-400'}`}>
+                      <div className={`shrink-0 transition-transform ${isActive ? 'scale-110 text-emerald-400' : 'text-slate-500'}`}>
                         {item.icon}
                       </div>
                       <span className="truncate tracking-wide">{item.label}</span>
@@ -404,30 +442,27 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   );
                 })}
               </nav>
-            </div>
-          )}
+            )}
+          </div>
 
-          {/* Sistema (Siempre visible para todos excepto en Gestión Administrativa) */}
+          {/* Sistema Configuration link */}
           {activeModule !== 'admin' && (
-            <div>
-              <p className="px-3 text-[10px] font-black uppercase tracking-wider text-cyan-400/60 mb-2">
-                Sistema
-              </p>
+            <div className="space-y-1">
               <button
                 onClick={() => {
                   onSelectView('configuracion');
                   if (onCloseMobile) onCloseMobile();
                 }}
-                className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
+                className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer border-l-2 ${
                   currentView === 'configuracion'
-                    ? 'bg-[#006e62] text-white shadow-lg shadow-teal-900/40 border border-emerald-400/30'
-                    : 'text-slate-300 hover:text-white hover:bg-cyan-500/10'
+                    ? 'bg-cyan-500/10 text-white border-cyan-400 shadow-[inset_0_0_12px_rgba(6,182,212,0.15)] font-bold'
+                    : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.02] border-transparent'
                 }`}
               >
-                <div className="shrink-0 text-slate-400">
+                <div className="shrink-0 text-slate-500">
                   <Settings className="w-4 h-4" />
                 </div>
-                <span className="truncate tracking-wide text-xs">Configuración</span>
+                <span className="truncate tracking-wide">Configuración</span>
               </button>
             </div>
           )}
@@ -436,8 +471,19 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       </div>
 
-      {/* Cerrar Sesión Button */}
-      <div className="p-3 border-t border-cyan-500/15 bg-rose-950/10 m-3 rounded-2xl">
+      {/* User Profile Badge & Logout (Enterprise style) */}
+      <div className="p-4 border-t border-white/5 bg-slate-950/30 flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3 overflow-hidden">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#0284c7] to-[#06b6d4] flex items-center justify-center font-bold text-white shrink-0 text-xs shadow-md shadow-cyan-500/10 select-none">
+            {authUser?.name ? authUser.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'OB'}
+          </div>
+          <div className="overflow-hidden">
+            <h4 className="font-bold text-xs text-white truncate leading-tight">{authUser?.name || 'Ober Osorio'}</h4>
+            <p className="text-[9px] text-slate-500 truncate mt-0.5 font-bold uppercase tracking-wider">
+              {authUser?.role === 'superadmin' ? 'Super Administrador' : authUser?.role || 'Administrador'}
+            </p>
+          </div>
+        </div>
         <button
           onClick={() => {
             if (onLogout) {
@@ -447,14 +493,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
               window.location.reload();
             }
           }}
-          className="w-full flex items-center justify-center gap-3 px-4 py-2.5 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 active:bg-rose-500/35 border border-rose-500/40 text-rose-300 hover:text-white transition-all cursor-pointer font-bold text-xs shadow-md shadow-rose-950/20"
+          className="p-2.5 rounded-xl bg-white/5 hover:bg-rose-500/10 hover:text-rose-400 text-slate-400 transition-all cursor-pointer shrink-0"
+          title="Cerrar Sesión"
         >
-          <LogOut className="w-4 h-4 text-rose-400" />
-          <span>Cerrar Sesión</span>
+          <LogOut className="w-4 h-4" />
         </button>
       </div>
     </aside>
     </>
   );
 };
-

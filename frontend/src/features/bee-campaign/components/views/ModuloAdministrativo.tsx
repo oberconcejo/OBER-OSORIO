@@ -1662,432 +1662,209 @@ export const ModuloAdministrativo: React.FC<ModuloAdministrativoProps> = ({
         {/* TAB 1: INICIO (RESUMEN EJECUTIVO ADMINISTRATIVO) */}
         {/* ---------------------------------------------------------------------- */}
         {activeTab === 'inicio' && (() => {
-          const corporacion = localStorage.getItem('bee_campaign_corporacion') || 'Alcaldía';
-          const municipio = localStorage.getItem('bee_campaign_municipio') || 'Medellín (Capital)';
-          const departamento = localStorage.getItem('bee_campaign_departamento') || 'Antioquia';
-
-          const isMunicipal = corporacion === 'Alcaldía' || corporacion === 'Concejo' || corporacion === 'JAL';
-          const isDepartamental = corporacion === 'Gobernación' || corporacion === 'Asamblea';
-
-          const evolutionData = [
-            { name: 'Ene', votantes: 8000 },
-            { name: 'Feb', votantes: 11000 },
-            { name: 'Mar', votantes: 14500 },
-            { name: 'Abr', votantes: 19000 },
-            { name: 'May', votantes: 24563 },
-            { name: 'Jun', votantes: 25000 },
-            { name: 'Jul', votantes: 25500 },
-            { name: 'Ago', votantes: 26200 },
-            { name: 'Sep', votantes: 27000 },
-            { name: 'Oct', votantes: 28100 },
-            { name: 'Nov', votantes: 28900 },
-            { name: 'Dic', votantes: 29500 },
-          ];
-
           const pieData = [
-            { name: 'Candidato A', value: 45.2, color: '#a855f7' },
-            { name: 'Candidato B', value: 28.7, color: '#3b82f6' },
-            { name: 'Candidato C', value: 15.3, color: '#06b6d4' },
-            { name: 'Indecisos', value: 7.8, color: '#f59e0b' },
-            { name: 'Ninguno', value: 3.0, color: '#ef4444' }
+            { name: 'Candidato A', value: 45.2, color: '#3b82f6' },
+            { name: 'Candidato B', value: 28.7, color: '#a855f7' },
+            { name: 'Candidato C', value: 15.3, color: '#ec4899' },
+            { name: 'Indecisos', value: 7.8, color: '#f97316' },
+            { name: 'Ninguno', value: 3.0, color: '#06b6d4' }
           ];
 
           return (
-            <div className="space-y-6 animate-fadeIn text-slate-100">
+            <div className="space-y-6 animate-fadeIn text-slate-100 font-sans">
+              <style>{`
+                @keyframes wavePulse {
+                  0%, 100% { transform: translateY(0) scale(1); opacity: 0.35; }
+                  50% { transform: translateY(-4px) scale(1.02); opacity: 0.65; }
+                }
+              `}</style>
               
-              {/* Header de Bienvenida */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div>
-                  <h2 className="text-2xl font-black text-white tracking-tight">Bienvenido, {authUser?.name || 'Ober Osorio'}</h2>
-                  <p className="text-xs text-slate-400 mt-0.5">Resumen general de la plataforma</p>
-                </div>
-                <div className="flex items-center gap-2 shrink-0 bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-300">
-                  <CalendarIcon className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>23 de mayo, 2025</span>
-                </div>
-              </div>
-
-              {/* Tarjetas KPI Superiores */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* TOP LAYOUT: Hero Card + Resumen General Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
                 
-                {/* Lideres Activos */}
-                <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between shadow-lg">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <p className="text-xs text-slate-400 font-semibold">Líderes Activos</p>
-                      <p className="text-2xl font-black text-white mt-1">1.248</p>
-                    </div>
-                    <div className="w-10 h-10 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center">
-                      <Users className="w-5 h-5" />
-                    </div>
+                {/* HERO BANNER CARD (40% width / 5 cols) */}
+                <div className="lg:col-span-5 relative overflow-hidden rounded-3xl border border-white/5 bg-[#081225]/40 backdrop-blur-xl p-8 flex flex-col justify-between min-h-[320px] shadow-2xl group">
+                  {/* Glowing particle wave SVG animation */}
+                  <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
+                    <svg className="w-full h-full" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M-50 150 C 100 120, 150 200, 250 130 C 350 70, 400 180, 500 150" stroke="url(#cyanGlowGrad)" strokeWidth="3" style={{ animation: 'wavePulse 6s ease-in-out infinite' }} />
+                      <path d="M-50 170 C 80 200, 180 120, 280 180 C 340 210, 420 150, 500 160" stroke="url(#blueGlowGrad)" strokeWidth="1.5" style={{ animation: 'wavePulse 8s ease-in-out infinite 1s' }} />
+                      {/* Animated circular points (nodes) */}
+                      <circle cx="100" cy="140" r="4" className="fill-cyan-400 animate-pulse" />
+                      <circle cx="100" cy="140" r="3" className="fill-cyan-300" />
+                      <circle cx="250" cy="130" r="4" className="fill-blue-400 animate-pulse" />
+                      <circle cx="250" cy="130" r="3" className="fill-blue-300" />
+                      <circle cx="340" cy="180" r="4" className="fill-cyan-400 animate-pulse" />
+                      <circle cx="340" cy="180" r="3" className="fill-cyan-300" />
+                      
+                      <defs>
+                        <linearGradient id="cyanGlowGrad" x1="0" y1="0" x2="1" y2="0">
+                          <stop offset="0%" stopColor="#00f2fe" stopOpacity="0" />
+                          <stop offset="50%" stopColor="#06b6d4" stopOpacity="0.8" />
+                          <stop offset="100%" stopColor="#00f2fe" stopOpacity="0" />
+                        </linearGradient>
+                        <linearGradient id="blueGlowGrad" x1="0" y1="0" x2="1" y2="0">
+                          <stop offset="0%" stopColor="#3b82f6" stopOpacity="0" />
+                          <stop offset="60%" stopColor="#6366f1" stopOpacity="0.6" />
+                          <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
                   </div>
-                  <div className="mt-4 flex items-center justify-between gap-2">
-                    <span className="text-[10px] text-emerald-400 font-bold flex items-center gap-0.5">
-                      <TrendingUp className="w-3 h-3" /> 12.5%
-                    </span>
-                    <span className="text-[9px] text-slate-500">vs. mes anterior</span>
-                    <div className="w-24 h-6">
-                      <svg viewBox="0 0 100 20" className="w-full h-full text-blue-500 fill-none stroke-current stroke-2">
-                        <path d="M0 15 Q 15 10, 30 14 T 60 5 T 90 12 T 100 8" />
-                      </svg>
-                    </div>
+                  
+                  {/* Hero card content */}
+                  <div className="relative z-10 space-y-4 my-auto">
+                    <h2 className="text-4xl font-display font-black text-white leading-tight">
+                      Gestión <br />
+                      <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-400 bg-clip-text text-transparent">
+                        Administrativa
+                      </span>
+                    </h2>
+                    <p className="text-xs sm:text-sm text-slate-400 max-w-sm leading-relaxed font-light">
+                      Administra usuarios, campañas, testigos, jurados y todos los recursos de tu organización.
+                    </p>
                   </div>
-                </div>
-
-                {/* Votantes Registrados */}
-                <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between shadow-lg">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <p className="text-xs text-slate-400 font-semibold">Votantes Registrados</p>
-                      <p className="text-2xl font-black text-white mt-1">24.563</p>
-                    </div>
-                    <div className="w-10 h-10 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center">
-                      <UserCheck className="w-5 h-5" />
-                    </div>
-                  </div>
-                  <div className="mt-4 flex items-center justify-between gap-2">
-                    <span className="text-[10px] text-emerald-400 font-bold flex items-center gap-0.5">
-                      <TrendingUp className="w-3 h-3" /> 8.3%
-                    </span>
-                    <span className="text-[9px] text-slate-500">vs. mes anterior</span>
-                    <div className="w-24 h-6">
-                      <svg viewBox="0 0 100 20" className="w-full h-full text-cyan-500 fill-none stroke-current stroke-2">
-                        <path d="M0 18 Q 15 12, 30 16 T 60 8 T 90 14 T 100 5" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Cobertura Territorial */}
-                <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between shadow-lg">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <p className="text-xs text-slate-400 font-semibold">Cobertura Territorial</p>
-                      <p className="text-2xl font-black text-white mt-1">78.4%</p>
-                    </div>
-                    <div className="w-10 h-10 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center">
-                      <Compass className="w-5 h-5" />
-                    </div>
-                  </div>
-                  <div className="mt-4 flex items-center justify-between gap-2">
-                    <span className="text-[10px] text-emerald-400 font-bold flex items-center gap-0.5">
-                      <TrendingUp className="w-3 h-3" /> 5.6%
-                    </span>
-                    <span className="text-[9px] text-slate-500">vs. mes anterior</span>
-                    <div className="w-24 h-6">
-                      <svg viewBox="0 0 100 20" className="w-full h-full text-purple-500 fill-none stroke-current stroke-2">
-                        <path d="M0 12 Q 15 15, 30 8 T 60 14 T 90 6 T 100 10" />
-                      </svg>
-                    </div>
+                  
+                  <div className="relative z-10 pt-4">
+                    <button
+                      onClick={() => setActiveTab('gestion_campana')}
+                      className="px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white shadow-lg shadow-cyan-500/20 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer inline-flex items-center gap-2"
+                    >
+                      <span>Explorar Módulo</span>
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </button>
                   </div>
                 </div>
-
-                {/* Testigos en Campo */}
-                <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between shadow-lg">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <p className="text-xs text-slate-400 font-semibold">Testigos en Campo</p>
-                      <p className="text-2xl font-black text-white mt-1">532</p>
-                    </div>
-                    <div className="w-10 h-10 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                      <ShieldCheck className="w-5 h-5" />
-                    </div>
-                  </div>
-                  <div className="mt-4 flex items-center justify-between gap-2">
-                    <span className="text-[10px] text-emerald-400 font-bold flex items-center gap-0.5">
-                      <TrendingUp className="w-3 h-3" /> 15.1%
-                    </span>
-                    <span className="text-[9px] text-slate-500">vs. mes anterior</span>
-                    <div className="w-24 h-6">
-                      <svg viewBox="0 0 100 20" className="w-full h-full text-emerald-500 fill-none stroke-current stroke-2">
-                        <path d="M0 14 Q 15 8, 30 12 T 60 6 T 90 10 T 100 4" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-              {/* Seccion Intermedia: Mapa y Evolucion */}
-              <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
                 
-                {/* Mapa de Cobertura */}
-                <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 lg:col-span-2 space-y-4 flex flex-col justify-between">
-                  <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-                    <h3 className="font-extrabold text-white text-xs uppercase tracking-wider">
-                      {isMunicipal 
-                        ? `Mapa de Cobertura: ${municipio.replace(' (Capital)', '')}` 
-                        : isDepartamental 
-                          ? `Mapa de Cobertura: ${departamento}` 
-                          : 'Mapa de Cobertura Territorial'}
-                    </h3>
-                    <select className="bg-slate-950 border border-slate-800 rounded-lg px-2 py-1 text-[10px] text-slate-300 outline-none">
-                      <option>{isMunicipal ? 'Comunas' : isDepartamental ? 'Subregiones' : 'Cobertura'}</option>
+                {/* RESUMEN GENERAL GRID (60% width / 7 cols) */}
+                <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xs font-bold text-white uppercase tracking-wider">Resumen General</h3>
+                    <select className="bg-white/5 border border-white/5 rounded-xl px-3 py-1 text-xs text-slate-300 outline-none hover:bg-white/10 transition-colors">
+                      <option>Este mes</option>
+                      <option>Últimos 3 meses</option>
                     </select>
                   </div>
                   
-                  <div className="flex items-center justify-between gap-4 py-2">
-                    <div className="w-1/2 flex items-center justify-center">
-                      {isMunicipal ? (
-                        /* Medellín Commune SVG */
-                        <svg viewBox="0 0 100 120" className="w-full h-full max-h-[140px] drop-shadow-[0_0_15px_rgba(6,182,212,0.15)]">
-                          <path d="M40 10 L60 10 L65 25 L35 25 Z" className="fill-cyan-500/80 hover:fill-cyan-400 transition-all cursor-pointer" />
-                          <path d="M20 25 L35 25 L38 45 L15 40 Z" className="fill-teal-500/80 hover:fill-teal-400 transition-all cursor-pointer" />
-                          <path d="M35 25 L65 25 L60 50 L38 45 Z" className="fill-blue-500/70 hover:fill-blue-400 transition-all cursor-pointer" />
-                          <path d="M15 40 L38 45 L35 65 L12 60 Z" className="fill-purple-500/70 hover:fill-purple-400 transition-all cursor-pointer" />
-                          <path d="M38 45 L60 50 L55 70 L35 65 Z" className="fill-cyan-600/70 hover:fill-cyan-500 transition-all cursor-pointer" />
-                          <path d="M35 65 L55 70 L50 95 L30 90 Z" className="fill-indigo-500/60 hover:fill-indigo-400 transition-all cursor-pointer" />
-                          <path d="M55 70 L75 75 L70 110 L50 95 Z" className="fill-teal-600/70 hover:fill-teal-500 transition-all cursor-pointer" />
-                          <path d="M50 95 L70 110 L55 120 L35 110 Z" className="fill-blue-600/70 hover:fill-blue-500 transition-all cursor-pointer" />
-                        </svg>
-                      ) : isDepartamental ? (
-                        /* Antioquia Subregions SVG */
-                        <svg viewBox="0 0 100 120" className="w-full h-full max-h-[140px] drop-shadow-[0_0_15px_rgba(6,182,212,0.15)]">
-                          <path d="M10 20 L25 15 L35 35 L20 45 L5 35 Z" className="fill-cyan-500/80 hover:fill-cyan-400 transition-all cursor-pointer" />
-                          <path d="M60 10 L80 15 L75 35 L55 30 Z" className="fill-teal-500/80 hover:fill-teal-400 transition-all cursor-pointer" />
-                          <path d="M35 35 L55 30 L65 55 L45 60 Z" className="fill-blue-500/70 hover:fill-blue-400 transition-all cursor-pointer" />
-                          <path d="M20 45 L35 35 L45 60 L30 70 Z" className="fill-purple-500/70 hover:fill-purple-400 transition-all cursor-pointer" />
-                          <path d="M45 60 L60 55 L58 75 L42 80 Z" className="fill-cyan-600/70 hover:fill-cyan-500 transition-all cursor-pointer" />
-                          <path d="M60 55 L85 60 L80 90 L58 75 Z" className="fill-teal-600/70 hover:fill-teal-500 transition-all cursor-pointer" />
-                          <path d="M30 70 L42 80 L35 105 L22 95 Z" className="fill-indigo-500/60 hover:fill-indigo-400 transition-all cursor-pointer" />
-                          <path d="M65 55 L85 60 L90 80 L75 90 Z" className="fill-blue-600/70 hover:fill-blue-500 transition-all cursor-pointer" />
-                        </svg>
-                      ) : (
-                        /* Colombia SVG Map */
-                        <svg viewBox="0 0 100 120" className="w-full h-full max-h-[140px] drop-shadow-[0_0_15px_rgba(6,182,212,0.15)]">
-                          <path d="M45 10 L55 20 L50 25 L40 18 Z" className="fill-cyan-500/80 hover:fill-cyan-400 transition-all cursor-pointer" />
-                          <path d="M38 18 L50 25 L45 35 L35 30 Z" className="fill-teal-500/80 hover:fill-teal-400 transition-all cursor-pointer" />
-                          <path d="M32 25 L38 18 L35 30 L28 28 Z" className="fill-blue-500/70 hover:fill-blue-400 transition-all cursor-pointer" />
-                          <path d="M28 28 L35 30 L30 45 L20 40 Z" className="fill-indigo-500/60 hover:fill-indigo-400 transition-all cursor-pointer" />
-                          <path d="M30 45 L35 48 L32 60 L24 55 Z" className="fill-purple-500/70 hover:fill-purple-400 transition-all cursor-pointer" />
-                          <path d="M35 48 L48 40 L55 55 L40 65 Z" className="fill-cyan-600/70 hover:fill-cyan-500 transition-all cursor-pointer" />
-                          <path d="M40 65 L55 55 L58 70 L42 80 Z" className="fill-teal-600/70 hover:fill-teal-500 transition-all cursor-pointer" />
-                          <path d="M24 55 L32 60 L28 80 L18 70 Z" className="fill-blue-600/70 hover:fill-blue-500 transition-all cursor-pointer" />
-                          <path d="M28 80 L42 80 L35 100 L22 95 Z" className="fill-indigo-600/70 hover:fill-indigo-500 transition-all cursor-pointer" />
-                          <path d="M42 80 L58 70 L70 85 L50 100 Z" className="fill-purple-600/70 hover:fill-purple-500 transition-all cursor-pointer" />
-                          <path d="M50 100 L70 85 L85 105 L60 120 Z" className="fill-cyan-700/60 hover:fill-cyan-600 transition-all cursor-pointer" />
-                        </svg>
-                      )}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow">
+                    
+                    {/* Card 1: Líderes Activos */}
+                    <div className="rounded-2xl border border-white/5 bg-[#070c17]/60 p-5 flex flex-col justify-between shadow-xl hover:border-white/10 transition-all">
+                      <div className="flex items-start justify-between">
+                        <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center shrink-0">
+                          <Users className="w-5 h-5" />
+                        </div>
+                        <div className="text-right">
+                          <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Líderes Activos</p>
+                          <p className="text-2xl font-display font-black text-white mt-1">1.248</p>
+                        </div>
+                      </div>
+                      <div className="mt-4 flex items-center justify-between border-t border-white/5 pt-3">
+                        <span className="text-[10px] text-emerald-400 font-bold flex items-center gap-0.5">
+                          <TrendingUp className="w-3 h-3" /> +12.5% <span className="text-[9px] text-slate-500 font-normal">vs. mes anterior</span>
+                        </span>
+                        <div className="w-20 h-6 shrink-0">
+                          <svg viewBox="0 0 100 20" className="w-full h-full text-blue-400 fill-none stroke-current stroke-2">
+                            <path d="M0 15 Q 15 10, 30 14 T 60 5 T 90 12 T 100 8" />
+                          </svg>
+                        </div>
+                      </div>
                     </div>
                     
-                    {isMunicipal ? (
-                      /* Medellín Comuna Coverage List */
-                      <div className="w-1/2 space-y-1 text-[10px] text-slate-300 font-mono">
-                        <div className="flex items-center justify-between border-b border-slate-800/40 pb-0.5">
-                          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-cyan-400"></span> Comuna 13 (S. Javier)</span>
-                          <span className="text-white font-bold">92%</span>
+                    {/* Card 2: Votantes Registrados */}
+                    <div className="rounded-2xl border border-white/5 bg-[#070c17]/60 p-5 flex flex-col justify-between shadow-xl hover:border-white/10 transition-all">
+                      <div className="flex items-start justify-between">
+                        <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0">
+                          <UserCheck className="w-5 h-5" />
                         </div>
-                        <div className="flex items-center justify-between border-b border-slate-800/40 pb-0.5">
-                          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-teal-400"></span> Comuna 7 (Robledo)</span>
-                          <span className="text-white font-bold">85%</span>
-                        </div>
-                        <div className="flex items-center justify-between border-b border-slate-800/40 pb-0.5">
-                          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-blue-400"></span> Comuna 16 (Belén)</span>
-                          <span className="text-white font-bold">78%</span>
-                        </div>
-                        <div className="flex items-center justify-between border-b border-slate-800/40 pb-0.5">
-                          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-indigo-400"></span> Comuna 14 (Poblado)</span>
-                          <span className="text-white font-bold">74%</span>
-                        </div>
-                        <div className="flex items-center justify-between border-b border-slate-800/40 pb-0.5">
-                          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-purple-400"></span> Comuna 11 (Laureles)</span>
-                          <span className="text-white font-bold">69%</span>
-                        </div>
-                        <div className="flex items-center justify-between border-b border-slate-800/40 pb-0.5">
-                          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-slate-400"></span> Comuna 10 (Centro)</span>
-                          <span className="text-white font-bold">63%</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-slate-600"></span> Comunas Norte</span>
-                          <span className="text-white font-bold">58%</span>
+                        <div className="text-right">
+                          <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Votantes Registrados</p>
+                          <p className="text-2xl font-display font-black text-white mt-1">24.563</p>
                         </div>
                       </div>
-                    ) : isDepartamental ? (
-                      /* Antioquia Subregions Coverage List */
-                      <div className="w-1/2 space-y-1 text-[10px] text-slate-300 font-mono">
-                        <div className="flex items-center justify-between border-b border-slate-800/40 pb-0.5">
-                          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-cyan-400"></span> Valle de Aburrá</span>
-                          <span className="text-white font-bold">92%</span>
-                        </div>
-                        <div className="flex items-center justify-between border-b border-slate-800/40 pb-0.5">
-                          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-teal-400"></span> Oriente</span>
-                          <span className="text-white font-bold">85%</span>
-                        </div>
-                        <div className="flex items-center justify-between border-b border-slate-800/40 pb-0.5">
-                          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-blue-400"></span> Urabá</span>
-                          <span className="text-white font-bold">78%</span>
-                        </div>
-                        <div className="flex items-center justify-between border-b border-slate-800/40 pb-0.5">
-                          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-indigo-400"></span> Suroeste</span>
-                          <span className="text-white font-bold">74%</span>
-                        </div>
-                        <div className="flex items-center justify-between border-b border-slate-800/40 pb-0.5">
-                          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-purple-400"></span> Occidente</span>
-                          <span className="text-white font-bold">69%</span>
-                        </div>
-                        <div className="flex items-center justify-between border-b border-slate-800/40 pb-0.5">
-                          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-slate-400"></span> Norte</span>
-                          <span className="text-white font-bold">63%</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-slate-600"></span> Nordeste / Otros</span>
-                          <span className="text-white font-bold">58%</span>
+                      <div className="mt-4 flex items-center justify-between border-t border-white/5 pt-3">
+                        <span className="text-[10px] text-emerald-400 font-bold flex items-center gap-0.5">
+                          <TrendingUp className="w-3 h-3" /> +8.3% <span className="text-[9px] text-slate-500 font-normal">vs. mes anterior</span>
+                        </span>
+                        <div className="w-20 h-6 shrink-0">
+                          <svg viewBox="0 0 100 20" className="w-full h-full text-cyan-400 fill-none stroke-current stroke-2">
+                            <path d="M0 18 Q 15 12, 30 16 T 60 8 T 90 14 T 100 5" />
+                          </svg>
                         </div>
                       </div>
-                    ) : (
-                      /* National/Default Colombia Coverage List */
-                      <div className="w-1/2 space-y-1 text-[10px] text-slate-300 font-mono">
-                        <div className="flex items-center justify-between border-b border-slate-800/40 pb-0.5">
-                          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-cyan-400"></span> Antioquia</span>
-                          <span className="text-white font-bold">92%</span>
+                    </div>
+                    
+                    {/* Card 3: Cobertura Territorial */}
+                    <div className="rounded-2xl border border-white/5 bg-[#070c17]/60 p-5 flex flex-col justify-between shadow-xl hover:border-white/10 transition-all">
+                      <div className="flex items-start justify-between">
+                        <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center shrink-0">
+                          <PieChart className="w-5 h-5" />
                         </div>
-                        <div className="flex items-center justify-between border-b border-slate-800/40 pb-0.5">
-                          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-teal-400"></span> Cundinamarca</span>
-                          <span className="text-white font-bold">85%</span>
-                        </div>
-                        <div className="flex items-center justify-between border-b border-slate-800/40 pb-0.5">
-                          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-blue-400"></span> Valle del Cauca</span>
-                          <span className="text-white font-bold">78%</span>
-                        </div>
-                        <div className="flex items-center justify-between border-b border-slate-800/40 pb-0.5">
-                          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-indigo-400"></span> Santander</span>
-                          <span className="text-white font-bold">74%</span>
-                        </div>
-                        <div className="flex items-center justify-between border-b border-slate-800/40 pb-0.5">
-                          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-purple-400"></span> Atlántico</span>
-                          <span className="text-white font-bold">69%</span>
-                        </div>
-                        <div className="flex items-center justify-between border-b border-slate-800/40 pb-0.5">
-                          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-slate-400"></span> Bolívar</span>
-                          <span className="text-white font-bold">63%</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-slate-600"></span> Otros</span>
-                          <span className="text-white font-bold">58%</span>
+                        <div className="text-right">
+                          <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Cobertura Territorial</p>
+                          <p className="text-2xl font-display font-black text-white mt-1">78.4%</p>
                         </div>
                       </div>
-                    )}
+                      <div className="mt-4 flex items-center justify-between border-t border-white/5 pt-3">
+                        <span className="text-[10px] text-emerald-400 font-bold flex items-center gap-0.5">
+                          <TrendingUp className="w-3 h-3" /> +5.6% <span className="text-[9px] text-slate-500 font-normal">vs. mes anterior</span>
+                        </span>
+                        <div className="w-20 h-6 shrink-0">
+                          <svg viewBox="0 0 100 20" className="w-full h-full text-purple-400 fill-none stroke-current stroke-2">
+                            <path d="M0 12 Q 15 15, 30 8 T 60 14 T 90 6 T 100 10" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Card 4: Testigos Activos */}
+                    <div className="rounded-2xl border border-white/5 bg-[#070c17]/60 p-5 flex flex-col justify-between shadow-xl hover:border-white/10 transition-all">
+                      <div className="flex items-start justify-between">
+                        <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                          <ShieldCheck className="w-5 h-5" />
+                        </div>
+                        <div className="text-right">
+                          <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Testigos Activos</p>
+                          <p className="text-2xl font-display font-black text-white mt-1">532</p>
+                        </div>
+                      </div>
+                      <div className="mt-4 flex items-center justify-between border-t border-white/5 pt-3">
+                        <span className="text-[10px] text-emerald-400 font-bold flex items-center gap-0.5">
+                          <TrendingUp className="w-3 h-3" /> +15.1% <span className="text-[9px] text-slate-500 font-normal">vs. mes anterior</span>
+                        </span>
+                        <div className="w-20 h-6 shrink-0">
+                          <svg viewBox="0 0 100 20" className="w-full h-full text-emerald-400 fill-none stroke-current stroke-2">
+                            <path d="M0 14 Q 15 8, 30 12 T 60 6 T 90 10 T 100 4" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    
                   </div>
                 </div>
-
-                {/* Evolución de Votantes */}
-                <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 lg:col-span-3 space-y-4 flex flex-col justify-between">
-                  <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-                    <h3 className="font-extrabold text-white text-xs uppercase tracking-wider">
-                      Evolución de Votantes
-                    </h3>
-                    <select className="bg-slate-950 border border-slate-800 rounded-lg px-2 py-1 text-[10px] text-slate-300 outline-none">
-                      <option>Este año</option>
-                    </select>
-                  </div>
-                  
-                  <div className="h-[150px] w-full mt-2">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <AreaChart data={evolutionData} margin={{ top: 5, right: 5, left: -25, bottom: 0 }}>
-                        <defs>
-                          <linearGradient id="colorVotantes" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.25}/>
-                            <stop offset="95%" stopColor="#06b6d4" stopOpacity={0}/>
-                          </linearGradient>
-                        </defs>
-                        <XAxis dataKey="name" stroke="#64748b" fontSize={9} tickLine={false} axisLine={false} />
-                        <YAxis stroke="#64748b" fontSize={9} tickLine={false} axisLine={false} />
-                        <ChartTooltip 
-                          contentStyle={{ backgroundColor: '#090d16', border: '1px solid #1e293b', borderRadius: '12px' }}
-                          labelStyle={{ color: '#94a3b8', fontSize: '10px', fontWeight: 'bold' }}
-                          itemStyle={{ color: '#fff', fontSize: '10px' }}
-                        />
-                        <Area type="monotone" dataKey="votantes" stroke="#06b6d4" strokeWidth={2.5} fillOpacity={1} fill="url(#colorVotantes)" />
-                      </AreaChart>
-                    </ResponsiveContainer>
-                  </div>
-                </div>
-
+                
               </div>
 
-              {/* Seccion Inferior: Actividades, Intencion y Alertas */}
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* BOTTOM ROW: Distribución Electoral + Actividad Reciente + Security Hologram */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
                 
-                {/* Actividades Recientes */}
-                <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between space-y-4">
-                  <div className="border-b border-slate-800 pb-2">
-                    <h3 className="font-extrabold text-white text-xs uppercase tracking-wider">
-                      Actividades Recientes
-                    </h3>
+                {/* 1. Distribución Electoral (Doughnut Chart) (5 cols) */}
+                <div className="lg:col-span-5 rounded-3xl border border-white/5 bg-[#070c17]/60 p-6 flex flex-col justify-between shadow-xl">
+                  <div className="border-b border-white/5 pb-3">
+                    <h3 className="font-bold text-white text-xs uppercase tracking-wider">Distribución Electoral</h3>
                   </div>
                   
-                  <div className="space-y-3 flex-1 py-1">
-                    <div className="flex items-start gap-2.5">
-                      <div className="w-8 h-8 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center shrink-0">
-                        <Users className="w-4 h-4" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-[11px] text-white font-bold truncate">Nuevo líder registrado en Medellín</p>
-                        <p className="text-[9px] text-slate-400">Juan Pérez - Comuna 13</p>
-                      </div>
-                      <span className="text-[9px] text-slate-500 shrink-0">Hace 20 min</span>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <div className="w-8 h-8 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center shrink-0">
-                        <UserCheck className="w-4 h-4" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-[11px] text-white font-bold truncate">Votante registrado en Cali</p>
-                        <p className="text-[9px] text-slate-400">María González - Comuna 7</p>
-                      </div>
-                      <span className="text-[9px] text-slate-500 shrink-0">Hace 45 min</span>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <div className="w-8 h-8 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0">
-                        <Activity className="w-4 h-4" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-[11px] text-white font-bold truncate">Encuesta completada en Bogotá</p>
-                        <p className="text-[9px] text-slate-400">Encuesta #1258 - Satisfacción</p>
-                      </div>
-                      <span className="text-[9px] text-slate-500 shrink-0">Hace 1 hora</span>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <div className="w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
-                        <ShieldCheck className="w-4 h-4" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-[11px] text-white font-bold truncate">Testigo asignado en Barranquilla</p>
-                        <p className="text-[9px] text-slate-400">Carlos Martínez - Puesto 45</p>
-                      </div>
-                      <span className="text-[9px] text-slate-500 shrink-0">Hace 2 horas</span>
-                    </div>
-                  </div>
-                  
-                  <button 
-                    onClick={() => setActiveTab('lideres_votantes')}
-                    className="w-full text-center text-[10px] text-cyan-400 hover:text-cyan-300 font-extrabold cursor-pointer border-t border-slate-800 pt-2 flex items-center justify-center gap-0.5"
-                  >
-                    <span>Ver todas las actividades</span> <ChevronRight className="w-3 h-3" />
-                  </button>
-                </div>
-
-                {/* Distribución por Intención de Voto */}
-                <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between space-y-3">
-                  <div className="border-b border-slate-800 pb-2">
-                    <h3 className="font-extrabold text-white text-xs uppercase tracking-wider">
-                      Distribución por Intención de Voto
-                    </h3>
-                  </div>
-                  
-                  <div className="flex items-center justify-between gap-2 flex-1">
-                    <div className="w-[100px] h-[100px] relative flex-shrink-0">
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-6 py-4">
+                    {/* Doughnut Chart Recharts */}
+                    <div className="w-[140px] h-[140px] relative flex-shrink-0">
                       <ResponsiveContainer width="100%" height="100%">
                         <PieChart>
                           <Pie
                             data={pieData}
                             cx="50%"
                             cy="50%"
-                            innerRadius={36}
-                            outerRadius={46}
+                            innerRadius={48}
+                            outerRadius={60}
                             paddingAngle={2}
                             dataKey="value"
                           >
@@ -2098,92 +1875,115 @@ export const ModuloAdministrativo: React.FC<ModuloAdministrativoProps> = ({
                         </PieChart>
                       </ResponsiveContainer>
                       <div className="absolute inset-0 flex flex-col items-center justify-center">
-                        <span className="text-white text-xs font-black leading-none">24.563</span>
-                        <span className="text-slate-500 text-[8px] mt-0.5 uppercase tracking-wider font-extrabold">Total</span>
+                        <span className="text-white text-base font-black leading-none">24.563</span>
+                        <span className="text-slate-500 text-[9px] mt-0.5 uppercase tracking-wider font-bold">Total</span>
                       </div>
                     </div>
                     
-                    <div className="flex-1 space-y-1.5 text-[9px] text-slate-300 font-mono pl-2">
-                      <div className="flex items-center justify-between">
-                        <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#a855f7]"></span> Candidato A</span>
-                        <span className="text-white font-bold">45.2%</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#3b82f6]"></span> Candidato B</span>
-                        <span className="text-white font-bold">28.7%</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#06b6d4]"></span> Candidato C</span>
-                        <span className="text-white font-bold">15.3%</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#f59e0b]"></span> Indecisos</span>
-                        <span className="text-white font-bold">7.8%</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#ef4444]"></span> Ninguno</span>
-                        <span className="text-white font-bold">3.0%</span>
-                      </div>
+                    {/* Legend */}
+                    <div className="flex-1 space-y-2 text-[10px] text-slate-300 font-mono w-full">
+                      {pieData.map((entry, idx) => (
+                        <div key={idx} className="flex items-center justify-between">
+                          <span className="flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: entry.color }} />
+                            <span>{entry.name}</span>
+                          </span>
+                          <span className="text-white font-bold">{entry.value}%</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
-                  
-                  <button 
-                    onClick={() => onSelectView('gestion_estrategica')}
-                    className="w-full text-center text-[10px] text-cyan-400 hover:text-cyan-300 font-extrabold cursor-pointer border-t border-slate-800 pt-2 flex items-center justify-center gap-0.5"
-                  >
-                    <span>Ver análisis detallado</span> <ChevronRight className="w-3 h-3" />
-                  </button>
                 </div>
 
-                {/* Alertas y Notificaciones */}
-                <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between space-y-4">
-                  <div className="border-b border-slate-800 pb-2">
-                    <h3 className="font-extrabold text-white text-xs uppercase tracking-wider">
-                      Alertas y Notificaciones
-                    </h3>
+                {/* 2. Actividad Reciente (4 cols) */}
+                <div className="lg:col-span-4 rounded-3xl border border-white/5 bg-[#070c17]/60 p-6 flex flex-col justify-between shadow-xl">
+                  <div className="border-b border-white/5 pb-3">
+                    <h3 className="font-bold text-white text-xs uppercase tracking-wider">Actividad Reciente</h3>
                   </div>
                   
-                  <div className="space-y-3 flex-1 py-1">
-                    <div className="flex items-start gap-2.5">
-                      <div className="w-8 h-8 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
-                        <AlertTriangle className="w-4 h-4" />
+                  <div className="space-y-4 flex-1 py-4">
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center shrink-0">
+                        <Users className="w-4 h-4" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-[11px] text-white font-bold truncate">Cobertura territorial baja</p>
-                        <p className="text-[9px] text-slate-400">Atlántico - 69% de cobertura</p>
+                        <p className="text-[11px] text-white font-bold leading-normal">Nuevo líder registrado en Medellín</p>
+                        <p className="text-[9px] text-slate-500 mt-0.5">Juan Pérez - Comuna 13</p>
                       </div>
-                      <span className="text-[9px] text-slate-500 shrink-0">Hace 30 min</span>
+                      <span className="text-[9px] text-slate-500 shrink-0">Hace 20 min</span>
                     </div>
 
-                    <div className="flex items-start gap-2.5">
-                      <div className="w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
-                        <CheckCircle2 className="w-4 h-4" />
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center shrink-0">
+                        <UserCheck className="w-4 h-4" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-[11px] text-white font-bold truncate">Sincronización completada</p>
-                        <p className="text-[9px] text-slate-400">Datos actualizados correctamente</p>
+                        <p className="text-[11px] text-white font-bold leading-normal">Votante registrado en Cali</p>
+                        <p className="text-[9px] text-slate-500 mt-0.5">María González - Comuna 7</p>
+                      </div>
+                      <span className="text-[9px] text-slate-500 shrink-0">Hace 45 min</span>
+                    </div>
+
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0">
+                        <CreditCard className="w-4 h-4" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-[11px] text-white font-bold leading-normal">Presupuesto actualizado</p>
+                        <p className="text-[9px] text-slate-500 mt-0.5">Campaña Alcaldía 2026</p>
                       </div>
                       <span className="text-[9px] text-slate-500 shrink-0">Hace 1 hora</span>
                     </div>
 
-                    <div className="flex items-start gap-2.5">
-                      <div className="w-8 h-8 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center shrink-0">
-                        <Bell className="w-4 h-4" />
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                        <ShieldCheck className="w-4 h-4" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-[11px] text-white font-bold truncate">Nueva encuesta disponible</p>
-                        <p className="text-[9px] text-slate-400">Encuesta de percepción ciudadana</p>
+                        <p className="text-[11px] text-white font-bold leading-normal">Testigo asignado en Barranquilla</p>
+                        <p className="text-[9px] text-slate-500 mt-0.5">Carlos Martínez - Puesto 45</p>
                       </div>
                       <span className="text-[9px] text-slate-500 shrink-0">Hace 2 horas</span>
                     </div>
                   </div>
                   
                   <button 
-                    onClick={() => setActiveTab('encuestas_sondeos')}
-                    className="w-full text-center text-[10px] text-cyan-400 hover:text-cyan-300 font-extrabold cursor-pointer border-t border-slate-800 pt-2 flex items-center justify-center gap-0.5"
+                    onClick={() => setActiveTab('lideres_votantes')}
+                    className="w-full text-center text-[10px] font-black uppercase tracking-wider text-cyan-400 hover:text-cyan-300 border-t border-white/5 pt-3 transition-colors cursor-pointer"
                   >
-                    <span>Ver todas las alertas</span> <ChevronRight className="w-3 h-3" />
+                    Ver todas
                   </button>
+                </div>
+
+                {/* 3. Holographic Security Panel (3 cols) */}
+                <div className="lg:col-span-3 rounded-3xl border border-white/5 bg-[#070c17]/60 p-6 flex flex-col items-center justify-between shadow-xl relative overflow-hidden group">
+                  <div className="w-full border-b border-white/5 pb-3">
+                    <h3 className="font-bold text-white text-xs uppercase tracking-wider">Estado de Seguridad</h3>
+                  </div>
+                  
+                  {/* Hologram Graphic */}
+                  <div className="my-auto py-6 relative flex items-center justify-center w-full min-h-[160px]">
+                    {/* Animated Outer Circles */}
+                    <div className="absolute w-32 h-32 rounded-full border border-cyan-500/20 animate-[spin_10s_linear_infinite]" />
+                    <div className="absolute w-28 h-28 rounded-full border border-dashed border-blue-500/30 animate-[spin_15s_linear_infinite_reverse]" />
+                    <div className="absolute w-24 h-24 rounded-full border border-cyan-500/10" />
+                    
+                    {/* Hologram Glow */}
+                    <div className="absolute w-20 h-20 bg-cyan-500/10 rounded-full blur-[15px]" />
+                    
+                    {/* Shield and check SVG */}
+                    <svg className="w-16 h-16 text-cyan-400 relative z-10 animate-[bounce_4s_ease-in-out_infinite]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" className="fill-cyan-950/40" />
+                      <path d="m9 12 2 2 4-4" strokeWidth="2" className="text-cyan-300" />
+                    </svg>
+                  </div>
+                  
+                  <div className="w-full text-center space-y-1.5">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                      Encriptado E2E
+                    </span>
+                    <p className="text-[10px] text-slate-500">Respaldos en Supabase</p>
+                  </div>
                 </div>
 
               </div>
